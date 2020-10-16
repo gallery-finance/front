@@ -119,12 +119,10 @@ export const Header = () => {
                         {active && (
                             <div className="header-account">
                                 <div className="balance">
-                                    {/* <p>{glfBalance? formatAmount(glfBalance): 0} GLF</p> */}
-                                    <p>0.042657 GLF</p>
+                                    <p>{glfBalance? formatAmount(glfBalance): 0} GLF</p>
                                 </div>
                                 <div className="address">
-                                    0x0659..1FA
-                                    {/* {formatAddress(account)} */}
+                                    {formatAddress(account)}
                                     <div className="point"></div>
                                 </div>
                             </div>
