@@ -5,16 +5,15 @@ import { mainContext } from "../../reducer";
 import { HANDLE_SHOW_CONNECT_MODAL } from "../../const";
 import { Link, NavLink, useLocation } from "react-router-dom";
 
-import { Logoicon } from "../../icons";
-import {useGLFBalance} from "../../pages/Hooks";
+import { Logoicon, LogoSmallIcon } from "../../icons";
+import { useGLFBalance } from "../../pages/Hooks";
 
 export const Header = () => {
-
     const { active, account, library, chainId } = useActiveWeb3React();
     const { dispatch } = useContext(mainContext);
 
     const [showMenu, setShowMenu] = useState(false);
-    const {glfBalance} = useGLFBalance()
+    const { glfBalance } = useGLFBalance();
     const location = useLocation();
 
     const handleMenuItemClick = () => {
@@ -32,65 +31,74 @@ export const Header = () => {
                         <Logoicon />
                     </Link>
 
-                    <div className="header__menu">
-                        <nav className="menu">
-                            <ul className="menu__list">
-                                <li className="menu__item">
-                                    <NavLink
-                                        to="/about"
-                                        className="menu__link"
-                                        activeClassName="is-current"
-                                        onClick={handleMenuItemClick}
-                                    >
-                                        About
-                                    </NavLink>
-                                </li>
-                                <li className="menu__item">
-                                    <NavLink
-                                        to="/workshop"
-                                        className="menu__link"
-                                        activeClassName="is-current"
-                                        onClick={handleMenuItemClick}
-                                    >
-                                        Workshop
-                                    </NavLink>
-                                </li>
-                                <li className="menu__item">
-                                    <NavLink
-                                        to="/auction"
-                                        className="menu__link"
-                                        activeClassName="is-current"
-                                        onClick={handleMenuItemClick}
-                                    >
-                                        Auction
-                                    </NavLink>
-                                </li>
-                                <li className="menu__item">
-                                    <NavLink
-                                        to="/exhibition-hall"
-                                        className="menu__link"
-                                        activeClassName="is-current"
-                                        onClick={handleMenuItemClick}
-                                    >
-                                        Exhibition hall
-                                    </NavLink>
-                                </li>
-                                <li className="menu__item">
-                                    <NavLink
-                                        to="/pools"
-                                        className="menu__link"
-                                        activeClassName="is-current"
-                                        onClick={handleMenuItemClick}
-                                    >
-                                        Pools
-                                    </NavLink>
-                                </li>
-                            </ul>
-                        </nav>
+                    <Link
+                        to="/"
+                        className={`header__logo--small ${active ? "active" : ""}`}
+                    >
+                        <LogoSmallIcon />
+                    </Link>
 
-                        {!active && ( <div className="header__btn">
-                            <div className="buttonContainer">
+                    <div className="header__menu-wrapper">
+                        <div className="header__menu">
+                            <nav className="menu">
+                                <ul className="menu__list">
+                                    <li className="menu__item">
+                                        <NavLink
+                                            to="/about"
+                                            className="menu__link"
+                                            activeClassName="is-current"
+                                            onClick={handleMenuItemClick}
+                                        >
+                                            About
+                                        </NavLink>
+                                    </li>
+                                    <li className="menu__item">
+                                        <NavLink
+                                            to="/workshop"
+                                            className="menu__link"
+                                            activeClassName="is-current"
+                                            onClick={handleMenuItemClick}
+                                        >
+                                            Workshop
+                                        </NavLink>
+                                    </li>
+                                    <li className="menu__item">
+                                        <NavLink
+                                            to="/auction"
+                                            className="menu__link"
+                                            activeClassName="is-current"
+                                            onClick={handleMenuItemClick}
+                                        >
+                                            Auction
+                                        </NavLink>
+                                    </li>
+                                    <li className="menu__item">
+                                        <NavLink
+                                            to="/exhibition-hall"
+                                            className="menu__link"
+                                            activeClassName="is-current"
+                                            onClick={handleMenuItemClick}
+                                        >
+                                            Exhibition hall
+                                        </NavLink>
+                                    </li>
+                                    <li className="menu__item">
+                                        <NavLink
+                                            to="/pools"
+                                            className="menu__link"
+                                            activeClassName="is-current"
+                                            onClick={handleMenuItemClick}
+                                        >
+                                            Pools
+                                        </NavLink>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
 
+                        {!active && (
+                            <div className="header__btn">
+                                <div className="buttonContainer">
                                     <button
                                         onClick={() => {
                                             dispatch({
@@ -104,9 +112,9 @@ export const Header = () => {
                                     >
                                         <span onClick={() => {}}>Unlock Wallet</span>
                                     </button>
-
+                                </div>
                             </div>
-                        </div>)}
+                        )}
 
                         {active && (
                             <div className="header-account">
@@ -120,8 +128,6 @@ export const Header = () => {
                             </div>
                         )}
                     </div>
-
-
                 </div>
 
                 <div className="visible-md">

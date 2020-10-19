@@ -47,24 +47,26 @@
 
         @media #{$mdWidth} {
 
-            width: 260px;
+            width: 290px;
             position: absolute;
             height: 24px;
             top: 21px;
-            right: 100px;
+            right: 65px;
 
         }
-        
-        @media #{$smWidth} {
 
-            position: relative;
-            height: 24px;
-            margin: 15px 0 0;
-            width: 100%;
-            top: unset;
+        @media (max-width: 470px) {
+
             right: unset;
+            left: 20px; 
 
-		}
+        }
+
+        @media (max-width: 370px) {
+
+            width: 240px;
+
+        }
 
         .balance {
             width: 160px;
@@ -72,13 +74,18 @@
 
             p {
                 color: #fff;
-                margin-right: 16px
+                margin-right: 16px;
+
+                @media (max-width: 370px) {
+
+                    margin-right: 8px;
+        
+                }
             }
         } 
 
         .address {
 			padding: 0 8px;
-            width: 100%;
             max-width: 153px;
             width: 100%;
             height: 100%;
@@ -86,7 +93,13 @@
             background: #fff;
             display: flex;
             justify-content: center;
-            align-items: center
+            align-items: center;
+
+            @media (max-width: 370px) {
+
+                max-width: 120px;
+    
+            }
         }
 
         .point {
@@ -94,7 +107,13 @@
             height: 16px;
             background: #fad06a;
             border-radius: 50%;
-            margin-left: 16px
+            margin-left: 16px;
+
+            @media (max-width: 370px) {
+
+                display: none;
+    
+            }
         }
     }
 
@@ -103,7 +122,8 @@
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		height: 100px;
+        height: 100px;
+        min-height: 64px;
 
 		@media #{$mdWidth} {
 
@@ -117,20 +137,50 @@
 
 	&__logo {
 
-		position: relative;
+        position: relative;
 
 		svg {
 
-			stroke: var(--color);
+            stroke: var(--color);
+            
+            @media #{$mdWidth} {
 
-			@media #{$mdWidth} {
+                width: 168px;
+                height: 24px;
+    
+            }
 
-				width: 168px;
-				height: 24px;
+        }
 
-			}
+        @media (max-width: 580px) {
 
-		}
+            display: none; 
+    
+        }
+        
+        &--small {
+            display: none; 
+
+            svg {
+
+                height: 24px;
+    
+            }
+
+            &.active {
+                @media (max-width: 470px) {
+
+                    display: none; 
+        
+                }
+            }
+
+            @media (max-width: 580px) {
+
+                display: block; 
+    
+            }
+        }
 
 	}
 
@@ -146,7 +196,18 @@
 			padding-top: 72px;
 			border-top: 1px solid rgba(255, 255, 255, .1);
 
-		}
+        }
+        
+        &-wrapper {
+            display: flex;
+            align-items: center;
+
+            @media #{$mdWidth} {
+
+                display: block;
+    
+            }
+        }
 
 	}
 
@@ -156,10 +217,16 @@
 
 		@media #{$mdWidth} {
 
-			margin: 20px 0 0;
-			display: flex;
-			padding-top: 20px;
-			justify-content: center;
+            display: block;
+            position: absolute;
+            top: 9px;
+            right: 100px;
+
+        }
+
+        @media (max-width: 370px) {
+
+            right: 75px;
 
         }
         
