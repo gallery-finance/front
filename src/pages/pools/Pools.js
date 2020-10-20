@@ -65,9 +65,6 @@ export const Pools = () => {
                         </a>
                     </div>
 
-                    <a className="head-page__audited"  target="_blank" href="https://github.com/gallery-finance/assets/raw/master/Gallery%20Auditing%20report.pdf">
-                        audited by anchain.ai
-                    </a>
                 </header>
 
 
