@@ -1,4 +1,16 @@
 // GLF
+export function getGalleryAddress(chainId) {
+    switch (chainId) {
+        case 1:
+            return  '0xe10B34fA276173258Ece52f2e59728168EF06251'
+        case 4:
+            return  '0xe10B34fA276173258Ece52f2e59728168EF06251'
+        default:
+            return '0xe10B34fA276173258Ece52f2e59728168EF06251'
+    }
+}
+
+// GLF
 export function getGLFStakingAddress(chainId) {
     switch (chainId) {
         case 1:

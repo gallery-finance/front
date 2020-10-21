@@ -5,17 +5,16 @@ import { mainContext } from "../../reducer";
 import {formatAmount} from "../../utils/format";
 
 export const StakedTokensModal = ({onOk, amount, symbol}) => {
-    const { dispatch } = useContext(mainContext);
 
     return (
         <div className="modal">
             <div className="modal__box">
                 <form className="form-app" action="/">
                     <div className="form-app__inner transction-submitted">
-                        <div class="emoji emoji--yay">
-                            <div class="emoji__face">
-                                <div class="emoji__eyebrows"></div>
-                                <div class="emoji__mouth"></div>
+                        <div className="emoji emoji--yay">
+                            <div className="emoji__face">
+                                <div className="emoji__eyebrows"/>
+                                <div className="emoji__mouth"/>
                             </div>
                         </div>
                         <div className="form-app__title h3">

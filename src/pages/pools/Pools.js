@@ -12,6 +12,7 @@ import {formatAmount} from "../../utils/format";
 import {useStatistics} from "./Hooks";
 import BigNumber from "bignumber.js";
 import Web3 from 'web3'
+import {useProposals} from "../../components/Workshop/Hooks";
 
 const {toWei, fromWei} = Web3.utils
 
@@ -34,6 +35,7 @@ export const Pools = () => {
     const [MEMEStaked, setMEMEStaked] = useState()
     const [DONUTStaked, setDONUTStaked] = useState()
     const [BOTStaked, setBOTStaked] = useState()
+    const {proposals} = useProposals()
 
     function loadTotalStaked () {
         console.log('loadTotalStaked',BOTPrice,BOTStaked)

@@ -4,7 +4,6 @@ import Lottie from "react-lottie";
 import { HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL } from "../../const";
 import { mainContext } from "../../reducer";
 import loading from '../../assets/loading.json'
-import { modalLoader } from "../../assets/js/modal-loader";
 
 const defaultOptions = {
     loop: true,

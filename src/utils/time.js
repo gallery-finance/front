@@ -1,6 +1,5 @@
 
 export const getLeftTime = (time)=>{
-    console.log('calcuTime', time)
     if (time) {
 
         const time1 = time * 1000;

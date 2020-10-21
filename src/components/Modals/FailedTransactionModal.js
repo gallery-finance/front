@@ -13,9 +13,9 @@ export const FailedTransactionModal = () => {
                     <div className="form-app__inner transction-submitted">
                         <div class="emoji  emoji--sad">
                             <div class="emoji__face">
-                                <div class="emoji__eyebrows"></div>
-                                <div class="emoji__eyes"></div>
-                                <div class="emoji__mouth"></div>
+                                <div class="emoji__eyebrows"/>
+                                <div class="emoji__eyes"/>
+                                <div class="emoji__mouth"/>
                             </div>
                         </div>
 
@@ -48,7 +48,7 @@ export const FailedTransactionModal = () => {
                             aria-label="Close"
                         >
                             <svg width="24" height="24" viewBox="0 0 24 24">
-                                <path d="M14.5 10l7.39-7L24 5l-7.39 7L24 19l-2.11 2-7.39-7-7.39 7L5 19l7.39-7L5 5l2.11-2 7.39 7z"></path>
+                                <path d="M14.5 10l7.39-7L24 5l-7.39 7L24 19l-2.11 2-7.39-7-7.39 7L5 19l7.39-7L5 5l2.11-2 7.39 7z"/>
                             </svg>
                         </button>
                     </div>

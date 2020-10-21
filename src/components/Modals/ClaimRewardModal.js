@@ -1,4 +1,4 @@
-import React, {useContext, useState} from "react";
+import React, {useState} from "react";
 import {getPercent} from "../../utils/time";
 import {formatAmount} from "../../utils/format";
 import BigNumber from "bignumber.js";

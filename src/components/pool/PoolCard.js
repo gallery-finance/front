@@ -13,7 +13,7 @@ import Web3 from 'web3'
 const {toWei} = Web3.utils
 
 export const PoolCard = ({pool, price, loadTotal, glfPrice}) => {
-    const {total, time, apy, totalRewards} = usePoolCard(pool.type)
+    const {total, time, totalRewards} = usePoolCard(pool.type)
 
     console.log('apy', pool.type,total, price, totalRewards, glfPrice)
 
