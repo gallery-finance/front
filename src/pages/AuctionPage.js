@@ -1,51 +1,106 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import image1 from "../assets/img/auction/img--mobile.webp";
-import image2 from "../assets/img/auction/img--mobile@2x.webp";
-import image3 from "../assets/img/auction/img--mobile.png";
-import image4 from "../assets/img/auction/img--mobile@2x.png";
-import image5 from "../assets/img/auction/img.webp";
-import image6 from "../assets/img/auction/img@2x.webp";
-import image7 from "../assets/img/auction/img.png";
-import image8 from "../assets/img/auction/img@2x.png";
+import { AuctionCard } from "../components/Auction";
+import { BackButton } from "../components/BackButton";
+
+import cover_1 from "../assets/img/card-pool/1.png";
+import cover_2 from "../assets/img/card-pool/2.png";
+import cover_3 from "../assets/img/card-pool/3.png";
+import cover_4 from "../assets/img/card-pool/4.png";
+import cover_5 from "../assets/img/card-pool/5.png";
+import cover_6 from "../assets/img/card-pool/6.png";
+
+const poolList = [
+    {
+        id: "13",
+        type: "live",
+        label: "Starry Night",
+        author: "by Van Gogh",
+        cover: cover_1,
+        token: "0x84e517408ba6b891b9ac74b2f90013fcbc516d9d"
+    },
+    {
+        id: "13",
+        type: "closed",
+        label: "Portrait of the ... ",
+        author: "by Van Gogh",
+        cover: cover_2,
+        token: "0x84e517408ba6b891b9ac74b2f90013fcbc516d9d"
+    },
+    {
+        id: "13",
+        type: "filled",
+        label: "Wheatfield with ... ",
+        author: "by Van Gogh",
+        cover: cover_3,
+        token: "0x84e517408ba6b891b9ac74b2f90013fcbc516d9d"
+    },
+    {
+        id: "13",
+        type: "closed",
+        label: "Portrait of the ... ",
+        author: "by Van Gogh",
+        cover: cover_4,
+        token: "0x84e517408ba6b891b9ac74b2f90013fcbc516d9d"
+    },
+    {
+        id: "13",
+        type: "live",
+        label: "Starry Night",
+        author: "by Van Gogh",
+        cover: cover_5,
+        token: "0x84e517408ba6b891b9ac74b2f90013fcbc516d9d"
+    },
+    {
+        id: "13",
+        type: "filled",
+        label: "Wheatfield with ... ",
+        author: "by Van Gogh",
+        cover: cover_6,
+        token: "0x84e517408ba6b891b9ac74b2f90013fcbc516d9d"
+    }
+];
 
 export const AuctionPage = () => (
-    <article className="auction center">
-        <div className="auction__body">
-            <h1 className="h1">Decentralized NFT Auction</h1>
+    <article className="center">
+        <BackButton />
 
-            <p>
-                We believe that the artists should always be rewarded. That is why
-                when you create an art piece, you will earn money every time it is
-                sold via the auction: we allocate 50% of the transaction fees to the
-                original creators of sold NFTs.
-            </p>
+        <header className="head-page">
+            <h1 className="head-page__title h1">Decentralized NFT Auction</h1>
+        </header>
 
-            <div className="auction__btn">
-                <Link to="/" className="">
-                    Coming Soon!
-                </Link>
+        <div className="voter-head">
+            <div className="voter-head__dashboard">
+                <div className="voter-head__dashboard-account">
+                    <div className="voter-head__dashboard-ico">
+                        <svg width="24" height="24" viewBox="0 0 24 24">
+                            <path d="M2 9h19a1 1 0 011 1v10a1 1 0 01-1 1H3a1 1 0 01-1-1V9zm1-6h15v4H2V4a1 1 0 011-1zm12 11v2h3v-2h-3z"></path>
+                        </svg>
+                    </div>
+                    <Link to="/workshop/account" className="link">
+                        Account
+                    </Link>
+                </div>
+                <div className="voter-head__dashboard-power">
+                    <p>
+                        Your Voting Power: <b>100 GLF</b>
+                    </p>
+                </div>
+                <div className="voter-head__dashboard-btn">
+                    <Link to="/" className="btn">
+                        Search
+                    </Link>
+                </div>
             </div>
         </div>
 
-        <div className="auction__img">
-            <picture>
-                <source
-                    srcSet={`${image1} 1x, ${image2} 2x`}
-                    type="image/webp"
-                    media="(max-width: 360px)"
-                />
-                <source
-                    srcSet={`${image3} 1x, ${image4} 2x`}
-                    media="(max-width: 360px)"
-                />
-
-                <source srcSet={`${image5} 1x, ${image6} 2x`} type="image/webp" />
-                <source srcSet={`${image7} 1x, ${image8} 2x`} />
-
-                <img src={image7} width="566" height="437" loading="lazy" alt="" />
-            </picture>
+        <div className="auction-list">
+            <div className="auction-list__list">
+                {poolList.map(item => (
+                    <AuctionCard key={item.id} {...item} />
+                ))}
+            </div>
         </div>
     </article>
 );

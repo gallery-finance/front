@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-import { MyBalance, MyFigures, MyArtwork, MyNTFs } from "./AccountRoutes";
+import { MyBalance, MyFigures, MyArtwork, MyNFTs } from "./AccountRoutes";
 
 export const AccountPage = () => {
     const [tab, setTab] = useState(1);
@@ -9,51 +9,21 @@ export const AccountPage = () => {
     return (
         <>
             <div className="center">
-                <ul
-                    className="breadcrumbs hidden-sm"
-                    itemScope=""
-                    itemType="https://schema.org/BreadcrumbList"
-                >
-                    <li
-                        className="breadcrumbs__item"
-                        itemProp="itemListElement"
-                        itemScope=""
-                        itemType="https://schema.org/ListItem"
-                    >
-                        <Link to="/" className="breadcrumbs__link" itemProp="item">
-                            <span itemProp="name">Home</span>
+                <ul className="breadcrumbs hidden-sm">
+                    <li className="breadcrumbs__item">
+                        <Link to="/" className="breadcrumbs__link">
+                            <span>Home</span>
                         </Link>
-                        <meta itemProp="position" content="1" />
                     </li>
 
-                    <li
-                        className="breadcrumbs__item"
-                        itemProp="itemListElement"
-                        itemScope=""
-                        itemType="https://schema.org/ListItem"
-                    >
-                        <Link
-                            to="/workshop"
-                            className="breadcrumbs__link"
-                            itemProp="item"
-                        >
-                            <span itemProp="name">Workshops</span>
+                    <li className="breadcrumbs__item">
+                        <Link to="/workshop" className="breadcrumbs__link">
+                            <span>Workshops</span>
                         </Link>
-                        <meta itemProp="position" content="2" />
                     </li>
 
-                    <li
-                        className="breadcrumbs__item"
-                        itemProp="itemListElement"
-                        itemScope=""
-                        itemType="https://schema.org/ListItem"
-                    >
-                        <span itemProp="name">Account</span>
-                        <link
-                            itemProp="item"
-                            href="http://gf.wndrbase.com/workshop/voter"
-                        />
-                        <meta itemProp="position" content="3" />
+                    <li className="breadcrumbs__item">
+                        <span>Account</span>
                     </li>
                 </ul>
             </div>
@@ -103,7 +73,7 @@ export const AccountPage = () => {
                 {tab === 1 && <MyBalance />}
                 {tab === 2 && <MyFigures />}
                 {tab === 3 && <MyArtwork />}
-                {tab === 4 && <MyNTFs />}
+                {tab === 4 && <MyNFTs />}
             </article>
         </>
     );
