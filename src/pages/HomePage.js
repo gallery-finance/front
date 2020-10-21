@@ -5,8 +5,6 @@ import imageHead1 from "../assets/img/home/header/img--320x240.98581828.webp";
 import imageHead2 from "../assets/img/home/header/img--320x240.9b29229b.jpg";
 import imageHead3 from "../assets/img/home/header/img--1456x800.de4ea038.webp";
 import imageHead4 from "../assets/img/home/header/img--728x400.037e419c.jpg";
-import imageHead5 from "../assets/img/home/header/img--1380x623.10a4f1a1.webp";
-import imageHead6 from "../assets/img/home/header/img--2760x1246.6d1ff26d.webp";
 import imageHead7 from "../assets/img/home/header/img--1380x623.67d85562.jpg";
 import imageHead8 from "../assets/img/home/header/img--1456x800.58c248ea.jpg";
 import imageHead9 from "../assets/img/home/header/img--2760x1246.1b689d0a.jpg";
@@ -62,10 +60,10 @@ export const HomePage = () => (
                                 srcSet={`${imageHead4} 1x, ${imageHead8} 2x`}
                                 media="(max-width: 768px)"
                             />
-                            <source
+                            {/* <source
                                 srcSet={`${imageHead5} 1x, ${imageHead6} 2x`}
                                 type="image/webp"
-                            />
+                            /> */}
                             <source srcSet={`${imageHead7} 1x, ${imageHead9} 2x`} />
                             <img
                                 src={imageHead7}

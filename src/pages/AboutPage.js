@@ -49,8 +49,17 @@ export const AboutPage = () => (
             </div>
         </div>
 
+<<<<<<< HEAD
         <div className="about__img transparent">
             <img src={image1} width="400" height="394" loading="lazy" alt="" />
         </div>
     </article>
 );
+=======
+            <div className="auction__img transparent">
+                <img src={image1} width="400" height="394" loading="lazy" alt="" />
+            </div>
+        </article>
+    );
+};
+>>>>>>> dfa00a65b80f4f19293dd4a22c53ae64d25222aa

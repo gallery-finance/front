@@ -12,6 +12,8 @@ import {getLeftTime} from '../../utils/time'
 import ERC20 from "../../web3/abi/ERC20.json";
 import BigNumber from "bignumber.js";
 
+BigNumber.config({EXPONENTIAL_AT: [-20, 40]})
+
 export const usePoolCard = (token) =>{
     const {account, active, library, chainId} = useActiveWeb3React()
     const [ total, setTotal] = useState()
@@ -59,7 +61,7 @@ export const usePoolCard = (token) =>{
                     console.log(`${token} totalSupply:`,res)
                     if(token === 'MEME'){
                         console.log('mene: token staked',res)
-                        setTotal(new BigNumber(res).multipliedBy(10000000000).toString())
+                        setTotal((new BigNumber(res).multipliedBy(10000000000)).toString())
                     }else {
                         setTotal(res)
                     }

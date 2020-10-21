@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Web3ReactProvider } from "@web3-react/core";
 import { Web3Provider } from "@ethersproject/providers";
@@ -34,6 +34,13 @@ function getLibrary(provider) {
 }
 
 function App() {
+    useEffect(() => {
+        const el = document.querySelector(".loader-container");
+        if (el) {
+            el.remove();
+        }
+    }, []);
+
     return (
         <ContextProvider>
             <Web3ReactProvider getLibrary={getLibrary}>
