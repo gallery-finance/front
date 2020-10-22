@@ -98,7 +98,7 @@ export const AuctionPage = () => (
         <div className="auction-list">
             <div className="auction-list__list">
                 {poolList.map(item => (
-                    <AuctionCard key={item.id} {...item} />
+                    <AuctionCard key={item.id} item={item} />
                 ))}
             </div>
         </div>

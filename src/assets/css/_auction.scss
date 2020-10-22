@@ -127,4 +127,96 @@
             }
         }
     }
+
+    &-details {
+        &__title {
+            display: flex;
+            align-items: center;
+        }
+
+        &__type {
+            text-align: center;
+            margin: 0 0 0 12px;
+            padding: 3px 8px;
+            min-width: 90px;
+            height: 28px;
+            text-transform: uppercase;
+            border: none;
+            border-radius: 6px;
+            color: #fff;
+            font-size: 16px;
+
+            &--live {
+                background: #86ba6e;
+            }
+
+            &--closed {
+                background: #bdbdbd;
+            }
+
+            &--filled {
+                background: #fd7749;
+            }
+        }
+
+        &__image {
+            margin: 24px 0;
+
+            &-wrapper {
+                display: flex;
+                align-items: center;
+
+                @media (max-width: 475px) {
+                    display: block;
+                }
+            }
+        }
+
+        &__price {
+            margin-left: 20px;
+
+            @media (max-width: 475px) {
+                margin-left: 0px;
+                margin-bottom: 12px;
+            }
+
+            &>div {
+                &:first-child {
+                    margin-bottom: 12px;
+                }
+            }
+
+            p {
+                font-size: 13px;
+                opacity: 0.4;
+            }
+        }
+
+        &__table {
+            th {
+                width: 90px;
+            }
+
+            .table__token {
+                word-break: break-word;
+
+                a {
+                    color: #0f0f0f;
+                    text-decoration: underline;
+
+                    &:hover {
+                        text-decoration: none;
+                    }
+                }
+            }
+        }
+
+        &__bid {
+            width: 100%;
+            
+            td {
+                text-align: right;
+            }
+        }
+    }
 }

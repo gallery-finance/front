@@ -12,3 +12,4 @@ export * from "./UnlockedTokensModal";
 export * from "./VoteFigureModal";
 export * from "./ArtworkDetailsModal";
 export * from "./ProposeFigureModal";
+export * from "./AuctionDetailsModal";
