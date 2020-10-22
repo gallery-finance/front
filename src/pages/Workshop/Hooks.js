@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import Gallery from '../../web3/abi/Gallery.json'
 import {getContract, useActiveWeb3React} from "../../web3";
 import {getGalleryAddress} from "../../web3/address";
+import BigNumber from "bignumber.js";
 
 export const useMyVote = () =>{
     const {account, active, library, chainId} = useActiveWeb3React()
@@ -99,7 +100,17 @@ export const useProposals = () =>{
            proposal.id = item.returnValues.proposalId
            return proposal;
        }));
-        console.log('proposal:',proposalList)
+       proposalList.sort((a, b)=>{
+           console.log('proposal---->:',a)
+
+           if (new BigNumber(a.votes).isGreaterThan(b.votes)) {
+               return -1;
+           } else if (new BigNumber(a.votes).isEqualTo(b.votes)) {
+               return 0;
+           } else {
+               return 1;
+           }
+       })
        setProposals(proposalList)
     }
 
@@ -134,10 +145,10 @@ export const useMyProposals = () =>{
         console.log('my propasal ids',idList)
         const proposalList = await Promise.all(idList.map(async item => {
             console.log('query my proposal--->',account, item.toString())
-            const proposalId = await contract.methods.myProposals(account, 0).call()
+            const proposalId = await contract.methods.myProposals(account, item).call()
             const proposal = await contract.methods.proposals(proposalId).call()
             proposal.votes = await contract.methods.proposalVotes(proposalId).call()
-            console.log('query my proposal result--->',proposal)
+            console.log('query my proposal result--->',proposalId, proposal)
             proposal.id = proposalId
             return proposal;
         }));

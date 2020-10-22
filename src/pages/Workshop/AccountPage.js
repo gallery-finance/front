@@ -3,16 +3,6 @@ import { Link } from "react-router-dom";
 
 import { MyBalance, MyFigures, MyArtwork, MyNTFs } from "./AccountRoutes";
 import {getContract, useActiveWeb3React} from "../../web3";
-import ERC20 from "../../web3/abi/ERC20.json";
-import {getGalleryAddress, getGLFStakingAddress} from "../../web3/address";
-import Gallery from "../../web3/abi/Gallery.json";
-import {
-    HANDLE_SHOW_FAILED_TRANSACTION_MODAL, HANDLE_SHOW_TRANSACTION_MODAL,
-    HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
-    waitingForConfirm,
-    waitingForInit,
-    waitingPending
-} from "../../const";
 import {mainContext} from "../../reducer";
 
 export const AccountPage = () => {
@@ -101,23 +91,23 @@ export const AccountPage = () => {
                             My Figures
                         </button>
 
-                        <button
-                            className={`tabs__btn button ${
-                                tab === 3 && "is-active"
-                            }`}
-                            onClick={() => setTab(3)}
-                        >
-                            My Artwork
-                        </button>
+                        {/*<button*/}
+                        {/*    className={`tabs__btn button ${*/}
+                        {/*        tab === 3 && "is-active"*/}
+                        {/*    }`}*/}
+                        {/*    onClick={() => setTab(3)}*/}
+                        {/*>*/}
+                        {/*    My Artwork*/}
+                        {/*</button>*/}
 
-                        <button
-                            className={`tabs__btn button ${
-                                tab === 4 && "is-active"
-                            }`}
-                            onClick={() => setTab(4)}
-                        >
-                            My NFTs
-                        </button>
+                        {/*<button*/}
+                        {/*    className={`tabs__btn button ${*/}
+                        {/*        tab === 4 && "is-active"*/}
+                        {/*    }`}*/}
+                        {/*    onClick={() => setTab(4)}*/}
+                        {/*>*/}
+                        {/*    My NFTs*/}
+                        {/*</button>*/}
                     </div>
                 </div>
 
