@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 import { AuctionCard } from "../components/Auction";
 import { BackButton } from "../components/BackButton";
+import { SearchIcon } from "../icons";
 
 import cover_1 from "../assets/img/card-pool/1.png";
 import cover_2 from "../assets/img/card-pool/2.png";
@@ -88,9 +89,12 @@ export const AuctionPage = () => (
                     </p>
                 </div>
                 <div className="voter-head__dashboard-btn">
-                    <Link to="/" className="btn">
-                        Search
-                    </Link>
+                    <div className="auction-header__input">
+                        <input type="text" placeholder="Search auction..." />
+                        <button className="auction-header__input-icon">
+                            <SearchIcon />
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

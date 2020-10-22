@@ -14,3 +14,4 @@ export * from "./DegoLightIcon";
 export * from "./DegoRedIcon";
 export * from "./DonutLightIcon";
 export * from "./DonutRedIcon";
+export * from "./SearchIcon";
