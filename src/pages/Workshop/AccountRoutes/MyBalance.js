@@ -182,23 +182,20 @@ export const MyBalance = () => {
                         </th>
                         <td className="account-balance__value">{(rewardsTime && rewardsTime < 0 && myTotalVote) ? formatAmount(myTotalVote): 0} GLF</td>
 
-                        {(rewardsTime && rewardsTime < 0 ) && (
-                            <td className="account-balance__btn">
-                                <button
-                                    className="btn btn--border btn--small"
-                                    type="button"
-                                    onClick={() => {
-                                        if (rewardsTime && rewardsTime < 0) {
-                                            onWithdraw()
-                                        }
-                                    }}
-                                >
-                                    Unlock tokens (stage1)
-                                </button>
-                            </td>
-                        )}
 
-
+                        <td className="account-balance__btn">
+                            <button
+                                className="btn btn--border btn--small"
+                                type="button"
+                                onClick={() => {
+                                    if (rewardsTime && rewardsTime < 0) {
+                                        onWithdraw()
+                                    }
+                                }}
+                            >
+                                Unlock tokens (stage1)
+                            </button>
+                        </td>
                     </tr>
 
                     <tr>
