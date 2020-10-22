@@ -251,7 +251,7 @@ export const StakingDEGO = () => {
     return (
         <article className="center">
 
-            <BackButton />
+            <BackButton toPools />
 
             <header className="head-page">
 

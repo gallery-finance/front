@@ -270,7 +270,7 @@ export const StakingETH = () => {
     return(
         <article className="center">
 
-            <BackButton />
+            <BackButton toPools />
 
             <header className="head-page">
 

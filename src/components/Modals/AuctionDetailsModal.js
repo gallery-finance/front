@@ -22,7 +22,7 @@ export const AuctionDetailsModal = ({ item, setIsOpen }) => (
                             <picture>
                                 <img
                                     src={item.cover}
-                                    alt="Starry Night"
+                                    alt=""
                                     loading="lazy"
                                     width="180"
                                     height="115"

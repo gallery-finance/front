@@ -252,7 +252,7 @@ export const StakingMEME = () => {
     return (
         <article className="center">
 
-            <BackButton />
+            <BackButton toPools />
 
             <header className="head-page">
 

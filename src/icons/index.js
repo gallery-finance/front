@@ -15,3 +15,5 @@ export * from "./DegoRedIcon";
 export * from "./DonutLightIcon";
 export * from "./DonutRedIcon";
 export * from "./SearchIcon";
+export * from "./EyeCloseIcon";
+export * from "./EyeOpenIcon";

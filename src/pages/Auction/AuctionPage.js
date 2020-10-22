@@ -1,16 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import { AuctionCard } from "../components/Auction";
-import { BackButton } from "../components/BackButton";
-import { SearchIcon } from "../icons";
+import { AuctionCard } from "../../components/Auction";
+import { BackButton } from "../../components/BackButton";
+import { SearchIcon } from "../../icons";
 
-import cover_1 from "../assets/img/card-pool/1.png";
-import cover_2 from "../assets/img/card-pool/2.png";
-import cover_3 from "../assets/img/card-pool/3.png";
-import cover_4 from "../assets/img/card-pool/4.png";
-import cover_5 from "../assets/img/card-pool/5.png";
-import cover_6 from "../assets/img/card-pool/6.png";
+import cover_1 from "../../assets/img/card-pool/1.png";
+import cover_2 from "../../assets/img/card-pool/2.png";
+import cover_3 from "../../assets/img/card-pool/3.png";
+import cover_4 from "../../assets/img/card-pool/4.png";
+import cover_5 from "../../assets/img/card-pool/5.png";
+import cover_6 from "../../assets/img/card-pool/6.png";
 
 const poolList = [
     {
@@ -65,7 +65,7 @@ const poolList = [
 
 export const AuctionPage = () => (
     <article className="center">
-        <BackButton />
+        <BackButton toHome />
 
         <header className="head-page">
             <h1 className="head-page__title h1">Decentralized NFT Auction</h1>
@@ -79,7 +79,7 @@ export const AuctionPage = () => (
                             <path d="M2 9h19a1 1 0 011 1v10a1 1 0 01-1 1H3a1 1 0 01-1-1V9zm1-6h15v4H2V4a1 1 0 011-1zm12 11v2h3v-2h-3z"></path>
                         </svg>
                     </div>
-                    <Link to="/workshop/account" className="link">
+                    <Link to="/auction/account" className="link">
                         Account
                     </Link>
                 </div>

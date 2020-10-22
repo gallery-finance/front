@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Web3ReactProvider } from "@web3-react/core";
 import { Web3Provider } from "@ethersproject/providers";
@@ -17,13 +17,13 @@ import { StakingDEGO } from "./pages/pools/StakingDEGO";
 import { StakingDONUT } from "./pages/pools/StakingDONUT";
 import { AboutPage } from "./pages/AboutPage";
 import { WorkshopPage } from "./pages/WorkshopPage";
-import { AuctionPage } from "./pages/AuctionPage";
 import { ExhibitionHallPage } from "./pages/ExhibitionHallPage";
+import { AuctionPage, AuctionAccountPage } from "./pages/Auction";
 import {
     WorkshopVoterPage,
     WorkshopArtworkPage,
     WorkshopSubmitPage,
-    AccountPage
+    WorkshopAccountPage
 } from "./pages/Workshop";
 import { Footer } from "./components/Footer";
 
@@ -113,7 +113,13 @@ function App() {
                         <Route
                             exact
                             path="/workshop/account"
-                            component={AccountPage}
+                            component={WorkshopAccountPage}
+                        />
+
+                        <Route
+                            exact
+                            path="/auction/account"
+                            component={AuctionAccountPage}
                         />
                     </Switch>
                     <Footer />

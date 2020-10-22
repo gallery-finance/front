@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import { MyBalance, MyFigures, MyArtwork, MyNFTs } from "./AccountRoutes";
 
-export const AccountPage = () => {
+export const WorkshopAccountPage = () => {
     const [tab, setTab] = useState(1);
 
     return (

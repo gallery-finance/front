@@ -268,4 +268,222 @@
             }
         }
     }
+
+    &-my-pool {
+        .auction-details__image-wrapper {
+            @media (max-width: 600px) {
+                display: block;
+            }
+        }
+
+        .modal__box {
+            margin: 75px auto;
+            width: 728px;
+        }
+
+        .form-app {
+            width: 100%;
+        }
+
+        .form-app__inputbox-row {
+            &>div {
+                width: 100%;
+                margin-right: 26px;
+
+                p {
+                    opacity: 0.3;
+                    font-size: 13px;
+                }
+
+                &:last-child {
+                    margin-right: 0;
+                }
+            }
+        }
+
+        &__data {
+            margin-left: 40px;
+
+            @media (max-width: 600px) {
+                margin-left: 0px;
+                margin-bottom: 24px;
+            }
+
+            p {
+                font-size: 13px;
+                opacity: 0.3;
+            }
+
+            &-password {
+                display: flex;
+
+                &>div {
+                    margin-top: 6px;
+                }
+
+                &>div:first-child {
+                    margin-right: 12px;
+                }
+            }
+
+            .form-app__inputbox-input {
+                position: relative;
+
+                button {
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    bottom: 0;
+                    width: 36px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    background: transparent;
+                    border: none;
+                    cursor: pointer;
+
+                    &:focus {
+                        outline: none;
+                    }
+                }
+            }
+        }
+
+        th {
+            width: 180px;
+
+            @media (max-width: 600px) {
+                width: 90px;
+            }
+        }
+
+        &__price {
+            padding: 24px 0;
+
+            &-row {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                @media (max-width: 520px) {
+                    display: block;
+                }
+
+                &:first-child {
+                    margin-bottom: 12px;
+
+                    @media (max-width: 520px) {
+                        margin-bottom: 24px;
+                    }
+                }
+
+                .checkbox__label {
+                    font-size: 16px;
+
+                    &::before {
+                        width: 16px;
+                        height: 16px;
+                    }
+
+                    @media (max-width: 520px) {
+                        margin-bottom: 8px;
+                    }
+                }
+
+                p {
+                    @media (max-width: 520px) {
+                        margin-bottom: 8px;
+                    }
+                }
+            }
+
+            &-input {
+                display: flex;
+                align-items: center;
+
+                &>div {
+                    margin-right: 8px;
+
+                    @media (max-width: 520px) {
+                        width: 100%;
+                    }
+                }
+
+                input {
+                    width: 161px;
+                    text-align: right;
+
+                    @media (max-width: 520px) {
+                        width: 100%;
+                    }
+                }
+            }
+        }
+
+        &__time {
+            margin-bottom: 68px !important;
+
+            &-title {
+                margin-bottom: 12px;
+            }
+
+            .form-app__inputbox-row {
+                @media (max-width: 520px) {
+                    display: block;
+                }
+
+                &>div {
+                    @media (max-width: 520px) {
+                        margin-bottom: 8px;
+                    }
+                }
+            }
+        }
+
+        &--check {
+            .auction-details__price {
+                margin-left: 40px;
+
+                @media (max-width: 600px) {
+                    margin-left: 0;
+                    margin-bottom: 12px;
+                }
+            }
+        }
+
+        &__bids {
+            margin-bottom: 55px;
+            overflow-x: auto;
+
+            &__title {
+                font-size: 16px;
+                margin-top: 24px;
+                margin-bottom: 10px;
+            }
+
+            &__table {
+                font-size: 14px;
+                width: 100%;
+                border-top: 2px solid #e0e0e0;
+
+                tr {
+                    background: #f2f2f2;
+
+                    &:nth-child(2n) {
+                        background: transparent;
+                    }
+                }
+
+                td {
+                    padding: 8px;
+
+                    a {
+                        color: #1d1d1d;
+                        opacity: 0.4;
+                        text-decoration: underline;
+                    }
+                }
+            }
+        }
+    }
 }
