@@ -1,14 +1,16 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 
 export const StageCard = ({
-    number,
-    stageText,
-    title,
-    timeIn,
-    status,
-    description
-}) => {
+                              number,
+                              stageText,
+                              title,
+                              timeIn,
+                              status,
+                              description,
+                              active,
+                              link
+                          }) => {
     return (
         <div className="workshop-cards__item">
             <div className="workshop-cards__number">{number}</div>
@@ -16,7 +18,7 @@ export const StageCard = ({
             <p className="workshop-cards__name">
                 <span>{title}</span>
             </p>
-            <hr />
+            <hr/>
             <dl className="workshop-cards__dl">
                 <div className="workshop-cards__dl-row">
                     <dt className="workshop-cards__dl-dt">Time in</dt>
@@ -29,11 +31,11 @@ export const StageCard = ({
                     </dd>
                 </div>
             </dl>
-            <hr />
+            <hr/>
             <p className="workshop-cards__text">{description}</p>
-            <a style={{backgroundColor: 'rgba(0, 0, 0, 0.5)'}} disabled className="workshop-cards__btn btn">
+            <Link to={link} style={{backgroundColor: active ? '' : 'rgba(0, 0, 0, 0.5)'}} className="workshop-cards__btn btn">
                 Join
-            </a>
+            </Link>
         </div>
     );
 };

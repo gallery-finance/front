@@ -198,14 +198,9 @@ export const WorkshopVoterPage = () => {
         <article className="center">
             <div className="center">
                 <ul className="breadcrumbs hidden-sm">
-                    <li className="breadcrumbs__item">
-                        <Link to="/" className="breadcrumbs__link">
-                            <span>Home</span>
-                        </Link>
-                    </li>
 
                     <li className="breadcrumbs__item">
-                        <Link to="/workshop" className="breadcrumbs__link">
+                        <Link to="/Workshop" className="breadcrumbs__link">
                             <span>Workshops</span>
                         </Link>
                     </li>
@@ -226,13 +221,13 @@ export const WorkshopVoterPage = () => {
                                     d="M2 9h19a1 1 0 011 1v10a1 1 0 01-1 1H3a1 1 0 01-1-1V9zm1-6h15v4H2V4a1 1 0 011-1zm12 11v2h3v-2h-3z"/>
                             </svg>
                         </div>
-                        <Link to="/workshop/account" className="link">
+                        <Link to="/workshop/account" className="link line">
                             Account
                         </Link>
                     </div>
                     <div className="voter-head__dashboard-power">
                         <p>
-                            Your Voting Power: <b>{myTotalVote && formatAmount(myTotalVote)} GLF</b>
+                            Your Voting Power: <b>{glfBalance && formatAmount(glfBalance)} GLF</b>
                         </p>
                     </div>
                     <div className="voter-head__dashboard-btn">
@@ -296,7 +291,7 @@ export const WorkshopVoterPage = () => {
                             voteAmount={voteAmount}
                             onChange={setVoteAmount}
                             onConfirm={onVote}
-                            proposal={setSelectedProposal}
+                            proposal={selectedProposal}
                             balance={glfBalance}
                             setVoteOpen={setVoteOpen}/>
                     </div>

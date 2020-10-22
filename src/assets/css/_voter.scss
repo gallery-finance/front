@@ -39,6 +39,16 @@
 
 				}
 
+				.line {
+
+
+
+				}
+
+				.line:hover{
+					border-bottom: 1px var(--yellow) solid;
+				}
+
 				@media #{$smWidth} {
 
 					padding: 20px 24px;

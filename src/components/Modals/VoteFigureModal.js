@@ -2,6 +2,7 @@ import React from "react";
 import {formatAmount} from "../../utils/format";
 
 export const VoteFigureModal = ({setVoteOpen, balance, proposal, onCancel, onConfirm, voteAmount, onChange}) => {
+    console.log('VoteFigureModal',proposal)
     return (
         <div className="modal">
             <div className="modal__box">

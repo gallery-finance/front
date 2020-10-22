@@ -30,17 +30,6 @@ export const AccountPage = () => {
                     itemScope=""
                     itemType="https://schema.org/BreadcrumbList"
                 >
-                    <li
-                        className="breadcrumbs__item"
-                        itemProp="itemListElement"
-                        itemScope=""
-                        itemType="https://schema.org/ListItem"
-                    >
-                        <Link to="/" className="breadcrumbs__link" itemProp="item">
-                            <span itemProp="name">Home</span>
-                        </Link>
-                        <meta itemProp="position" content="1" />
-                    </li>
 
                     <li
                         className="breadcrumbs__item"
@@ -54,6 +43,22 @@ export const AccountPage = () => {
                             itemProp="item"
                         >
                             <span itemProp="name">Workshops</span>
+                        </Link>
+                        <meta itemProp="position" content="2" />
+                    </li>
+
+                    <li
+                        className="breadcrumbs__item"
+                        itemProp="itemListElement"
+                        itemScope=""
+                        itemType="https://schema.org/ListItem"
+                    >
+                        <Link
+                            to="/workshop/figures"
+                            className="breadcrumbs__link"
+                            itemProp="item"
+                        >
+                            <span itemProp="name">Figures</span>
                         </Link>
                         <meta itemProp="position" content="2" />
                     </li>

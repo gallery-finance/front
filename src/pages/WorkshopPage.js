@@ -70,11 +70,13 @@ export const WorkshopPage = () => {
             <div className="workshop-cards">
                 <div className="workshop-cards__list">
                     <StageCard
+                        link={"/workshop/figures"}
+                        active
                         number={1}
                         stageText="Stage One"
                         title="Vote for the 10 most-wanted figures"
                         timeIn="10/22/2020 -10/25/2020"
-                        status="preparation"
+                        status="live"
                         description={
                             <>
                                 You can propose a figure or you can vote for a figure
