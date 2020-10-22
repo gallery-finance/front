@@ -24,13 +24,16 @@ export const MyBalance = () => {
     const [claimOpen, setClaimOpen] = useState(false);
     const [unlockedOpen, setUnlockedOpen] = useState(false);
     const {glfBalance} = useGLFBalance()
-    const {myTotalVote} = useMyVote()
+    const {myTotalVote,  proposalRewards} = useMyVote()
 
     const {withDrawn, claimedTokens, rewardsTime} = useAccount()
 
 
     const onClaim = async () => {
         console.log('on submit')
+        if(!proposalRewards || proposalRewards == 0){
+            return
+        }
         const contract = getContract(library, Gallery.abi, getGalleryAddress(chainId))
         try {
             dispatch({
@@ -177,7 +180,7 @@ export const MyBalance = () => {
                                 My Tokens ready to unlock:
                             </div>
                         </th>
-                        <td className="account-balance__value">{withDrawn && formatAmount(myTotalVote)} GLF</td>
+                        <td className="account-balance__value">{(rewardsTime && rewardsTime < 0 && myTotalVote) ? formatAmount(myTotalVote): 0} GLF</td>
                         <td className="account-balance__btn">
                             <button
                                 className="btn btn--border btn--small"
@@ -219,7 +222,7 @@ export const MyBalance = () => {
                         <th className="account-balance__title">
                             My rewards for Stage 1:
                         </th>
-                        <td className="account-balance__value">121 GLF</td>
+                        <td className="account-balance__value">{proposalRewards && formatAmount(proposalRewards)} GLF</td>
                         <td></td>
                     </tr>
                     <tr>
@@ -238,7 +241,7 @@ export const MyBalance = () => {
                                 Total rewards:
                             </div>
                         </th>
-                        <td className="account-balance__value">243 GLF</td>
+                        <td className="account-balance__value">{proposalRewards && formatAmount(proposalRewards)} GLF</td>
                         <td></td>
                     </tr>
                     </tbody>

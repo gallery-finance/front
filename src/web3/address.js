@@ -2,11 +2,11 @@
 export function getGalleryAddress(chainId) {
     switch (chainId) {
         case 1:
-            return  '0xe10B34fA276173258Ece52f2e59728168EF06251'
+            return  '0xD4cbb93216448D726706b6f9f0DeDe1A4eB67b92'
         case 4:
-            return  '0xe10B34fA276173258Ece52f2e59728168EF06251'
+            return  '0xD4cbb93216448D726706b6f9f0DeDe1A4eB67b92'
         default:
-            return '0xe10B34fA276173258Ece52f2e59728168EF06251'
+            return '0xD4cbb93216448D726706b6f9f0DeDe1A4eB67b92'
     }
 }
 

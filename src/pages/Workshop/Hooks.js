@@ -7,14 +7,27 @@ import BigNumber from "bignumber.js";
 export const useMyVote = () =>{
     const {account, active, library, chainId} = useActiveWeb3React()
     const [ myTotalVote, setMyTotalVote] = useState()
+    const [ proposalRewards, setProposalRewards] = useState()
+
 
     useEffect(()=>{
         if(active){
             try{
                 const contract = getContract(library, Gallery.abi, getGalleryAddress(chainId))
                 contract.methods.myProposalVotes(account).call().then(res =>{
-                    console.log('bot totalSupply:',res)
+                    console.log('myProposalVotes:',res)
                     setMyTotalVote(res)
+                })
+            }catch (e) {
+                console.log('myProposalVotes error:',e)
+
+            }
+
+            try{
+                const contract = getContract(library, Gallery.abi, getGalleryAddress(chainId))
+                contract.methods.myProposalRewards(account).call().then(res =>{
+                    console.log('myProposalRewards:',res)
+                    setProposalRewards(res)
                 })
             }catch (e) {
                 console.log('load totalSupply error:',e)
@@ -24,7 +37,7 @@ export const useMyVote = () =>{
         }
     },[active])
 
-    return {myTotalVote}
+    return {myTotalVote, proposalRewards}
 }
 
 
@@ -63,7 +76,11 @@ export const useAccount = () =>{
             try{
                 const contract = getContract(library, Gallery.abi, getGalleryAddress(chainId))
                 contract.methods.myProposalUpdateAt(account).call().then(res =>{
-
+                    console.log('myProposalUpdateAt',res)
+                    if(res == 0){
+                        setRewardsTime(0)
+                        return
+                    }
                     const now = new Date();
                     const date = new Date(res * 1000);
                     console.log('rewardsTime:',now-date)
@@ -91,9 +108,7 @@ export const useProposals = () =>{
    async function queryProposals() {
         const contract = getContract(library, Gallery.abi, getGalleryAddress(chainId))
        const list = await contract.getPastEvents('ProposalCreated',{ fromBlock: 0, toBlock: "latest" })
-       console.log('list--->',list[0].returnValues)
        const proposalList = await Promise.all(list.map(async item => {
-           console.log('item--->',item)
 
            const proposal = await contract.methods.proposals(item.returnValues.proposalId).call()
            proposal.votes = await contract.methods.proposalVotes(item.returnValues.proposalId).call()
@@ -101,7 +116,6 @@ export const useProposals = () =>{
            return proposal;
        }));
        proposalList.sort((a, b)=>{
-           console.log('proposal---->:',a)
 
            if (new BigNumber(a.votes).isGreaterThan(b.votes)) {
                return -1;
