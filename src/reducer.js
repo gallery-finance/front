@@ -9,7 +9,7 @@ import {
   HANDLE_SHOW_STAKED_TOKENS_MODAL,
   HANDLE_SHOW_UNSTAKED_TOKENS_MODAL,
   HANDLE_SHOW_FAILED_TRANSACTION_MODAL,
-  HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL
+  HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL, HANDLE_SHOW_TRANSACTION_MODAL
 } from "./const";
 
 const mainContext = React.createContext();
@@ -32,6 +32,8 @@ const reducer = (state, action) => {
       return { ...state, showFailedTransactionModal: action.showFailedTransactionModal };
     case HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL:
       return { ...state, showWaitingWalletConfirmModal: action.showWaitingWalletConfirmModal };
+    case HANDLE_SHOW_TRANSACTION_MODAL:
+      return { ...state, showTransactionModal: action.showTransactionModal };
     default:
 
       return state
@@ -47,7 +49,8 @@ const ContextProvider = props => {
     showStakedTokensModal: false,
     showUnstakedTokensModal: false,
     showFailedTransactionModal: false,
-    showWaitingWalletConfirmModal: {show:false, title: "", content: ""}
+    showWaitingWalletConfirmModal: {show:false, title: "", content: ""},
+    showTransactionModal: false
   });
   return (
       <mainContext.Provider value={{state, dispatch}}>

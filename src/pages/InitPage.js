@@ -10,7 +10,8 @@ import {
     StakedTokensModal,
     UnstakedTokensModal,
     FailedTransactionModal,
-    WaitingWalletConfirmModal
+    WaitingWalletConfirmModal,
+    TransactionModal
 } from "../components/Modals";
 import {GALLERY_SELECT_WEB3_CONTEXT} from "../const";
 import {InjectedConnector} from "@web3-react/injected-connector";
@@ -65,7 +66,8 @@ export const InitPage = () => {
         showStakedTokensModal,
         showUnstakedTokensModal,
         showFailedTransactionModal,
-        showWaitingWalletConfirmModal
+        showWaitingWalletConfirmModal,
+        showTransactionModal
     } = state;
 
 
@@ -134,6 +136,21 @@ export const InitPage = () => {
                 <div className="modal-show" style={{zIndex: 11}}>
                     <div className="wrapper" >
                         <WaitingWalletConfirmModal />
+                    </div>
+                </div>
+            )}
+            {showWaitingWalletConfirmModal.show && (
+                <div className="modal-show" style={{zIndex: 11}}>
+                    <div className="wrapper" >
+                        <WaitingWalletConfirmModal />
+                    </div>
+                </div>
+            )}
+
+            {showTransactionModal && (
+                <div className="modal-show" style={{zIndex: 11}}>
+                    <div className="wrapper" >
+                        <TransactionModal />
                     </div>
                 </div>
             )}

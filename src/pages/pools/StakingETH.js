@@ -22,7 +22,7 @@ import {
     UnstakeModal
 } from "../../components/Modals";
 import {UniswapBlackIcon, UniswapLightIcon} from "../../icons";
-import {ClaimedTokensModal} from "../../components/Modals/ClaimedTokensModal";
+import {ClaimedTokensModal} from "../../components/Modals";
 import Web3 from "web3";
 import {formatAmount} from "../../utils/format";
 import {ChainId, Token, Pair, TokenAmount} from "@uniswap/sdk";

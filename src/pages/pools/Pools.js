@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react'
+import {PoolBigCard} from '../../components/pool/PoolBigCard'
 import {PoolCard} from '../../components/pool/PoolCard'
 import cover_1 from '../../assets/img/card-pool/1.png'
 import cover_2 from '../../assets/img/card-pool/2.png'
@@ -6,13 +7,13 @@ import cover_3 from '../../assets/img/card-pool/3.png'
 import cover_4 from '../../assets/img/card-pool/4.png'
 import cover_5 from '../../assets/img/card-pool/5.png'
 import cover_6 from '../../assets/img/card-pool/6.png'
+import cover_7 from '../../assets/img/card-pool/7.jpg'
 import {REQUESTING_DATA} from "../../const";
 import {useGLFBalance} from "../Hooks";
 import {formatAmount} from "../../utils/format";
 import {useStatistics} from "./Hooks";
 import BigNumber from "bignumber.js";
 import Web3 from 'web3'
-import {useProposals} from "../../components/Workshop/Hooks";
 
 const {toWei, fromWei} = Web3.utils
 
@@ -35,7 +36,6 @@ export const Pools = () => {
     const [MEMEStaked, setMEMEStaked] = useState()
     const [DONUTStaked, setDONUTStaked] = useState()
     const [BOTStaked, setBOTStaked] = useState()
-    const {proposals} = useProposals()
 
     function loadTotalStaked () {
         console.log('loadTotalStaked',BOTPrice,BOTStaked)
@@ -71,6 +71,16 @@ export const Pools = () => {
 
 
                 <div className="card-pool">
+                    <PoolBigCard
+                        label="Gallery Rembrandt"
+                        cover={cover_7}
+                        pair="GLF"
+                        link="staking-eth"
+                        staked={500.212}
+                        points={200.22}
+                        redeemed={11}
+                        left={12}
+                    />                    
                     <div className="card-pool__list">
                         {poolList.map(item =>{
                             return (
