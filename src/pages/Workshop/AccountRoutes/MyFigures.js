@@ -28,7 +28,7 @@ export const MyFigures = () => {
                     <tbody>
                         {myProposals.map(item => (
                             <tr key={item.id}>
-                                <td>{item.info}</td>
+                                <td>{new Date(item.createAt * 1000).toLocaleDateString()}</td>
                                 <td>{item.name}</td>
                                 <td className="hidden-sm">
                                     <div className="voter-table__details">

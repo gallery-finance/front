@@ -115,6 +115,8 @@ export const useProposals = () =>{
            proposal.id = item.returnValues.proposalId
            return proposal;
        }));
+
+        console.log('proposalList',proposalList)
        proposalList.sort((a, b)=>{
 
            if (new BigNumber(a.votes).isGreaterThan(b.votes)) {
@@ -144,13 +146,9 @@ export const useMyProposals = () =>{
     const [myProposals, setMyProposals] = useState([])
 
     async function queryMyProposals() {
-        console.log('my propasal')
-
         const contract = getContract(library, Gallery.abi, getGalleryAddress(chainId))
 
         const count = await contract.methods.myProposalCount(account).call()
-        console.log('my propasal count',count)
-
         let idList = []
         for (let i = 0; i < count; i++) {
             idList[i] = count - i - 1;
