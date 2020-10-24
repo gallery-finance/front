@@ -2,13 +2,9 @@ import React, {useContext, useState} from "react";
 import { Link } from "react-router-dom";
 
 import { MyBalance, MyFigures, MyArtwork, MyNTFs } from "./AccountRoutes";
-import {getContract, useActiveWeb3React} from "../../web3";
-import {mainContext} from "../../reducer";
 
 export const AccountPage = () => {
     const [tab, setTab] = useState(1);
-    const {account, active, library, chainId} = useActiveWeb3React()
-    const {dispatch, state} = useContext(mainContext);
 
 
 

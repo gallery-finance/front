@@ -1,11 +1,9 @@
-import React, {useContext, useState} from "react";
+import React, {useContext} from "react";
 
-import {ClaimedTokensModal, UnlockedTokensModal} from "../../../components/Modals";
 import {useAccount, useMyVote} from "../Hooks";
 import {formatAmount} from "../../../utils/format";
 import {getContract, useActiveWeb3React} from "../../../web3";
-import ERC20 from "../../../web3/abi/ERC20.json";
-import {getGalleryAddress, getGLFStakingAddress} from "../../../web3/address";
+import {getGalleryAddress} from "../../../web3/address";
 import Gallery from "../../../web3/abi/Gallery.json";
 import {
     HANDLE_SHOW_FAILED_TRANSACTION_MODAL,
@@ -19,14 +17,12 @@ import {mainContext} from "../../../reducer";
 import {useGLFBalance} from "../../Hooks";
 
 export const MyBalance = () => {
-    const {dispatch, state} = useContext(mainContext);
-    const {account, active, library, chainId} = useActiveWeb3React()
-    const [claimOpen, setClaimOpen] = useState(false);
-    const [unlockedOpen, setUnlockedOpen] = useState(false);
+    const {dispatch} = useContext(mainContext);
+    const {account, library, chainId} = useActiveWeb3React()
     const {glfBalance} = useGLFBalance()
     const {myTotalVote,  proposalRewards} = useMyVote()
 
-    const {withDrawn, claimedTokens, rewardsTime} = useAccount()
+    const {rewardsTime} = useAccount()
 
 
     const onClaim = async () => {

@@ -13,8 +13,6 @@ import {getBotAddress, getBotStakingAddress} from "../../web3/address";
 import StakingRewardsV2 from "../../web3/abi/StakingRewardsV2.json";
 import Web3 from 'web3'
 import {
-    bot_stake_icon, bot_unstake_icon,
-    glf_icon,
     HANDLE_SHOW_CONNECT_MODAL, HANDLE_SHOW_FAILED_TRANSACTION_MODAL,
     HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL, REQUESTING_DATA,
     waitingForApprove, waitingForConfirm, waitingForInit, waitingPending
@@ -24,7 +22,7 @@ import {useStaking} from "../../components/pool/Hooks";
 import {BackButton} from "../../components/BackButton";
 import {formatAmount, weiDiv} from "../../utils/format";
 import {BOTLightIcon, BOTRedIcon} from "../../icons";
-import {ClaimedTokensModal} from "../../components/Modals/ClaimedTokensModal";
+import {ClaimedTokensModal} from "../../components/Modals";
 
 const {toWei, fromWei} = Web3.utils
 

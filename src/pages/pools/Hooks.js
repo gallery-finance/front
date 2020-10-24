@@ -1,19 +1,12 @@
 import React, {useState, useEffect} from 'react';
-import StakingRewardsV2 from '../../web3/abi/StakingRewardsV2.json'
 import {getContract, useActiveWeb3React} from "../../web3";
 import {
-    getBotAddress,
-    getBotStakingAddress, getDEGOAddress, getDEGOStakingAddress, getDONUTAddress, getDONUTStakingAddress, getETHAddress,
-    getETHStakingAddress, getGLFStakingAddress, getMEMOAddress,
-    getMEMOStakingAddress, getUSDTAddress,
-    getUSDTStakingAddress, getUSDTTokenAddress
+    getBotAddress, getDEGOAddress, getDONUTAddress, getETHAddress, getGLFStakingAddress, getMEMOAddress, getUSDTAddress, getUSDTTokenAddress
 } from "../../web3/address";
 import BigNumber from "bignumber.js";
 import ERC20 from "../../web3/abi/ERC20.json";
-import Web3 from 'web3'
 import {ChainId, Fetcher, Route, Token, WETH} from "@uniswap/sdk";
 
-const {fromWei} = Web3.utils
 
 export const useStatistics = () =>{
     const {account, active, library, chainId} = useActiveWeb3React()

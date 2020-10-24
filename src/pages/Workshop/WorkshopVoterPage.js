@@ -5,7 +5,7 @@ import {VoterItem} from "../../components/Workshop";
 import {ProposeFigureModal, VoteFigureModal} from "../../components/Modals";
 import {getContract, useActiveWeb3React} from "../../web3";
 import ERC20 from "../../web3/abi/ERC20.json";
-import {getETHAddress, getETHStakingAddress, getGalleryAddress, getGLFStakingAddress} from "../../web3/address";
+import {getGalleryAddress, getGLFStakingAddress} from "../../web3/address";
 import Gallery from "../../web3/abi/Gallery.json";
 import {
     HANDLE_SHOW_FAILED_TRANSACTION_MODAL, HANDLE_SHOW_TRANSACTION_MODAL,
@@ -15,16 +15,15 @@ import {
     waitingPending
 } from "../../const";
 import {mainContext} from "../../reducer";
-import {useMyVote, useProposals} from "./Hooks";
+import {useProposals} from "./Hooks";
 import {formatAmount} from "../../utils/format";
 import {useGLFBalance} from "../Hooks";
 
 const {toWei} = Web3.utils
 
 export const WorkshopVoterPage = () => {
-    const {dispatch, state} = useContext(mainContext);
-    const {account, active, library, chainId} = useActiveWeb3React()
-    const {myTotalVote} = useMyVote()
+    const {dispatch} = useContext(mainContext);
+    const {account, library, chainId} = useActiveWeb3React()
     const {proposals} = useProposals()
     const {glfBalance} = useGLFBalance()
 

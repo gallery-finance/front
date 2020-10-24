@@ -2,7 +2,7 @@ import React, {useContext, useEffect, useState} from 'react';
 import {useWeb3React} from "@web3-react/core";
 import {mainContext} from '../../reducer'
 import {InjectedConnector} from "@web3-react/injected-connector";
-import {GALLERY_SELECT_WEB3_CONTEXT, HANDLE_SHOW_CONNECT_MODAL, HANDLE_WEB3_CONTEXT} from "../../const";
+import {GALLERY_SELECT_WEB3_CONTEXT, HANDLE_SHOW_CONNECT_MODAL} from "../../const";
 import {formatAddress} from "../../utils/format";
 import MetaMask from '../../assets/img/modal/MetaMask.png'
 import MetaMask2 from '../../assets/img/modal/MetaMask@2x.png'
