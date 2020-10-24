@@ -1,7 +1,7 @@
 import React, {useContext} from "react";
 
 import {useAccount, useMyVote} from "../Hooks";
-import {formatAmount} from "../../../utils/format";
+import {formatAmount, weiPlus} from "../../../utils/format";
 import {getContract, useActiveWeb3React} from "../../../web3";
 import {getGalleryAddress} from "../../../web3/address";
 import Gallery from "../../../web3/abi/Gallery.json";
@@ -20,16 +20,13 @@ export const MyBalance = () => {
     const {dispatch} = useContext(mainContext);
     const {account, library, chainId} = useActiveWeb3React()
     const {glfBalance} = useGLFBalance()
-    const {myTotalVote,  proposalRewards} = useMyVote()
+    const {proposalRewards, figureRewards, myProposalVotes, myFigureVotes} = useMyVote()
 
     const {rewardsTime} = useAccount()
 
 
     const onClaim = async () => {
         console.log('on submit')
-        if(!proposalRewards || proposalRewards == 0){
-            return
-        }
         const contract = getContract(library, Gallery.abi, getGalleryAddress(chainId))
         try {
             dispatch({
@@ -167,7 +164,7 @@ export const MyBalance = () => {
                                 My Voted Tokens:
                             </div>
                         </th>
-                        <td className="account-balance__value">{myTotalVote && formatAmount(myTotalVote)} GLF</td>
+                        <td className="account-balance__value">{(myProposalVotes || myFigureVotes) && formatAmount(weiPlus(myProposalVotes, myFigureVotes))} GLF</td>
                         <td></td>
                     </tr>
                     <tr>
@@ -176,8 +173,7 @@ export const MyBalance = () => {
                                 Tokens ready to unlock stage1:
                             </div>
                         </th>
-                        <td className="account-balance__value">{(rewardsTime && rewardsTime < 0 && myTotalVote) ? formatAmount(myTotalVote): 0} GLF</td>
-
+                        <td className="account-balance__value">{(rewardsTime && rewardsTime < 0 && proposalRewards) ? formatAmount(proposalRewards) : 0} GLF</td>
 
                         <td className="account-balance__btn">
                             {(rewardsTime && rewardsTime < 0) ? (
@@ -192,7 +188,7 @@ export const MyBalance = () => {
                                 >
                                     Unlock tokens (stage1)
                                 </button>
-                            ): null}
+                            ) : null}
 
                         </td>
                     </tr>
@@ -230,7 +226,7 @@ export const MyBalance = () => {
                         <th className="account-balance__title">
                             My rewards for Stage 2:
                         </th>
-                        <td className="account-balance__value">0 GLF</td>
+                        <td className="account-balance__value">{figureRewards && formatAmount(figureRewards)} GLF</td>
                         <td></td>
                     </tr>
                     <tr>
@@ -242,7 +238,7 @@ export const MyBalance = () => {
                                 Total rewards:
                             </div>
                         </th>
-                        <td className="account-balance__value">{proposalRewards && formatAmount(proposalRewards)} GLF</td>
+                        <td className="account-balance__value">{(proposalRewards || figureRewards) && formatAmount(weiPlus(proposalRewards, figureRewards))} GLF</td>
                         <td></td>
                     </tr>
                     </tbody>

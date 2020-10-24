@@ -1,11 +1,116 @@
-import React from "react";
+import React, {useContext, useState} from "react";
 
 import imgWebp1x from "../../assets/img/artwork-list/img.webp";
 import imgWebp2x from "../../assets/img/artwork-list/img@2x.webp";
 import img1x from "../../assets/img/artwork-list/img.jpg";
 import img2x from "../../assets/img/artwork-list/img@2x.jpg";
+import {getContract, useActiveWeb3React} from "../../web3";
+import ERC20 from "../../web3/abi/ERC20.json";
+import {getGalleryAddress, getGLFStakingAddress} from "../../web3/address";
+import Gallery from "../../web3/abi/Gallery.json";
+import {
+    HANDLE_SHOW_FAILED_TRANSACTION_MODAL,
+    HANDLE_SHOW_TRANSACTION_MODAL,
+    HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
+    waitingForConfirm,
+    waitingForInit,
+    waitingPending
+} from "../../const";
+import {mainContext} from "../../reducer";
+import Web3 from "web3";
+import {useGLFBalance} from "../../pages/Hooks";
+import {formatAmount} from "../../utils/format";
 
-export const VoteModal = ({ setIsOpen }) => {
+const {toWei} = Web3.utils
+
+
+export const VoteModal = ({ setIsOpen, figure }) => {
+
+    const {dispatch} = useContext(mainContext);
+    const {account, library, chainId} = useActiveWeb3React()
+    const {glfBalance}  =  useGLFBalance()
+    const [voteAmount, setVoteAmount] = useState();
+
+
+    const onVote = async () => {
+        console.log('on submit')
+        if (!voteAmount) {
+            return
+        }
+        const tokenContract = getContract(library, ERC20.abi, getGLFStakingAddress(chainId))
+        const contract = getContract(library, Gallery.abi, getGalleryAddress(chainId))
+        const weiAmount = toWei(voteAmount, 'ether');
+
+        console.log('vote for proposal', '', toWei(voteAmount))
+        setIsOpen(false)
+        try {
+            dispatch({
+                type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
+                showWaitingWalletConfirmModal: waitingForConfirm
+            });
+            const result = await tokenContract.methods.approve(
+                getGalleryAddress(chainId),
+                weiAmount,
+            )
+                .send({from: account});
+
+            dispatch({
+                type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
+                showWaitingWalletConfirmModal: waitingForConfirm
+            });
+
+            await contract.methods.voteForFigure(figure.id, toWei(voteAmount))
+                .send({from: account})
+                .on('transactionHash', hash => {
+                    dispatch({
+                        type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
+                        showWaitingWalletConfirmModal: {...waitingPending, hash}
+                    });
+                })
+                .on('receipt', (_, receipt) => {
+                    console.log('BOT staking success')
+                    dispatch({
+                        type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
+                        showWaitingWalletConfirmModal: waitingForInit
+                    });
+                    dispatch({
+                        type: HANDLE_SHOW_TRANSACTION_MODAL,
+                        showTransactionModal: true
+                    });
+                })
+                .on('error', (err, receipt) => {
+                    console.log('BOT staking error', err)
+                    dispatch({
+                        type: HANDLE_SHOW_FAILED_TRANSACTION_MODAL,
+                        showFailedTransactionModal: true
+                    });
+                    dispatch({
+                        type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
+                        showWaitingWalletConfirmModal: waitingForInit
+                    });
+                })
+
+        } catch (err) {
+            dispatch({
+                type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
+                showWaitingWalletConfirmModal: waitingForInit
+            });
+            if (err.code === 4001) {
+                dispatch({
+                    type: HANDLE_SHOW_FAILED_TRANSACTION_MODAL,
+                    showFailedTransactionModal: true
+                });
+            } else {
+                dispatch({
+                    type: HANDLE_SHOW_FAILED_TRANSACTION_MODAL,
+                    showFailedTransactionModal: true
+                });
+            }
+            console.log('err', err);
+        }
+    };
+
+
     return (
         <div className="modal">
             <div className="modal__box">
@@ -19,14 +124,8 @@ export const VoteModal = ({ setIsOpen }) => {
 
                         <div className="form-vote-new__img">
                             <picture>
-                                <source
-                                    srcSet={`${imgWebp1x} 1x, ${imgWebp2x} 2x`}
-                                    type="image/webp"
-                                />
-                                <source srcSet={`${img1x} 1x, ${img2x} 2x`} />
-
                                 <img
-                                    src="/img/artwork-list/modal@2x.jpg"
+                                    src={figure.info.image}
                                     alt="Starry Night"
                                     loading="lazy"
                                     width="180"
@@ -40,9 +139,9 @@ export const VoteModal = ({ setIsOpen }) => {
                                 <tr>
                                     <th>Name:</th>
                                     <td>
-                                        Starry Night{" "}
+                                        {figure.info.title}
                                         <span className="opacity-60">
-                                            by Van Gogh
+                                            by {figure.info.artist}
                                         </span>
                                     </td>
                                 </tr>
@@ -50,11 +149,7 @@ export const VoteModal = ({ setIsOpen }) => {
                                 <tr>
                                     <th>Details:</th>
                                     <td className="fz-14">
-                                        Amet minim mollit non deserunt ullamco est
-                                        sit aliqua dolor do amet sint. Velit officia
-                                        consequat duis enim velit mollit.
-                                        Exercitation veniam consequat sunt nostrud
-                                        amet.
+                                        {figure.info.description}
                                     </td>
                                 </tr>
                             </tbody>
@@ -63,7 +158,9 @@ export const VoteModal = ({ setIsOpen }) => {
                         <div className="form-vote__inputbox form-app__inputbox">
                             <div className="form-app__inputbox-control">
                                 <div className="form-app__inputbox-input">
-                                    <input className="input" placeholder="0.0000" />
+                                    <input className="input" placeholder="0.0000" onChange={(e)=>{
+                                        setVoteAmount(e.target.value)
+                                    }}/>
                                 </div>
 
                                 <div className="form-app__inputbox-up">
@@ -75,7 +172,7 @@ export const VoteModal = ({ setIsOpen }) => {
                         </div>
 
                         <p className="form-app__inputbox-after-text">
-                            Voting Power: 110.212121 GLF tokens
+                            Voting Power: {glfBalance && formatAmount(glfBalance)} GLF tokens
                         </p>
 
                         <p className="form-app__note">
@@ -92,7 +189,7 @@ export const VoteModal = ({ setIsOpen }) => {
                                 Cancel
                             </button>
 
-                            <button className="btn btn--medium">Confirm</button>
+                            <button className="btn btn--medium" type="button" onClick={onVote}>Confirm</button>
                         </div>
                     </form>
                 </div>

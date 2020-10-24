@@ -5,7 +5,7 @@ export const StakingSuccess = ()=>{
     return (
         <article className="center">
 
-            <BackButton />
+            <BackButton toPools />
 
             <form className="form-app" action="/">
 

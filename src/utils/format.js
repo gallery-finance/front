@@ -12,6 +12,12 @@ export const formatAmount = (amount)=>{
     return new BigNumber(new BigNumber(Web3.utils.fromWei(amount)).toFixed(6)).toNumber()
 }
 
+export const weiPlus = (value1,  value2)=>{
+
+    console.log('wei plus',value2, value1, new BigNumber(new BigNumber(value1? value1: 0).plus(new BigNumber(value2? value2: 0)).toFixed(6)).toNumber())
+    return new BigNumber(new BigNumber(value1? value1: 0).plus(new BigNumber(value2? value2: 0)).toFixed(6)).toNumber().toString()
+}
+
 
 export const weiDiv = (value1, value2) => {
     if(value1 == 0 || value2 == 0){

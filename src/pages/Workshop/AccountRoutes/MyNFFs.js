@@ -17,7 +17,6 @@ import wheatfieldJPG1x from "../../../assets/img/artwork-list/wheatfield.jpg";
 import wheatfieldJPG2x from "../../../assets/img/artwork-list/wheatfield@2x.jpg";
 
 import { ArtworkCard } from "../../../components/account";
-import {useMyFigures} from "../Hooks";
 
 const artworks = [
     {
@@ -27,8 +26,8 @@ const artworks = [
         img2: starryNight2x,
         img3: starryNightJPG1x,
         img4: starryNightJPG2x,
-        text:
-            "The Starry Night is an oil on canvas painting by Dutch Post-Impressionist painter Vincent van Gogh. Painted in June 1889, it depicts the view from the east-facing window of his"
+        tokenID: 11,
+        number: 2
     },
     {
         title: "Portrait of the ... ",
@@ -37,8 +36,8 @@ const artworks = [
         img2: portrait2x,
         img3: portraitJPG1x,
         img4: portraitJPG2x,
-        text:
-            "Joseph Roulin—who appears in this portrait resplendent in his blue uniform against a floral background that echoes his lush, swirling beard—was among Vincent"
+        tokenID: 12,
+        number: 1
     },
     {
         title: "Wheatfield with ... ",
@@ -47,21 +46,18 @@ const artworks = [
         img2: wheatfield2x,
         img3: wheatfieldJPG1x,
         img4: wheatfieldJPG2x,
-        text:
-            "Wheatfield with Crows is a July 1890 painting by Vincent van Gogh. It has been cited by several critics as one of his greatest works. It is commonly stated that this was van Gogh's"
+        tokenID: 13,
+        number: 3
     }
 ];
 
-export const MyArtwork = () => {
-
-    const {myFigures} = useMyFigures()
-
+export const MyNFTs = () => {
     return (
         <div className="tabs__item">
             <div className="artwork-list">
                 <div className="artwork-list__list">
-                    {myFigures.map(item => (
-                        <ArtworkCard key={item.id} figure={item}  />
+                    {artworks.map(item => (
+                        <ArtworkCard key={item.title} item={item} isNFT />
                     ))}
                 </div>
             </div>

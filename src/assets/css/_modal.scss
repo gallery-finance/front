@@ -12,20 +12,14 @@
 	width: 100%;
 	justify-content: center;
 	align-items: center;
-	padding: 40px;
-
-	@media #{(max-width: 747px)} {
-
-		padding: 20px;
-
-	}
+	padding: 20px;
 
 	&__box {
-
+        max-height: 100%;
 		width: 528px;
 		max-width: 100%;
-		position: relative;
-
+        position: relative;
+        margin: 0 auto;
 	}
 
 	&__item {
@@ -60,9 +54,12 @@
 }
 
 .modal-show {
-	z-index: 10;
+    z-index: 10;
+    
 	.modal {
-		display: flex;
+        display: flex;
+        align-items: center;
+        overflow-y: auto;
 	}
 
 	.wrapper {

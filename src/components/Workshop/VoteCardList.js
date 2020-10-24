@@ -1,28 +1,27 @@
 import React, { useState } from "react";
 
 import { VoteCard } from "./";
-import { VoteModal } from "../../components/Modals";
+import { VoteModal } from "../Modals";
+import {useFigures} from "../../pages/Workshop/Hooks";
 
 export const VoteCardList = () => {
     const [isOpen, setIsOpen] = useState(false);
+
+    const {figures} = useFigures()
+
 
     return (
         <>
             <div className="artwork-list">
                 <div className="artwork-list__list">
-                    <VoteCard setIsOpen={setIsOpen} />
-                    <VoteCard setIsOpen={setIsOpen} />
-                    <VoteCard setIsOpen={setIsOpen} />
+                    {figures.map(item =>{
+                        return (
+                            <VoteCard figure={item} setIsOpen={setIsOpen} />
+                        )
+                    })}
                 </div>
             </div>
 
-            {isOpen && (
-                <div className="modal-show">
-                    <div className="wrapper">
-                        <VoteModal setIsOpen={setIsOpen} />
-                    </div>
-                </div>
-            )}
         </>
     );
 };

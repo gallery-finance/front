@@ -50,6 +50,7 @@ body {
 
 #root {
     height: 100%;
+    overflow-y: auto;
 }
 
 a {
@@ -235,6 +236,10 @@ a[href^="tel"],
 	opacity: .6;
 }
 
+.opacity-40 {
+	opacity: .4;
+}
+
 .fz-14 {
 
 	font-size: 14px;
@@ -248,7 +253,9 @@ a[href^="tel"],
 }
 
 .color-gray {
-
 	color: #808080;
+}
 
+.gold-color {
+    color: var(--yellow);
 }

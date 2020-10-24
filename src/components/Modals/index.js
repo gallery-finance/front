@@ -13,4 +13,4 @@ export * from "./VoteFigureModal";
 export * from "./ArtworkDetailsModal";
 export * from "./ProposeFigureModal";
 export * from "./TransactionModal";
-
+export * from "./AuctionDetailsModal";

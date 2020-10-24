@@ -17,9 +17,8 @@ import wheatfieldJPG1x from "../../../assets/img/artwork-list/wheatfield.jpg";
 import wheatfieldJPG2x from "../../../assets/img/artwork-list/wheatfield@2x.jpg";
 
 import { ArtworkCard } from "../../../components/account";
-import {useMyFigures} from "../Hooks";
 
-const artworks = [
+const purchasedList = [
     {
         title: "The Starry Night",
         imgBig: starryNightBig,
@@ -52,16 +51,13 @@ const artworks = [
     }
 ];
 
-export const MyArtwork = () => {
-
-    const {myFigures} = useMyFigures()
-
+export const PurchasedNFTs = () => {
     return (
         <div className="tabs__item">
-            <div className="artwork-list">
-                <div className="artwork-list__list">
-                    {myFigures.map(item => (
-                        <ArtworkCard key={item.id} figure={item}  />
+            <div className="auction-list">
+                <div className="auction-list__list">
+                    {purchasedList.map(item => (
+                        <ArtworkCard key={item.title} item={item} />
                     ))}
                 </div>
             </div>

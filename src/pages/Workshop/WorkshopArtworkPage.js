@@ -2,8 +2,12 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 import { VoteCardList } from "../../components/Workshop";
+import {useGLFBalance} from "../Hooks";
+import {formatAmount} from "../../utils/format";
 
 export const WorkshopArtworkPage = () => {
+
+    const {glfBalance} =useGLFBalance()
     const [currentTabIsHot, setCurrentTabIsHot] = useState(true);
 
     return (
@@ -42,7 +46,7 @@ export const WorkshopArtworkPage = () => {
                     </div>
                     <div className="voter-head__dashboard-power">
                         <p>
-                            Your Voting Power: <b>100 GLF</b>
+                            Your Voting Power: <b>{glfBalance && formatAmount(glfBalance)} GLF</b>
                         </p>
                     </div>
                     <div className="voter-head__dashboard-btn">

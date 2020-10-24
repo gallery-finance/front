@@ -38,7 +38,6 @@ export const WorkshopVoterPage = () => {
 
 
     const onSubmit = async () => {
-        console.log('on submit', name, detail)
         if (!name || !detail) {
             return
         }

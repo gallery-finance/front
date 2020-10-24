@@ -89,11 +89,13 @@ export const WorkshopPage = () => {
                         }
                     />
                     <StageCard
+                        active
+                        link={"/workshop/artwork"}
                         number={2}
                         stageText="Stage Two"
                         title="Vote for the best artwork"
                         timeIn="10/26/2020-10/30/2020"
-                        status="preparation"
+                        status="live"
                         description={
                             <>
                                 Once the top-10 figures are selected, artists get to

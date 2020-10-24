@@ -12,7 +12,7 @@ import image8 from "../assets/img/exhibition-hall/img@2x.png";
 
 export const ExhibitionHallPage = () => (
     <article className="exhibition-hall center">
-        <div className="auction__body">
+        <div className="exhibition-hall__body">
             <h1 className="h1">
                 Experience <br />
                 is more important than money.
@@ -30,7 +30,7 @@ export const ExhibitionHallPage = () => (
                 background on their work, getting more people to talk about it.
             </p>
 
-            <div className="auction__btn">
+            <div className="exhibition-hall__btn">
                 <Link to="/" className="">
                     Coming Soon!
                 </Link>

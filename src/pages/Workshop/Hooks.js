@@ -6,8 +6,12 @@ import BigNumber from "bignumber.js";
 
 export const useMyVote = () =>{
     const {account, active, library, chainId} = useActiveWeb3React()
-    const [ myTotalVote, setMyTotalVote] = useState()
+    const [ figureRewards, setFigureRewards] = useState()
     const [ proposalRewards, setProposalRewards] = useState()
+
+    const [ myProposalVotes, setMyProposalVotes] = useState()
+    const [ myFigureVotes, setMyFigureVotes] = useState()
+
 
 
     useEffect(()=>{
@@ -16,7 +20,18 @@ export const useMyVote = () =>{
                 const contract = getContract(library, Gallery.abi, getGalleryAddress(chainId))
                 contract.methods.myProposalVotes(account).call().then(res =>{
                     console.log('myProposalVotes:',res)
-                    setMyTotalVote(res)
+                    setMyProposalVotes(res)
+                })
+            }catch (e) {
+                console.log('myProposalVotes error:',e)
+
+            }
+
+            try{
+                const contract = getContract(library, Gallery.abi, getGalleryAddress(chainId))
+                contract.methods.myFigureVotes(account).call().then(res =>{
+                    console.log('myProposalVotes:',res)
+                    setMyFigureVotes(res)
                 })
             }catch (e) {
                 console.log('myProposalVotes error:',e)
@@ -34,10 +49,21 @@ export const useMyVote = () =>{
 
             }
 
+            try{
+                const contract = getContract(library, Gallery.abi, getGalleryAddress(chainId))
+                contract.methods.myFigureRewards(account).call().then(res =>{
+                    console.log('myFigureRewards:',res)
+                    setFigureRewards(res)
+                })
+            }catch (e) {
+                console.log('load totalSupply error:',e)
+
+            }
+
         }
     },[active])
 
-    return {myTotalVote, proposalRewards}
+    return {proposalRewards, figureRewards, myProposalVotes, myFigureVotes}
 }
 
 
@@ -167,18 +193,6 @@ export const useMyProposals = () =>{
 
         setMyProposals(proposalList)
         console.log('my propasal',proposalList)
-        // const list = await contract.getPastEvents('ProposalCreated',{ fromBlock: 0, toBlock: "latest" })
-        // console.log('list--->',list[0].returnValues)
-        // const proposalList = await Promise.all(list.map(async item => {
-        //     console.log('item--->',item)
-        //
-        //     const proposal = await contract.methods.proposals(item.returnValues.proposalId).call()
-        //     proposal.votes = item.returnValues.votes
-        //     proposal.id = item.returnValues.proposalId
-        //     return proposal;
-        // }));
-        // console.log('proposal:',proposalList)
-       // setMyProposals(proposalList)
     }
 
     useEffect(()=>{
@@ -189,3 +203,80 @@ export const useMyProposals = () =>{
 
     return {myProposals}
 }
+
+
+export const useFigures = () =>{
+    const {account, active, library, chainId} = useActiveWeb3React()
+    const [figures, setFigures] = useState([])
+
+    async function queryProposals() {
+        const contract = getContract(library, Gallery.abi, getGalleryAddress(chainId))
+        const list = await contract.getPastEvents('FigureCreated',{ fromBlock: 0, toBlock: "latest" })
+        const figureList = await Promise.all(list.map(async item => {
+
+            const figure = await contract.methods.figures(item.returnValues.figureId).call()
+            figure.votes = await contract.methods.figureVotes(item.returnValues.figureId).call()
+            console.log('figure',item.returnValues)
+            figure.info = JSON.parse(figure.info)
+            figure.id = item.returnValues.figureId
+            return figure;
+        }));
+
+        console.log('figureList',figureList)
+        figureList.sort((a, b)=>{
+            if (new BigNumber(a.votes).isGreaterThan(b.votes)) {
+                return -1;
+            } else if (new BigNumber(a.votes).isEqualTo(b.votes)) {
+                return 0;
+            } else {
+                return 1;
+            }
+        })
+        setFigures(figureList)
+    }
+
+    useEffect(()=>{
+        if(active){
+            queryProposals()
+        }
+    }, [active])
+
+    return {figures}
+}
+
+export const useMyFigures = () =>{
+    const {account, active, library, chainId} = useActiveWeb3React()
+    const [myFigures, setMyFigures] = useState([])
+
+    async function queryMyFigures() {
+        const contract = getContract(library, Gallery.abi, getGalleryAddress(chainId))
+
+        const count = await contract.methods.myFigureCount(account).call()
+        let idList = []
+        for (let i = 0; i < count; i++) {
+            idList[i] = count - i - 1;
+        }
+        console.log('figure count',idList)
+        const FigureList = await Promise.all(idList.map(async item => {
+            const figureId = await contract.methods.myFigures(account, item).call()
+            const figure = await contract.methods.figures(figureId).call()
+            figure.votes = await contract.methods.figureVotes(figureId).call()
+            figure.info = JSON.parse(figure.info)
+            console.log('query my proposal result--->',figureId, figure)
+            figure.id = figureId
+            return figure;
+        }));
+
+        setMyFigures(FigureList)
+        console.log('my propasal',FigureList)
+    }
+
+    useEffect(()=>{
+        if(active){
+            queryMyFigures()
+        }
+    }, [active])
+
+    return {myFigures}
+}
+

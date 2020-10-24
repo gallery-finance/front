@@ -191,6 +191,12 @@
   &:invalid {
     box-shadow: none;
   }
+
+  &--sm {
+      height: 41px;
+      font-weight: 400;
+      padding: 12px 36px 12px 16px;
+  }
 }
 
 textarea.input {
