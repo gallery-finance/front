@@ -10,6 +10,7 @@ import walletConnectIcon from '../../assets/img/modal/walletConnectIcon.svg'
 import ledger_icon from '../../assets/img/modal/Ledger.png'
 import {WalletConnectConnector} from "@web3-react/walletconnect-connector";
 import {LedgerConnector} from "@web3-react/ledger-connector";
+import { CrossModalIcon } from "../../icons";
 
 const injected = new InjectedConnector({
     supportedChainIds: [1, 3, 4, 5, 42]
@@ -196,10 +197,7 @@ export const WalletConnect = () => {
                             onClick={() => {
                                 dispatch({type: HANDLE_SHOW_CONNECT_MODAL, showConnectModal: false});
                             }}>
-                        <svg width="24" height="24" viewBox="0 0 24 24">
-                            <path
-                                d="M14.5 10l7.39-7L24 5l-7.39 7L24 19l-2.11 2-7.39-7-7.39 7L5 19l7.39-7L5 5l2.11-2 7.39 7z"/>
-                        </svg>
+                        <CrossModalIcon />
                     </button>
 
                 </div>

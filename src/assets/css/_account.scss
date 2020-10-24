@@ -147,7 +147,7 @@
 
 }
 
-@media (max-width: 747px) {
+@media #{$smWidth} {
     .account-balance table,
     .account-balance tbody,
     .account-balance td,

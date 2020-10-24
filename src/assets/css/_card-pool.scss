@@ -137,7 +137,7 @@
 		font-size: 14px;
 		color: #fff;
 		border-radius: 50%;
-		background-color: #fd7749;
+		background-color: var(--link);
 		border: 6px solid #fff;
 		z-index: 2;
 
@@ -239,7 +239,7 @@
 
 		&-green {
 
-			color: #86ba6e;
+			color: var(--green);
 
         }
         

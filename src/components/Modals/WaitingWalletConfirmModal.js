@@ -5,6 +5,7 @@ import { HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL } from "../../const";
 import { mainContext } from "../../reducer";
 import loading from '../../assets/loading.json'
 import { modalLoader } from "../../assets/js/modal-loader";
+import { CrossModalIcon } from "../../icons";
 
 const defaultOptions = {
     loop: true,
@@ -59,9 +60,7 @@ export const WaitingWalletConfirmModal = () => {
                             }}
                             aria-label="Close"
                         >
-                            <svg width="24" height="24" viewBox="0 0 24 24">
-                                <path d="M14.5 10l7.39-7L24 5l-7.39 7L24 19l-2.11 2-7.39-7-7.39 7L5 19l7.39-7L5 5l2.11-2 7.39 7z"></path>
-                            </svg>
+                            <CrossModalIcon />
                         </button>
                     </div>
                 </div>

@@ -1,53 +1,32 @@
 import React from "react";
 
-import starryNightBig from "../../../assets/img/artwork-list/starry-night--big.png";
-import starryNight1x from "../../../assets/img/artwork-list/starry-night.webp";
-import starryNight2x from "../../../assets/img/artwork-list/starry-night@2x.webp";
-import starryNightJPG1x from "../../../assets/img/artwork-list/starry-night.jpg";
-import starryNightJPG2x from "../../../assets/img/artwork-list/starry-night@2x.jpg";
-import portraitBig from "../../../assets/img/artwork-list/portrait--big.png";
-import portrait1x from "../../../assets/img/artwork-list/portrait.webp";
-import portrait2x from "../../../assets/img/artwork-list/portrait@2x.webp";
-import portraitJPG1x from "../../../assets/img/artwork-list/portrait.jpg";
-import portraitJPG2x from "../../../assets/img/artwork-list/portrait@2x.jpg";
-import wheatfieldBig from "../../../assets/img/artwork-list/wheatfield--big.png";
-import wheatfield1x from "../../../assets/img/artwork-list/wheatfield.webp";
-import wheatfield2x from "../../../assets/img/artwork-list/wheatfield@2x.webp";
-import wheatfieldJPG1x from "../../../assets/img/artwork-list/wheatfield.jpg";
-import wheatfieldJPG2x from "../../../assets/img/artwork-list/wheatfield@2x.jpg";
+import cover_1 from "../../../assets/img/card-pool/1.png";
+import cover_2 from "../../../assets/img/card-pool/2.png";
+import cover_3 from "../../../assets/img/card-pool/3.png";
 
-import { ArtworkCard } from "../../../components/account";
+import { PurchasedCard } from "../../../components/Auction";
 
 const purchasedList = [
     {
-        title: "The Starry Night",
-        imgBig: starryNightBig,
-        img1: starryNight1x,
-        img2: starryNight2x,
-        img3: starryNightJPG1x,
-        img4: starryNightJPG2x,
-        text:
-            "The Starry Night is an oil on canvas painting by Dutch Post-Impressionist painter Vincent van Gogh. Painted in June 1889, it depicts the view from the east-facing window of his"
+        id: "13",
+        tokenID: "1",
+        label: "Starry Night",
+        cover: cover_1,
+        token: "0x84e517408ba6b891b9ac74b2f90013fcbc516d9d"
     },
     {
-        title: "Portrait of the ... ",
-        imgBig: portraitBig,
-        img1: portrait1x,
-        img2: portrait2x,
-        img3: portraitJPG1x,
-        img4: portraitJPG2x,
-        text:
-            "Joseph Roulin—who appears in this portrait resplendent in his blue uniform against a floral background that echoes his lush, swirling beard—was among Vincent"
+        id: "13",
+        tokenID: "1",
+        label: "Portrait of the Postman Joseph...",
+        cover: cover_2,
+        token: "0x84e517408ba6b891b9ac74b2f90013fcbc516d9d"
     },
     {
-        title: "Wheatfield with ... ",
-        imgBig: wheatfieldBig,
-        img1: wheatfield1x,
-        img2: wheatfield2x,
-        img3: wheatfieldJPG1x,
-        img4: wheatfieldJPG2x,
-        text:
-            "Wheatfield with Crows is a July 1890 painting by Vincent van Gogh. It has been cited by several critics as one of his greatest works. It is commonly stated that this was van Gogh's"
+        id: "13",
+        tokenID: "1",
+        label: "Wheatfield with Crows",
+        cover: cover_3,
+        token: "0x84e517408ba6b891b9ac74b2f90013fcbc516d9d"
     }
 ];
 
@@ -57,7 +36,7 @@ export const PurchasedNFTs = () => {
             <div className="auction-list">
                 <div className="auction-list__list">
                     {purchasedList.map(item => (
-                        <ArtworkCard key={item.title} item={item} />
+                        <PurchasedCard key={item.label} item={item} />
                     ))}
                 </div>
             </div>

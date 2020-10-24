@@ -1,5 +1,7 @@
 import React from "react";
 
+import { CrossModalIcon } from "../../icons";
+
 import imgWebp1x from "../../assets/img/artwork-list/img.webp";
 import imgWebp2x from "../../assets/img/artwork-list/img@2x.webp";
 import img1x from "../../assets/img/artwork-list/img.jpg";
@@ -103,9 +105,7 @@ export const VoteModal = ({ setIsOpen }) => {
                     aria-label="Close modal"
                     onClick={() => setIsOpen(false)}
                 >
-                    <svg width="24" height="24" viewBox="0 0 24 24">
-                        <path d="M14.5 10l7.39-7L24 5l-7.39 7L24 19l-2.11 2-7.39-7-7.39 7L5 19l7.39-7L5 5l2.11-2 7.39 7z" />
-                    </svg>
+                    <CrossModalIcon />
                 </button>
             </div>
         </div>

@@ -3,6 +3,64 @@ import React from "react";
 import cover from "../../../assets/img/card-pool/6.png";
 
 export const CheckPoolStatus = () => {
+    const statusExists = true;
+    const statusIsOk = true;
+
+    const getPoolStatus = () => {
+        return (
+            <>
+                <hr />
+                <table className="form-vote__table auction-details__table">
+                    <tbody>
+                        <tr>
+                            <th>The auction is closed:</th>
+                            <td>0d : 0h : 0m </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <hr />
+
+                {statusIsOk ? (
+                    <p className="auction-details__result result--green">
+                        Your item was successfully sold at the auction
+                    </p>
+                ) : (
+                    <p className="auction-details__result result--red">
+                        Sorry, your item was not sold at the auction
+                    </p>
+                )}
+
+                <div className="form-app__submit">
+                    <button className="btn btn--medium check-pool-btn" type="button">
+                        {statusIsOk ? "Claim my GLFs" : "Claim my NFT"}
+                    </button>
+                </div>
+            </>
+        );
+    };
+
+    const getTimeInfo = () => {
+        return (
+            <>
+                <hr />
+                <table className="form-vote__table auction-details__table">
+                    <tbody>
+                        <tr>
+                            <th>Time left:</th>
+                            <td>2d : 15h : 45m</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div className="form-app__submit">
+                    <button className="btn btn--outline btn--medium check-pool-btn" type="button">
+                        Ok
+                    </button>
+                </div>
+            </>
+        );
+    };
+
     return (
         <div className="auction-my-pool auction-my-pool--check">
             <div className="modal__box">
@@ -12,7 +70,7 @@ export const CheckPoolStatus = () => {
                         action="/"
                         noValidate="novalidate"
                     >
-                        <h3 className="modal__title h3">Create a new NFT auction</h3>
+                        <h3 className="modal__title h3">My current pool status</h3>
                         <div className="auction-details__image-wrapper">
                             <div className="form-vote-new__img auction-details__image">
                                 <picture>
@@ -72,75 +130,7 @@ export const CheckPoolStatus = () => {
                             </tbody>
                         </table>
 
-                        <hr />
-                        <table className="form-vote__table auction-details__table">
-                            <tbody>
-                                <tr>
-                                    <th>Time left:</th>
-                                    <td>2d : 15h : 45m</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <hr />
-
-                        <div className="auction-my-pool__bids">
-                            <h3 className="auction-my-pool__bids__title">
-                                Current bids
-                            </h3>
-                            <table className="auction-my-pool__bids__table">
-                                <tbody>
-                                    <tr>
-                                        <td>11:23:06</td>
-                                        <td className="opacity-40">15/12/2020</td>
-                                        <td>128.074 GLF</td>
-                                        <td>
-                                            <a href="/">
-                                                0x87674F69E29A2....2d1D3593CF7
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>23:50:21</td>
-                                        <td className="opacity-40">11/12/2020</td>
-                                        <td>120.111 GLF</td>
-                                        <td>
-                                            <a href="/">
-                                                0x76474F69E29A2....2d1D3593LFE3
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>07:32:18</td>
-                                        <td className="opacity-40">8/12/2020</td>
-                                        <td>120.507 GLF</td>
-                                        <td>
-                                            <a href="/">
-                                                0x76474F69E29A2....2d1D359PFH4
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>15:48:29</td>
-                                        <td className="opacity-40">3/12/2020</td>
-                                        <td>109.873 GLF</td>
-                                        <td>
-                                            <a href="/">
-                                                0x76474F69E29A2....2d1D3590DKJ
-                                            </a>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <div className="form-app__submit">
-                            <button
-                                className="btn btn--outline btn--medium"
-                                type="button"
-                            >
-                                Cancel
-                            </button>
-                        </div>
+                        {statusExists ? getPoolStatus() : getTimeInfo()}
                     </form>
                 </div>
             </div>
