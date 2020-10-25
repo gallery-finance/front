@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Grow } from "@material-ui/core";
 
-import { GalleryModal, AuctionDetailsModal } from "../Modals";
+import { GalleryModal, PurchasedDetailsModal } from "../Modals";
 
-export const AuctionCard = ({ item }) => {
+export const PurchasedCard = ({ item }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [galleryOpen, setGalleryOpen] = useState(false);
 
@@ -15,7 +15,7 @@ export const AuctionCard = ({ item }) => {
                         <picture>
                             <img
                                 src={item.cover}
-                                alt="`$`"
+                                alt={item.label}
                                 loading="lazy"
                                 width="264"
                                 height="170"
@@ -24,20 +24,21 @@ export const AuctionCard = ({ item }) => {
                     </a>
                     <h2 className="item__title h3">{item.label}</h2>
                     <button
-                        className={`item__type item__type--${item.type}`}
+                        type="button"
+                        className="artwork-list__btn btn btn--gray"
                         onClick={() => setIsOpen(true)}
                     >
-                        {item.type}
+                        Purchased Jan 15, 2020
                     </button>
-                    <h5 className="item__workshop">
-                        Token ID {item.id}
-                    </h5>
-                    <div className="item__token">
-                        <p className="item__token-title">Token contract address</p>
-                        <a href="/" className="item__token-address">
-                            {item.token}
-                        </a>
-                    </div>
+                    <p className="artwork-list__token-id">Token ID {item.tokenID}</p>
+                    <p className="artwork-list__token-address">
+                        Token contract address
+                    </p>
+                    <p className="artwork-list__token-hash">
+                        <a href="/">{item.token}</a>
+                    </p>
+                    <hr className="item__line" />
+                    <div className="item-purchased__price">220.30 GLF</div>
                 </div>
             </Grow>
 
@@ -55,7 +56,7 @@ export const AuctionCard = ({ item }) => {
             {isOpen && (
                 <div className="modal-show">
                     <div className="wrapper">
-                        <AuctionDetailsModal item={item} setIsOpen={setIsOpen} />
+                        <PurchasedDetailsModal item={item} setIsOpen={setIsOpen} />
                     </div>
                 </div>
             )}

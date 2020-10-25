@@ -14,3 +14,4 @@ export * from "./ArtworkDetailsModal";
 export * from "./ProposeFigureModal";
 export * from "./TransactionModal";
 export * from "./AuctionDetailsModal";
+export * from "./PurchasedDetailsModal";

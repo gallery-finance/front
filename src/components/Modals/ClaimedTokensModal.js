@@ -1,7 +1,8 @@
 import React  from "react";
 
 import Web3 from 'web3'
-import {getPercent} from "../../utils/time";
+import { getPercent } from '../../utils/time'
+import { CrossModalIcon } from "../../icons";
 
 const {fromWei} =Web3.utils
 
@@ -47,3 +48,24 @@ export const ClaimedTokensModal = ({onOk, rewards, symbol,stakedTime}) => {
         </div>
     );
 };
+            {/*<button*/}
+              {/*type="button"*/}
+              {/*className="transction-submitted__btn btn"*/}
+              {/*onClick={() => setClaimOpen(false)}*/}
+            {/*>*/}
+              {/*Ok*/}
+            {/*</button>*/}
+            {/*<button*/}
+              {/*type="button"*/}
+              {/*className="form-app__close-btn button"*/}
+              {/*onClick={() => setClaimOpen(false)}*/}
+              {/*aria-label="Close"*/}
+            {/*>*/}
+              {/*<CrossModalIcon />*/}
+            {/*</button>*/}
+          {/*</div>*/}
+        {/*</form>*/}
+      {/*</div>*/}
+    {/*</div>*/}
+  {/*)*/}
+{/*}*/}
