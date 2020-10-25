@@ -34,7 +34,7 @@ export const WorkshopSubmitPage = () => {
   const [artwork, setArtwork] = useState()
   const [artist, setArtist] = useState()
   const [background, setBackground] = useState()
-  const [errors, setErrors] = useState({figure: "",image: "", artwork: "", artist: ""})
+  const [errors, setErrors] = useState({figure: "", image: "", artwork: "", artist: ""})
 
   useEffect(() => {
     if (proposals.length !== 0 && !figure) {
@@ -239,32 +239,37 @@ export const WorkshopSubmitPage = () => {
               )}
             </div>
 
-            {/*<div className="submit-artwork__drop submit-artwork__inputbox">*/}
-            {/*<input*/}
-            {/*className="submit-artwork__drop-input"*/}
-            {/*type="file"*/}
-            {/*/>*/}
+            <div className="submit-artwork__drop submit-artwork__inputbox">
+              <input
+                  className="submit-artwork__drop-input"
+                  type="file"
+              />
 
-            {/*<div className="submit-artwork__drop-content">*/}
-            {/*<svg*/}
-            {/*className="submit-artwork__drop-logo"*/}
-            {/*width="48"*/}
-            {/*height="48"*/}
-            {/*viewBox="0 0 48 48"*/}
-            {/*>*/}
-            {/*<path*/}
-            {/*d="M9.5 22.2v1.2l.85-.85L14 18.91l10.65 10.64.35.36.35-.36L32 22.91l5.65 5.64.85.86V9.5h-29v12.7zm.15 5.3l-.15.15V38.5h6.9l.15-.15 5.98-5.97.35-.35-.35-.35-8.18-8.18-.35-.35-.35.35-4 4zM21.5 37.65l-.85.85H38.5v-4.84l-.15-.16-6-6-.35-.35-.35.35L21.5 37.65zM8 6.5h32A1.5 1.5 0 0141.5 8v32a1.5 1.5 0 01-1.5 1.5H8A1.5 1.5 0 016.5 40V8A1.5 1.5 0 018 6.5zm23 13a2.5 2.5 0 110-5 2.5 2.5 0 010 5z"/>*/}
-            {/*</svg>*/}
+              <div className="submit-artwork__drop-content">
+                {image ? (
+                    <img src={image}/>
+                ) : (
+                    <svg
+                        className="submit-artwork__drop-logo"
+                        width="48"
+                        height="48"
+                        viewBox="0 0 48 48"
+                    >
+                      <path
+                          d="M9.5 22.2v1.2l.85-.85L14 18.91l10.65 10.64.35.36.35-.36L32 22.91l5.65 5.64.85.86V9.5h-29v12.7zm.15 5.3l-.15.15V38.5h6.9l.15-.15 5.98-5.97.35-.35-.35-.35-8.18-8.18-.35-.35-.35.35-4 4zM21.5 37.65l-.85.85H38.5v-4.84l-.15-.16-6-6-.35-.35-.35.35L21.5 37.65zM8 6.5h32A1.5 1.5 0 0141.5 8v32a1.5 1.5 0 01-1.5 1.5H8A1.5 1.5 0 016.5 40V8A1.5 1.5 0 018 6.5zm23 13a2.5 2.5 0 110-5 2.5 2.5 0 010 5z"/>
+                    </svg>
+                )}
 
-            {/*<p className="submit-artwork__drop-text">*/}
-            {/*Drop your image here, or <b>browse</b>*/}
-            {/*</p>*/}
 
-            {/*<small className="submit-artwork__drop-format">*/}
-            {/*Supports: JPG, JPEG2000, PNG*/}
-            {/*</small>*/}
-            {/*</div>*/}
-            {/*</div>*/}
+                {/*<p className="submit-artwork__drop-text">*/}
+                {/*Drop your image here, or <b>browse</b>*/}
+                {/*</p>*/}
+
+                {/*<small className="submit-artwork__drop-format">*/}
+                {/*Supports: JPG, JPEG2000, PNG*/}
+                {/*</small>*/}
+              </div>
+            </div>
 
             <div className="submit-artwork__row">
               <div className="submit-artwork__row-item submit-artwork__inputbox">

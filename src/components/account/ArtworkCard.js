@@ -21,8 +21,8 @@ export const ArtworkCard = ({ isNFT, figure }) => {
                         >
                             <picture>
                                 <img
-                                    src={figure.info.image}
-                                    alt={figure.info.title}
+                                    src={figure}
+                                    alt={figure}
                                     loading="lazy"
                                     width="264"
                                     height="170"
@@ -42,8 +42,8 @@ export const ArtworkCard = ({ isNFT, figure }) => {
                                 </b>
                             </span>
                         </a>
-                        <h2 className="artwork-list__title h3">{figure.info.title}</h2>
-                        <p className="artwork-list__author">by {figure.info.name}</p>
+                        <h2 className="artwork-list__title h3">{figure}</h2>
+                        <p className="artwork-list__author">by {figure}</p>
                         <div className="artwork-list__hashtag">
                             <p>#vangogh</p>
                         </div>

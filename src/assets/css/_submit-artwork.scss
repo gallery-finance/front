@@ -51,7 +51,7 @@
 
   &__drop {
     position: relative;
-    height: 153px;
+    min-height: 153px;
     background-color: rgba(255, 255, 255, 0.04);
     border: 1px dashed rgba(255, 255, 255, 0.2);
     border-radius: 8px;
