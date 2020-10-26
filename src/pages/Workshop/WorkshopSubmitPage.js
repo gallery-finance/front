@@ -239,6 +239,29 @@ export const WorkshopSubmitPage = () => {
               )}
             </div>
 
+            <div className="submit-artwork__row">
+              <div className="submit-artwork__row-item submit-artwork__inputbox">
+                <input
+                    className={`submit-artwork__input input ${
+                        errors.image.length > 0 &&
+                        "input--error"
+                    }`}
+                    placeholder="Artwork Url"
+                    name="image"
+                    value={image}
+                    onChange={handleChange}
+                    required
+                />
+
+                {errors.image.length > 0 && (
+                    <div className="submit-artwork__text-error">
+                      Url of the artwork can not be empty
+                    </div>
+                )}
+              </div>
+
+            </div>
+
             <div className="submit-artwork__drop submit-artwork__inputbox">
               <input
                   className="submit-artwork__drop-input"
@@ -247,7 +270,7 @@ export const WorkshopSubmitPage = () => {
 
               <div className="submit-artwork__drop-content">
                 {image ? (
-                    <img src={image}/>
+                    <img className="cover" content="no-referrer"  src={image}/>
                 ) : (
                     <svg
                         className="submit-artwork__drop-logo"
@@ -269,29 +292,6 @@ export const WorkshopSubmitPage = () => {
                 {/*Supports: JPG, JPEG2000, PNG*/}
                 {/*</small>*/}
               </div>
-            </div>
-
-            <div className="submit-artwork__row">
-              <div className="submit-artwork__row-item submit-artwork__inputbox">
-                <input
-                    className={`submit-artwork__input input ${
-                    errors.image.length > 0 &&
-                    "input--error"
-                        }`}
-                    placeholder="Artwork Url"
-                    name="image"
-                    value={image}
-                    onChange={handleChange}
-                    required
-                />
-
-                {errors.image.length > 0 && (
-                    <div className="submit-artwork__text-error">
-                      Url of the artwork can not be empty
-                    </div>
-                )}
-              </div>
-
             </div>
 
             <div className="submit-artwork__row">

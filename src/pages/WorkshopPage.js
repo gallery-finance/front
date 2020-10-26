@@ -76,7 +76,7 @@ export const WorkshopPage = () => {
                         stageText="Stage One"
                         title="Vote for the 10 most-wanted figures"
                         timeIn="10/22/2020 -10/25/2020"
-                        status="live"
+                        status="finished"
                         description={
                             <>
                                 You can propose a figure or you can vote for a figure

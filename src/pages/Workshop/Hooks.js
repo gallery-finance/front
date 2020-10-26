@@ -12,6 +12,9 @@ export const useMyVote = () =>{
     const [ myProposalVotes, setMyProposalVotes] = useState()
     const [ myFigureVotes, setMyFigureVotes] = useState()
 
+    const [ proposalLeftTime, setProposalLeftTime] = useState()
+
+
 
 
     useEffect(()=>{
@@ -54,6 +57,21 @@ export const useMyVote = () =>{
                 contract.methods.myFigureRewards(account).call().then(res =>{
                     console.log('myFigureRewards:',res)
                     setFigureRewards(res)
+                })
+            }catch (e) {
+                console.log('load totalSupply error:',e)
+
+            }
+
+            try{
+                const contract = getContract(library, Gallery.abi, getGalleryAddress(chainId))
+                contract.methods.startAt().call().then(res =>{
+                    console.log('proposal day at:',res)
+                    const date = new Date(res * 1000 + 4*24*60*60*1000);
+                    const now = new Date();
+                    const leftTime = date  - now
+                    console.log('proposal left time:',res)
+                    setProposalLeftTime(leftTime)
                 })
             }catch (e) {
                 console.log('load totalSupply error:',e)

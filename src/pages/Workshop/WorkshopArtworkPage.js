@@ -4,11 +4,15 @@ import { Link } from "react-router-dom";
 import { VoteCardList } from "../../components/Workshop";
 import {useGLFBalance} from "../Hooks";
 import {formatAmount} from "../../utils/format";
+import {useProposals} from "./Hooks";
 
 export const WorkshopArtworkPage = () => {
 
+    const {proposals} = useProposals()
     const {glfBalance} =useGLFBalance()
     const [currentTabIsHot, setCurrentTabIsHot] = useState(true);
+    const [selectedType, setSelectedType] = useState(-1);
+
 
     return (
         <article className="center">
@@ -69,57 +73,54 @@ export const WorkshopArtworkPage = () => {
                     <span className="tab__label">Hot</span>
                 </label>
 
-                <label className="tab__btn">
-                    <input
-                        type="radio"
-                        name="tab"
-                        className="tab__input visuallyhidden"
-                        checked={!currentTabIsHot}
-                        onChange={() => setCurrentTabIsHot(false)}
-                    />
-                    <span className="tab__label">Fresh</span>
-                </label>
+                {/*<label className="tab__btn">*/}
+                {/*    <input*/}
+                {/*        type="radio"*/}
+                {/*        name="tab"*/}
+                {/*        className="tab__input visuallyhidden"*/}
+                {/*        checked={!currentTabIsHot}*/}
+                {/*        onChange={() => setCurrentTabIsHot(false)}*/}
+                {/*    />*/}
+                {/*    <span className="tab__label">Fresh</span>*/}
+                {/*</label>*/}
             </div>
 
             <div className="hashtag">
                 <div className="hashtag__list">
                     <label className="hashtag__item">
                         <input
-                            type="checkbox"
+                            checked={selectedType === -1}
+                            onChange={()=>{
+                                setSelectedType(-1)
+                            }}
+                            name="art-type"
+                            type="radio"
                             className="hashtag__input visuallyhidden"
                         />
                         <span className="hashtag__label">#All</span>
                     </label>
 
-                    <label className="hashtag__item">
-                        <input
-                            type="checkbox"
-                            className="hashtag__input visuallyhidden"
-                        />
-                        <span className="hashtag__label">#Hot</span>
-                    </label>
-
-                    <label className="hashtag__item">
-                        <input
-                            type="checkbox"
-                            className="hashtag__input visuallyhidden"
-                        />
-                        <span className="hashtag__label">
-                            #Donald Jay Trump Junior
-                        </span>
-                    </label>
-
-                    <label className="hashtag__item">
-                        <input
-                            type="checkbox"
-                            className="hashtag__input visuallyhidden"
-                        />
-                        <span className="hashtag__label">#vangogh</span>
-                    </label>
+                    {proposals.slice(0,10).map(item =>{
+                        return (
+                            <label className="hashtag__item">
+                                <input
+                                    checked={item.id === selectedType}
+                                    onChange={(e)=>{
+                                        setSelectedType(item.id)
+                                        console.log('onSelect',item)
+                                    }}
+                                    name="art-type"
+                                    type="radio"
+                                    className="hashtag__input visuallyhidden"
+                                />
+                                <span className="hashtag__label">#{item.name}</span>
+                            </label>
+                        )
+                    })}
                 </div>
             </div>
 
-            <VoteCardList />
+            <VoteCardList type={selectedType}/>
         </article>
     );
 };

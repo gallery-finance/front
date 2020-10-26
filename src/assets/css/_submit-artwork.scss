@@ -82,6 +82,11 @@
 
     &-content {
       pointer-events: none;
+
+      .cover{
+        max-height: 500px;
+        object-fit: contain!important;
+      }
     }
 
     &-logo {

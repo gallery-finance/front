@@ -228,10 +228,10 @@ export const WorkshopVoterPage = () => {
                             Your Voting Power: <b>{glfBalance && formatAmount(glfBalance)} GLF</b>
                         </p>
                     </div>
-                    <div className="voter-head__dashboard-btn">
+                    <div className="voter-head__dashboard-btn" >
                         <button
                             type="button"
-                            className="btn"
+                            className="btn unable"
                             onClick={() => setIsOpen(true)}
                         >
                             Propose a figure

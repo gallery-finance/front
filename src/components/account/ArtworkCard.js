@@ -91,7 +91,6 @@ export const ArtworkCard = ({ isNFT, figure }) => {
                         <button
                             type="button"
                             className="artwork-list__btn btn btn--gray"
-                            onClick={() => setIsOpen(true)}
                         >
                             {new Date(figure.createAt * 1000).toLocaleDateString()}
                         </button>
