@@ -230,8 +230,10 @@ export const WorkshopVoterPage = () => {
                     </div>
                     <div className="voter-head__dashboard-btn" >
                         <button
+                            disabled
+                            style={{ backgroundColor: "#4a4a4a" }}
                             type="button"
-                            className="btn unable"
+                            className="btn"
                             onClick={() => setIsOpen(true)}
                         >
                             Propose a figure

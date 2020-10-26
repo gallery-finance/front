@@ -101,22 +101,22 @@ export const ArtworkCard = ({ isNFT, figure }) => {
                 )}
             </Grow>
 
-            {galleryOpen && (
-                <div className="modal-show">
-                    <div className="wrapper">
-                        <GalleryModal
-                            imgBig={figure.info.image}
-                            setIsOpen={setGalleryOpen}
-                        />
-                    </div>
-                </div>
-            )}
-
             {isOpen && (
                 <div className="modal-show">
                     <div className="wrapper">
                         <ArtworkDetailsModal figure={figure} setIsOpen={setIsOpen} />
                     </div>
+                </div>
+            )}
+
+            {galleryOpen && (
+                <div className="modal-show">
+                  <div className="wrapper">
+                    <GalleryModal
+                        imgBig={figure.info.image}
+                        setIsOpen={setGalleryOpen}
+                    />
+                  </div>
                 </div>
             )}
         </>

@@ -26,7 +26,7 @@ import {formatAmount} from "../../utils/format";
 const {toWei} = Web3.utils
 
 
-export const VoteModal = ({ setIsOpen, figure }) => {
+export const VoteModal = ({ setIsOpen, figure, onImgClick }) => {
 
     const {dispatch} = useContext(mainContext);
     const {account, library, chainId} = useActiveWeb3React()
@@ -124,9 +124,10 @@ export const VoteModal = ({ setIsOpen, figure }) => {
                     >
                         <h3 className="modal__title h3">Vote for a Artwork</h3>
 
-                        <div className="form-vote-new__img">
+                        <div className="form-vote-new__img" onClick={()=>{onImgClick(figure.info.image)}}>
                             <picture>
                                 <img
+
                                     src={figure.info.image}
                                     alt="Starry Night"
                                     loading="lazy"

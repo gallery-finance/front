@@ -13,6 +13,8 @@ export const VoterItem = ({ ranking, name, details, votes, setVoteOpen }) => {
       <td>{votes} GLF</td>
       <td>
         <button
+            disabled
+            style={{ backgroundColor: "#4a4a4a" }}
           type="button"
           className="btn btn--vote"
           data-modal="vote"

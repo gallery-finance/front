@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 
+
 import {GalleryModal, VoteModal} from "../Modals";
 
-import bigImg from "../../assets/img/artwork-list/big.jpg";
-import imgWebp1x from "../../assets/img/artwork-list/img.webp";
-import imgWebp2x from "../../assets/img/artwork-list/img@2x.webp";
-import img1x from "../../assets/img/artwork-list/img.jpg";
-import img2x from "../../assets/img/artwork-list/img@2x.jpg";
+import bigImg from "../../assets/img/32311603723640_.pic_hd.jpg";
+
 import {useGLFBalance} from "../../pages/Hooks";
 import {formatAmount} from "../../utils/format";
 
@@ -35,9 +33,9 @@ export const VoteCard = ({ setIsOpen, figure }) => {
                     </picture>
                 </a>
 
-                <h2 className="artwork-list__title h3">{figure.info.title}</h2>
+                <h2 className="artwork-list__title h3">{figure.info.name}</h2>
 
-                <p className="artwork-list__author">by {figure.info.name}</p>
+                <p className="artwork-list__author">by {figure.info.title}</p>
 
                 <div className="artwork-list__hashtag">
                     <a href="/">#vangogh</a>
@@ -60,19 +58,20 @@ export const VoteCard = ({ setIsOpen, figure }) => {
                 <div className="artwork-list__votes">{formatAmount(figure.votes)} GLF Votes</div>
             </div>
 
-            {galleryOpen && (
-                <div className="modal-show">
-                    <div className="wrapper">
-                        <GalleryModal imgBig={figure.info.image} setIsOpen={setGalleryOpen} />
-                    </div>
-                </div>
-            )}
 
             {voting && (
                 <div className="modal-show">
                     <div className="wrapper">
-                        <VoteModal figure={figure}  setIsOpen={setVoting} />
+                        <VoteModal figure={figure}  setIsOpen={setVoting} onImgClick={setGalleryOpen}/>
                     </div>
+                </div>
+            )}
+
+            {galleryOpen && (
+                <div className="modal-show">
+                  <div className="wrapper">
+                    <GalleryModal imgBig={figure.info.image} setIsOpen={setGalleryOpen} />
+                  </div>
                 </div>
             )}
         </>

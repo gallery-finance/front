@@ -9,7 +9,7 @@ export const GalleryModal = ({ setIsOpen, imgBig }) => {
                 className="modal__item"
                 style={{ backgroundColor: "rgba(0, 0, 0, 0)" }}
             >
-                <img src={imgBig} alt="" />
+                <img style={{maxHeight: '100vh',maxWidth: '100vw'}} src={imgBig} alt="" />
             </div>
 
             <button

@@ -44,7 +44,7 @@ export const WorkshopArtworkPage = () => {
                                 <path d="M2 9h19a1 1 0 011 1v10a1 1 0 01-1 1H3a1 1 0 01-1-1V9zm1-6h15v4H2V4a1 1 0 011-1zm12 11v2h3v-2h-3z"></path>
                             </svg>
                         </div>
-                        <Link to="/workshop/account" className="link">
+                        <Link to="/workshop/account" className="link line">
                             Account
                         </Link>
                     </div>
