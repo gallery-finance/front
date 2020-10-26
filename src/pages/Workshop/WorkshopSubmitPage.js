@@ -355,7 +355,7 @@ export const WorkshopSubmitPage = () => {
             </div>
 
             <p className="submit-artwork__note">
-              You need to stake <b>20 tokens for 7 days</b> to submit
+              You need to stake <b>10 tokens for 7 days</b> to submit
               your art piece. You can submit more than one art piece.
             </p>
 
