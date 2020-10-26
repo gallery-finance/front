@@ -28,9 +28,9 @@ export const TransactionModal = ({}) => {
                   type="button"
                   className="transction-submitted__btn btn"
                   onClick={() => {
-                    // if (showWaitingWalletConfirmModal.link) {
-                    //   history.push(showWaitingWalletConfirmModal.link)
-                    // }
+                    if (showWaitingWalletConfirmModal.link) {
+                      history.push(showWaitingWalletConfirmModal.link)
+                    }
                     dispatch({
                       type: HANDLE_SHOW_TRANSACTION_MODAL,
                       showTransactionModal: false

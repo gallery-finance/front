@@ -33,9 +33,9 @@ export const VoteCard = ({ setIsOpen, figure }) => {
                     </picture>
                 </a>
 
-                <h2 className="artwork-list__title h3">{figure.info.name}</h2>
+                <h2 className="artwork-list__title h3">{figure.info.title}</h2>
 
-                <p className="artwork-list__author">by {figure.info.title}</p>
+                <p className="artwork-list__author">by {figure.info.name}</p>
 
                 <div className="artwork-list__hashtag">
                     <a href="/">#vangogh</a>
