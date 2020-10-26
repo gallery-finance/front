@@ -27,8 +27,6 @@ const validateForm = errors => {
 
 export const WorkshopSubmitPage = () => {
 
-  const {history} = useHistory
-
   const {proposals} = useProposals()
   const {dispatch} = useContext(mainContext);
   const {account, library, chainId} = useActiveWeb3React()
@@ -130,7 +128,7 @@ export const WorkshopSubmitPage = () => {
             console.log('BOT staking success')
             dispatch({
               type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
-              showWaitingWalletConfirmModal: waitingForInit
+              showWaitingWalletConfirmModal: {...waitingForInit, link: '/workshop/artwork'}
             });
             dispatch({
               type: HANDLE_SHOW_TRANSACTION_MODAL,

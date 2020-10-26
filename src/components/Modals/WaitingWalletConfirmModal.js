@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import Lottie from "react-lottie";
+import {useHistory} from 'react-router-dom'
 import { HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL } from "../../const";
 import { mainContext } from "../../reducer";
 import loading from '../../assets/loading.json'
@@ -15,6 +16,7 @@ const defaultOptions = {
 };
 
 export const WaitingWalletConfirmModal = () => {
+    const {history} = useHistory
     const { dispatch, state } = useContext(mainContext);
     const { showWaitingWalletConfirmModal } = state;
 

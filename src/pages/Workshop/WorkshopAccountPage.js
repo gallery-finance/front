@@ -85,14 +85,14 @@ export const WorkshopAccountPage = () => {
                             My Artwork
                         </button>
 
-                        <button
-                            className={`tabs__btn button ${
-                                tab === 4 && "is-active"
-                            }`}
-                            onClick={() => setTab(4)}
-                        >
-                            My NFTs
-                        </button>
+                        {/*<button*/}
+                            {/*className={`tabs__btn button ${*/}
+                                {/*tab === 4 && "is-active"*/}
+                            {/*}`}*/}
+                            {/*onClick={() => setTab(4)}*/}
+                        {/*>*/}
+                            {/*My NFTs*/}
+                        {/*</button>*/}
                     </div>
                 </div>
 
