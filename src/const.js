@@ -20,7 +20,7 @@ export const REQUESTING_DATA = "data query"
 
 export const GALLERY_SELECT_WEB3_CONTEXT = "GALLERY_SELECT_WEB3_CONTEXT"
 
-export const waitingForInit = {show: false, title: 'Waiting' ,content: ''}
+export const waitingForInit = {show: false, title: 'Waiting' ,content: '', link: null};
 
 
 export const waitingForApprove = {show: true, title: 'Waiting for Approve' ,content: 'Approving spending limits on your wallet'}
