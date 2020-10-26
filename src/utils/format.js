@@ -1,7 +1,7 @@
 import BigNumber from 'bignumber.js'
 import Web3 from 'web3'
 
-const {fromWei} = Web3.utils
+BigNumber.config({EXPONENTIAL_AT: [-20, 40]})
 
 export const formatAddress = (address)=>{
     return  address.slice(0, 6) + '...' + address.slice(-3)
@@ -13,8 +13,6 @@ export const formatAmount = (amount)=>{
 }
 
 export const weiPlus = (value1,  value2)=>{
-
-    console.log('wei plus',value2, value1, new BigNumber(new BigNumber(value1? value1: 0).plus(new BigNumber(value2? value2: 0)).toFixed(6)).toNumber())
     return new BigNumber(new BigNumber(value1? value1: 0).plus(new BigNumber(value2? value2: 0)).toFixed(6)).toNumber().toString()
 }
 
