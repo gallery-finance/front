@@ -8,7 +8,6 @@ export function getContract(library, abi, address) {
 
 export const useActiveWeb3React =() => {
     const context = useWeb3ReactCore()
-    context.account = '0x14Fe1c6ADb626A8235b079d4ff66C6b0a3a2E68a'
     const contextNetwork = useWeb3ReactCore()
     return context.active ? context : contextNetwork
 }
