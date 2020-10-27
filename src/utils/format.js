@@ -9,10 +9,11 @@ export const formatAddress = (address)=>{
 
 export const formatAmount = (amount)=>{
     console.log('formatAmount',amount)
-    return new BigNumber(new BigNumber(Web3.utils.fromWei(amount)).toFixed(6)).toNumber()
+    return new BigNumber(new BigNumber(Web3.utils.fromWei(new BigNumber(amount).toString())).toFixed(6)).toNumber()
 }
 
 export const weiPlus = (value1,  value2)=>{
+    console.log('weiPlus',value1, value2)
     return new BigNumber(new BigNumber(value1? value1: 0).plus(new BigNumber(value2? value2: 0)).toFixed(6)).toNumber().toString()
 }
 
