@@ -173,7 +173,7 @@ export const MyBalance = () => {
                                 Tokens ready to unlock stage1:
                             </div>
                         </th>
-                        <td className="account-balance__value">{(rewardsTime && rewardsTime < 0 && proposalRewards) ? formatAmount(proposalRewards) : 0} GLF</td>
+                        <td className="account-balance__value">{myProposalVotes && formatAmount(myProposalVotes)} GLF</td>
 
                         <td className="account-balance__btn">
                             {(rewardsTime && rewardsTime < 0) ? (
