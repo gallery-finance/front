@@ -117,17 +117,18 @@
   &--border {
     color: var(--yellow);
     box-shadow: inset 0 0 0 2px var(--yellow);
+    background: transparent;
+
+    &:hover {
+        background: var(--yellow);
+        color: var(--bg);
+    }
   }
 
   &--small {
-    background-color: #1d1d1d;
     height: 40px;
     line-height: 40px;
     padding: 0 24px;
-
-    &:hover {
-        background-color: #1d1d1d;
-    }
   }
 
   @media #{$mdWidth} {
