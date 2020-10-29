@@ -1,8 +1,8 @@
 import React from "react";
 import Slider from "react-slick";
 
+import { PrevArrowIcon, NextArrowIcon } from "../../icons";
 import "slick-carousel/slick/slick.css";
-// import "slick-carousel/slick/slick-theme.css";
 
 const settings = {
     infinite: false,
@@ -10,50 +10,60 @@ const settings = {
     slidesToShow: 3,
     slidesToScroll: 1,
     prevArrow: (
-        <svg
-            width="27"
-            height="92"
-            viewBox="0 0 27 92"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-        >
-            <path d="M26 91L2 46L26 1" strokeWidth="2" />
-        </svg>
+        <div>
+            <PrevArrowIcon />
+        </div>
     ),
     nextArrow: (
-        <svg
-            width="27"
-            height="92"
-            viewBox="0 0 27 92"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-        >
-            <path d="M1 91L25 46L1 1" strokeWidth="2" />
-        </svg>
-    )
+        <div>
+            <NextArrowIcon />
+        </div>
+    ),
+    responsive: [
+        {
+            breakpoint: 747,
+            settings: {
+                slidesToShow: 1
+            }
+        }
+    ]
 };
 
 export const ExhibitionHallSlider = () => {
     return (
         <div className="exhibition-hall-slider">
             <Slider {...settings}>
-                <div>
-                    <h3>Become a sponsor</h3>
+                <div className="exhibition-hall-slider__item">
+                    <h4 className="item__title gold-color h4">Become a sponsor</h4>
+                    <p className="item__date">20/12/20</p>
+                    <p className="item__subtitle">
+                        You can sponsor an artist to publish his artwork here on
+                        Exhibition hall ...
+                    </p>
                 </div>
-                <div>
-                    <h3>Join a Contest</h3>
+                <div className="exhibition-hall-slider__item">
+                    <h4 className="item__title gold-color h4">Join a Contest</h4>
+                    <p className="item__date">19/12/20</p>
+                    <p className="item__subtitle">
+                        Independent digital art gallery 'Aadvark' statrs a new
+                        digital artwork contest ...
+                    </p>
                 </div>
-                <div>
-                    <h3>NFT for free!</h3>
+                <div className="exhibition-hall-slider__item">
+                    <h4 className="item__title gold-color h4">NFT for free!</h4>
+                    <p className="item__date">18/12/20</p>
+                    <p className="item__subtitle">
+                        Publish your artwork this weekend and get NFT token for it -
+                        for free! ...
+                    </p>
                 </div>
-                <div>
-                    <h3>4</h3>
-                </div>
-                <div>
-                    <h3>5</h3>
-                </div>
-                <div>
-                    <h3>6</h3>
+                <div className="exhibition-hall-slider__item">
+                    <h4 className="item__title gold-color h4">NFT for free!</h4>
+                    <p className="item__date">18/12/20</p>
+                    <p className="item__subtitle">
+                        Publish your artwork this weekend and get NFT token for it -
+                        for free! ...
+                    </p>
                 </div>
             </Slider>
         </div>

@@ -17,7 +17,7 @@
 
         &__btn-wrapper {
             border-left: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 26px 0px 26px 77px;
+            padding: 26px 72px;
 
             @media (max-width: 540px) {
                 border-left: none;
@@ -29,13 +29,11 @@
     &-slider {
         margin: 50px 0;
 
-        h3 {
-            color: #fff;
-        }
-
         .slick-arrow {
-            fill: none;
-            stroke: var(--yellow);
+            svg {
+                fill: none;
+                stroke: var(--yellow);
+            }
 
             &.slick-disabled {
                 cursor: default;
@@ -48,10 +46,26 @@
 
         .slick-prev {
             left: -36px;
+
+            @media (width: 768px) {
+                left: -22px;
+            }
+
+            @media #{$smWidth} {
+                left: 0;
+            }
         }
 
         .slick-next {
             right: -36px;
+
+            @media (width: 768px) {
+                right: -22px;
+            }
+
+            @media #{$smWidth} {
+                right: 0;
+            }
         }
 
         .slick-prev,
@@ -68,6 +82,56 @@
             border: none;
             outline: none;
             background: transparent;
+            z-index: 100;
+        }
+
+        .slick-slide {
+            border-left: 1px solid rgba(255, 255, 255, 0.1);
+
+            &:first-child {
+                border-left: none;
+            }
+        }
+
+        .slick-current {
+            border-left: none;
+        }
+
+        &__item {
+            display: block !important;
+            text-align: center;
+            color: #fff;
+            max-width: 326px;
+            margin: 0 auto;
+
+            @media (max-width: 410px) {
+                max-width: 240px;
+            }
+
+            .item {
+                &__title {
+                    font-weight: 400;
+                    margin-bottom: 4px;
+
+                    @media (max-width: 410px) {
+                        font-size: 18px;
+                    }
+                }
+
+                &__date {
+                    font-size: 12px;
+                    opacity: 0.3;
+                    margin-bottom: 4px;
+                }
+
+                &__subtitle {
+                    opacity: 0.8;
+
+                    @media (max-width: 410px) {
+                        font-size: 14px;
+                    }
+                }
+            }
         }
     }
 
