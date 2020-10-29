@@ -176,7 +176,7 @@ export const MyBalance = () => {
                         <td className="account-balance__value">{myProposalVotes && formatAmount(myProposalVotes)} GLF</td>
 
                         <td className="account-balance__btn">
-                            {(rewardsTime && rewardsTime < 0) ? (
+                            {myProposalVotes && myProposalVotes!== '0' ? (
                                 <button
                                     className="btn btn--border btn--small"
                                     type="button"
