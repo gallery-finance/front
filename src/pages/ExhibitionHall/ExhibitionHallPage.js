@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-import { ExhibitionHallCard } from "../../components/ExhibitionHall";
+import {
+    ExhibitionHallCard,
+    ExhibitionHallSlider
+} from "../../components/ExhibitionHall";
 
 import image1 from "../../assets/img/exhibition-hall/1.jpg";
 import image2 from "../../assets/img/exhibition-hall/2.jpg";
@@ -192,14 +195,7 @@ export const ExhibitionHallPage = () => {
                 </div>
             </header>
 
-            <header className="exhibition-hall-head" style={{ marginTop: 0 }}>
-                <h1 className="exhibition-hall-head__title h1">Exhibition hall</h1>
-                <div className="exhibition-hall-head__btn-wrapper">
-                    <Link to="/exhibition-hall/publish" className="btn btn--border">
-                        Publish an artwork
-                    </Link>
-                </div>
-            </header>
+            <ExhibitionHallSlider />
 
             <div className="hashtag">
                 <div
