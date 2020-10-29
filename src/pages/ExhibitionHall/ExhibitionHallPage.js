@@ -1,52 +1,52 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-import { ExhibitionHallCard } from "../components/ExhibitionHall";
+import { ExhibitionHallCard } from "../../components/ExhibitionHall";
 
-import image1 from "../assets/img/exhibition-hall/1.jpg";
-import image2 from "../assets/img/exhibition-hall/2.jpg";
-import image3 from "../assets/img/exhibition-hall/3.jpg";
-import image4 from "../assets/img/exhibition-hall/4.jpg";
-import image5 from "../assets/img/exhibition-hall/5.jpg";
-import image6 from "../assets/img/exhibition-hall/6.jpg";
-import image7 from "../assets/img/exhibition-hall/7.jpg";
-import image8 from "../assets/img/exhibition-hall/8.jpg";
-import image9 from "../assets/img/exhibition-hall/9.jpg";
-import image10 from "../assets/img/exhibition-hall/10.jpg";
-import image11 from "../assets/img/exhibition-hall/11.jpg";
-import image12 from "../assets/img/exhibition-hall/12.jpg";
+import image1 from "../../assets/img/exhibition-hall/1.jpg";
+import image2 from "../../assets/img/exhibition-hall/2.jpg";
+import image3 from "../../assets/img/exhibition-hall/3.jpg";
+import image4 from "../../assets/img/exhibition-hall/4.jpg";
+import image5 from "../../assets/img/exhibition-hall/5.jpg";
+import image6 from "../../assets/img/exhibition-hall/6.jpg";
+import image7 from "../../assets/img/exhibition-hall/7.jpg";
+import image8 from "../../assets/img/exhibition-hall/8.jpg";
+import image9 from "../../assets/img/exhibition-hall/9.jpg";
+import image10 from "../../assets/img/exhibition-hall/10.jpg";
+import image11 from "../../assets/img/exhibition-hall/11.jpg";
+import image12 from "../../assets/img/exhibition-hall/12.jpg";
 
 const hashtagsList = [
-    { id: "1", name: "love" },
-    { id: "2", name: "like" },
-    { id: "3", name: "photography" },
-    { id: "4", name: "instagram" },
-    { id: "5", name: "music" },
-    { id: "6", name: "follow" },
-    { id: "7", name: "travel" },
-    { id: "8", name: "instagood" },
-    { id: "9", name: "fashion" },
-    { id: "10", name: "summer" },
-    { id: "11", name: "art" },
-    { id: "12", name: "photooftheday" },
-    { id: "13", name: "throwback" },
-    { id: "14", name: "memories" },
-    { id: "15", name: "tbt" },
-    { id: "16", name: "a" },
-    { id: "17", name: "s" },
-    { id: "18", name: "likeforlikes" },
-    { id: "19", name: "k" },
-    { id: "20", name: "picoftheday" },
-    { id: "21", name: "indonesia" },
-    { id: "22", name: "photo" },
-    { id: "23", name: "happy" },
-    { id: "24", name: "o" },
-    { id: "25", name: "nature" },
-    { id: "26", name: "beautiful" },
-    { id: "27", name: "life" },
-    { id: "28", name: "f" },
-    { id: "29", name: "new" },
-    { id: "30", name: "bhfyp" }
+    "love",
+    "like",
+    "photography",
+    "instagram",
+    "music",
+    "follow",
+    "travel",
+    "instagood",
+    "fashion",
+    "summer",
+    "art",
+    "photooftheday",
+    "throwback",
+    "memories",
+    "tbt",
+    "a",
+    "s",
+    "likeforlikes",
+    "k",
+    "picoftheday",
+    "indonesia",
+    "photo",
+    "happy",
+    "o",
+    "nature",
+    "beautiful",
+    "life",
+    "f",
+    "new",
+    "bhfyp"
 ];
 
 const exhibitionList = [
@@ -54,96 +54,110 @@ const exhibitionList = [
         id: "1",
         image: image1,
         title: "Women Mending Nets in the Dunes",
-        author: " by Van Gogh",
-        hashtags: "#love #photo #art #summer #like #instagram #new",
+        author: "by Van Gogh",
+        hashtags: ["love", "photo", "art", "summer", "like", "instagram", "new"],
         date: "24/11/20"
     },
     {
         id: "2",
         image: image2,
         title: "Women Mending Nets in the Dunes",
-        author: " by Van Gogh",
-        hashtags: "#travel #fashion #summer #art #photooftheday #throwback",
+        author: "by Van Gogh",
+        hashtags: [
+            "travel",
+            "fashion",
+            "summer",
+            "art",
+            "photooftheday",
+            "throwback"
+        ],
         date: "18/11/20"
     },
     {
         id: "3",
         image: image3,
         title: "Women Mending Nets in the Dunes",
-        author: " by Van Gogh",
-        hashtags: "#love #like #photography #instagram",
+        author: "by Van Gogh",
+        hashtags: ["love", "like", "photography", "instagram"],
         date: "14/11/20"
     },
     {
         id: "4",
         image: image4,
         title: "Women Mending Nets in the Dunes",
-        author: " by Van Gogh",
-        hashtags: "#travel #fashion #summer #art #photooftheday #throwback",
+        author: "by Van Gogh",
+        hashtags: [
+            "travel",
+            "fashion",
+            "summer",
+            "art",
+            "photooftheday",
+            "throwback"
+        ],
         date: "12/11/20"
     },
     {
         id: "5",
         image: image5,
         title: "Women Mending Nets in the Dunes",
-        author: " by Van Gogh",
-        hashtags: "#love #photo #art #summer #like #instagram #new",
+        author: "by Van Gogh",
+        hashtags: ["love", "photo", "art", "summer", "like", "instagram", "new"],
         date: "9/11/20"
     },
     {
         id: "6",
         image: image6,
         title: "Women Mending Nets in the Dunes",
-        author: " by Van Gogh",
-        hashtags: "#love #photo #art #summer #like #instagram #new",
+        author: "by Van Gogh",
+        hashtags: ["love", "photo", "art", "summer", "like", "instagram", "new"],
         date: "2/11/20"
     },
     {
         id: "7",
         image: image7,
         title: "Women Mending Nets in the Dunes",
-        author: " by Van Gogh",
-        hashtags: "#love #photo #art #summer #like #instagram #new",
+        author: "by Van Gogh",
+        hashtags: ["love", "photo", "art", "summer", "like", "instagram", "new"],
         date: "24/10/20"
     },
     {
         id: "8",
         image: image8,
         title: "Women Mending Nets in the Dunes",
-        author: " by Van Gogh",
-        hashtags: "#love #photo #art #summer #like #instagram #new",
+        author: "by Van Gogh",
+        hashtags: ["love", "photo", "art", "summer", "like", "instagram", "new"],
         date: "17/10/20"
     },
     {
         id: "9",
         image: image9,
         title: "Women Mending Nets in the Dunes",
-        author: " by Van Gogh",
-        hashtags: "#love #photo #art #summer #like #instagram #new",
+        author: "by Van Gogh",
+        hashtags: ["love", "photo", "art", "summer", "like", "instagram", "new"],
         date: "15/10/20"
     },
     {
         id: "10",
         image: image10,
         title: "Women Mending Nets in the Dunes",
-        author: " by Van Gogh",
-        hashtags: "#love #photo #art #summer #like #instagram #new",
+        author: "by Van Gogh",
+        hashtags: ["love", "photo", "art", "summer", "like", "instagram", "new"],
         date: "12/10/20"
     },
     {
         id: "11",
         image: image11,
         title: "Women Mending Nets in the Dunes",
-        author: " by Van Gogh",
-        hashtags: "#love #photo #art #summer #like #instagram #new",
+        author: "by Van Gogh",
+        hashtags: ["love", "photo", "art", "summer", "like", "instagram", "new"],
         date: "7/10/20"
     },
     {
         id: "12",
         image: image12,
         title: "Women Mending Nets in the Dunes",
-        author: " by Van Gogh",
-        hashtags: "#love #photo #art #summer #like #instagram #new",
+        author: "by Van Gogh",
+        hashtags: ["love", "photo", "art", "summer", "like", "instagram", "new"],
         date: "2/10/20"
     }
 ];
@@ -153,9 +167,8 @@ export const ExhibitionHallPage = () => {
     const [showMoreHashtags, setShowMoreHashtags] = useState(false);
     const [currentTabIsHot, setCurrentTabIsHot] = useState(true);
 
-    const handleSelectHashtag = id => {
-        setSelectedType(id);
-        console.log(id);
+    const handleSelectHashtag = hashtagName => {
+        setSelectedType(hashtagName);
         // fetch items ...
     };
 
@@ -163,12 +176,17 @@ export const ExhibitionHallPage = () => {
         setShowMoreHashtags(prev => !prev);
     };
 
+    const handleCardHashtagClick = hashtagName => {
+        setSelectedType(hashtagName);
+        // fetch items ...
+    };
+
     return (
         <article className="exhibition-hall center">
             <header className="exhibition-hall-head">
                 <h1 className="exhibition-hall-head__title h1">Exhibition hall</h1>
                 <div className="exhibition-hall-head__btn-wrapper">
-                    <Link to="/" className="btn btn--border">
+                    <Link to="/exhibition-hall/publish" className="btn btn--border">
                         Publish an artwork
                     </Link>
                 </div>
@@ -177,7 +195,7 @@ export const ExhibitionHallPage = () => {
             <header className="exhibition-hall-head" style={{ marginTop: 0 }}>
                 <h1 className="exhibition-hall-head__title h1">Exhibition hall</h1>
                 <div className="exhibition-hall-head__btn-wrapper">
-                    <Link to="/" className="btn btn--border">
+                    <Link to="/exhibition-hall/publish" className="btn btn--border">
                         Publish an artwork
                     </Link>
                 </div>
@@ -202,36 +220,32 @@ export const ExhibitionHallPage = () => {
                     </label>
 
                     {!showMoreHashtags
-                        ? hashtagsList.slice(0, 7).map(item => (
-                              <label key={item.id} className="hashtag__item">
+                        ? hashtagsList.slice(0, 7).map(hashtag => (
+                              <label key={hashtag} className="hashtag__item">
                                   <input
-                                      checked={item.id === selectedType}
+                                      checked={hashtag === selectedType}
                                       onChange={() => {
-                                          handleSelectHashtag(item.id);
+                                          handleSelectHashtag(hashtag);
                                       }}
                                       name="art-type"
                                       type="radio"
                                       className="hashtag__input visuallyhidden"
                                   />
-                                  <span className="hashtag__label">
-                                      #{item.name}
-                                  </span>
+                                  <span className="hashtag__label">#{hashtag}</span>
                               </label>
                           ))
-                        : hashtagsList.map(item => (
-                              <label key={item.id} className="hashtag__item">
+                        : hashtagsList.map(hashtag => (
+                              <label key={hashtag} className="hashtag__item">
                                   <input
-                                      checked={item.id === selectedType}
+                                      checked={hashtag === selectedType}
                                       onChange={() => {
-                                          handleSelectHashtag(item.id);
+                                          handleSelectHashtag(hashtag);
                                       }}
                                       name="art-type"
                                       type="radio"
                                       className="hashtag__input visuallyhidden"
                                   />
-                                  <span className="hashtag__label">
-                                      #{item.name}
-                                  </span>
+                                  <span className="hashtag__label">#{hashtag}</span>
                               </label>
                           ))}
 
@@ -307,7 +321,11 @@ export const ExhibitionHallPage = () => {
 
             <div className="exhibition-hall-list">
                 {exhibitionList.map(item => (
-                    <ExhibitionHallCard key={item.id} item={item} />
+                    <ExhibitionHallCard
+                        key={item.id}
+                        item={item}
+                        handleHashtagClick={handleCardHashtagClick}
+                    />
                 ))}
             </div>
         </article>

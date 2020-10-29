@@ -1,34 +1,29 @@
-import React, { useState } from "react";
+import React from "react";
+import { Link } from "react-router-dom";
 
-import { GalleryModal } from "../Modals";
-
-export const ExhibitionHallCard = ({ item }) => {
-    const [galleryOpen, setGalleryOpen] = useState(false);
-
+export const ExhibitionHallCard = ({ item, handleHashtagClick }) => {
     return (
-        <>
-            <div className="exhibition-hall-list__item item">
-                <a onClick={() => setGalleryOpen(true)} className="item__image">
-                    <img src={item.image} alt="`$`" width="348" height="348" />
-                </a>
-                <div className="item__content">
-                    <h4 className="item__title h4">{item.title}</h4>
-                    <p className="item__author">{item.author}</p>
-                    <p className="item__hashtags">{item.hashtags}</p>
-                    <p className="item__date">{item.date}</p>
-                </div>
+        <div className="exhibition-hall-list__item item">
+            <Link to={`/exhibition-hall/${item.id}`} className="item__image">
+                <img src={item.image} alt="`$`" width="348" height="348" />
+            </Link>
+            <div className="item__content">
+                <Link to={`/exhibition-hall/${item.id}`} className="item__title h4">
+                    {item.title}
+                </Link>
+                <p className="item__author">{item.author}</p>
+                <p className="item__hashtags">
+                    {item.hashtags &&
+                        item.hashtags.map(hashtag => (
+                            <React.Fragment key={hashtag}>
+                                <span onClick={() => handleHashtagClick(hashtag)}>
+                                    #{hashtag}
+                                </span>{" "}
+                            </React.Fragment>
+                        ))}
+                </p>
+                <p className="item__date">{item.date}</p>
             </div>
-
-            {galleryOpen && (
-                <div className="modal-show">
-                    <div className="wrapper">
-                        <GalleryModal
-                            imgBig={item.image}
-                            setIsOpen={setGalleryOpen}
-                        />
-                    </div>
-                </div>
-            )}
-        </>
+        </div>
     );
 };
