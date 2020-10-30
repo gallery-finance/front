@@ -107,7 +107,6 @@ export const WorkshopArtworkPage = () => {
                                     checked={item.id === selectedType}
                                     onChange={(e)=>{
                                         setSelectedType(item.id)
-                                        console.log('onSelect',item)
                                     }}
                                     name="art-type"
                                     type="radio"

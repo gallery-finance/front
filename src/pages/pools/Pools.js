@@ -11,11 +11,8 @@ import cover_7 from '../../assets/img/card-pool/7.jpg'
 import {REQUESTING_DATA} from "../../const";
 import {useGLFBalance} from "../Hooks";
 import {formatAmount} from "../../utils/format";
-import {useStatistics} from "./Hooks";
+import {useGLFStaking, useStatistics} from "./Hooks";
 import BigNumber from "bignumber.js";
-import Web3 from 'web3'
-
-const {toWei, fromWei} = Web3.utils
 
 const poolList = [
     {type: 'ETH', label: 'Gallery Qingming',cover: cover_1, pair: `GLF / ETH`, link: 'staking-eth', totalRewards: -1},
@@ -30,6 +27,7 @@ export const Pools = () => {
 
     const {glfBalance} = useGLFBalance()
     const {burnedTotal, curPrice, BOTPrice, USDTPrice, DEGOPrice, DONUTPrice, MEMEPrice, ETHPrice, totalSupply } = useStatistics()
+    const {glfStakedAmount, glfRewards} = useGLFStaking()
     const [ETHStaked, setETHStaked] = useState()
     const [USDTStaked, setUSDTStaked] = useState()
     const [DEGOStaked, setDEGOStaked] = useState()
@@ -71,16 +69,16 @@ export const Pools = () => {
 
 
                 <div className="card-pool">
-                    {/*<PoolBigCard*/}
-                    {/*    label="Gallery Rembrandt"*/}
-                    {/*    cover={cover_7}*/}
-                    {/*    pair="GLF"*/}
-                    {/*    link="staking-eth"*/}
-                    {/*    staked={500.212}*/}
-                    {/*    points={200.22}*/}
-                    {/*    redeemed={11}*/}
-                    {/*    left={12}*/}
-                    {/*/>                    */}
+                    <PoolBigCard
+                        label="Gallery Rembrandt"
+                        cover={cover_7}
+                        pair="GLF"
+                        link="staking-eth"
+                        staked={glfStakedAmount && formatAmount(glfStakedAmount)}
+                        points={glfRewards && formatAmount(glfRewards)}
+                        redeemed={11}
+                        left={12}
+                    />
                     <div className="card-pool__list">
                         {poolList.map(item =>{
                             return (

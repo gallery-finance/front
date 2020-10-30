@@ -55,7 +55,7 @@
 
 .modal-show {
     z-index: 10;
-    
+
 	.modal {
         display: flex;
         align-items: center;
@@ -224,6 +224,10 @@
     height: 115px;
     margin: 24px 0 36px;
     background-color: #c4c4c4;
+
+	  img{
+		  object-fit: cover;
+	  }
 
     &::after {
       position: absolute;

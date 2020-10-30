@@ -2,8 +2,7 @@ import React from "react";
 import Slider from "react-slick";
 
 import { PrevArrowIcon, NextArrowIcon } from "../../icons";
-import "slick-carousel/slick/slick.css";
-
+//import "slick-carousel/slick/slick.css";
 const settings = {
     infinite: false,
     speed: 500,

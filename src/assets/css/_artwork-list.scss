@@ -41,6 +41,10 @@
     height: 170px;
     background-color: #c4c4c4;
 
+    img{
+      object-fit: cover;
+    }
+
     @media #{$smWidth} {
       margin-bottom: 36px;
     }

@@ -1,11 +1,20 @@
 import React, {useState, useEffect} from 'react';
 import {getContract, useActiveWeb3React} from "../../web3";
 import {
-    getBotAddress, getDEGOAddress, getDONUTAddress, getETHAddress, getGLFStakingAddress, getMEMOAddress, getUSDTAddress, getUSDTTokenAddress
+    getBotAddress,
+    getDEGOAddress,
+    getDONUTAddress,
+    getETHAddress,
+    getETHStakingAddress, getGalleryAddress,
+    getGLFStakingAddress,
+    getMEMOAddress, getStakingScoreAddress,
+    getUSDTAddress,
+    getUSDTTokenAddress
 } from "../../web3/address";
 import BigNumber from "bignumber.js";
 import ERC20 from "../../web3/abi/ERC20.json";
 import {ChainId, Fetcher, Route, Token, WETH} from "@uniswap/sdk";
+import StakingScore from "../../web3/abi/StakingScore.json";
 
 
 export const useStatistics = () =>{
@@ -103,9 +112,6 @@ export const useStatistics = () =>{
 
         //const ETH = new Token(ChainId.MAINNET, '0x710980bb4a0866e9ec162ccd84439dda5a04b99c', 18)
 
-
-
-
     }
 
     async function queryGLFPrice(){
@@ -122,7 +128,6 @@ export const useStatistics = () =>{
 
     }
 
-
     useEffect(()=>{
         if(active){
             queryTokensPrice()
@@ -136,6 +141,45 @@ export const useStatistics = () =>{
     },[active])
 
     return {totalStaked, burnedTotal, curPrice, BOTPrice, ETHPrice, MEMEPrice, DONUTPrice, DEGOPrice, USDTPrice, totalSupply}
+}
+
+export const useGLFStaking = ()=>{
+    const {account, active, library, chainId} = useActiveWeb3React()
+    const [glfStakedAmount, setGLFStakedAmount] = useState()
+    const [glfRewards, setGLFRewards] = useState()
+    const [redeemedCount, setRedeemedCount] = useState()
+    const [NFTsLeft, setNFTsLeft] =useState()
+
+    function queryGLFStaking () {
+        const contract = getContract(library, StakingScore.abi, getStakingScoreAddress(chainId))
+        const tokenContract = getContract(library, ERC20.abi, getGalleryAddress(chainId))
+        try {
+            contract.methods.myStake(account).call().then(res =>{
+                console.log('glf myStake',res)
+                setGLFStakedAmount(res)
+            })
+        }catch (e){
+            console.log('glf myStake error',e)
+        }
+
+        try {
+            contract.methods.calculateReward(account).call().then(res =>{
+                console.log('glf calculateReward',res)
+                setGLFRewards(res)
+            })
+        }catch (e){
+            console.log('glf calculateReward error',e)
+        }
+    }
+
+    useEffect(()=>{
+        if(active){
+            queryGLFStaking()
+        }
+
+    },[active])
+
+    return {glfStakedAmount, glfRewards}
 }
 
 

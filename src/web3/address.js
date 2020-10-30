@@ -1,4 +1,4 @@
-// GLF
+// GLF token
 export function getGalleryAddress(chainId) {
     switch (chainId) {
         case 1:
@@ -10,7 +10,7 @@ export function getGalleryAddress(chainId) {
     }
 }
 
-// GLF
+// GLF staking
 export function getGLFStakingAddress(chainId) {
     switch (chainId) {
         case 1:
@@ -163,6 +163,17 @@ export function getDONUTAddress(chainId) {
             return  '0x1ddae7FdB2e7fFeE4005913a48a0E3CED1f5AEa0'
         default:
             return '0xc0f9bd5fa5698b6505f643900ffa515ea5df54a9'
+    }
+}
+
+export function getStakingScoreAddress(chainId) {
+    switch (chainId) {
+        case 1:
+            return  '0x10cF378933Afd4a4D02217e692bA4CaD0b32a9a9'
+        case 4:
+            return  '0x10cF378933Afd4a4D02217e692bA4CaD0b32a9a9'
+        default:
+            return '0x10cF378933Afd4a4D02217e692bA4CaD0b32a9a9'
     }
 }
 
