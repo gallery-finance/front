@@ -182,5 +182,45 @@ export const useGLFStaking = ()=>{
     return {glfStakedAmount, glfRewards}
 }
 
+export const useMyGLFStaking = ()=>{
+    const {account, active, library, chainId} = useActiveWeb3React()
+    const [glfStakedAmount, setGLFStakedAmount] = useState()
+    const [glfRewards, setGLFRewards] = useState()
+    const [redeemedCount, setRedeemedCount] = useState()
+    const [NFTsLeft, setNFTsLeft] =useState()
+
+    function queryGLFStaking () {
+        const contract = getContract(library, StakingScore.abi, getStakingScoreAddress(chainId))
+        const tokenContract = getContract(library, ERC20.abi, getGalleryAddress(chainId))
+        try {
+            contract.methods.myStake(account).call().then(res =>{
+                console.log('glf myStake',res)
+                setGLFStakedAmount(res)
+            })
+        }catch (e){
+            console.log('glf myStake error',e)
+        }
+
+        try {
+            contract.methods.calculateReward(account).call().then(res =>{
+                console.log('glf calculateReward',res)
+                setGLFRewards(res)
+            })
+        }catch (e){
+            console.log('glf calculateReward error',e)
+        }
+    }
+
+    useEffect(()=>{
+        if(active){
+            queryGLFStaking()
+        }
+
+    },[active])
+
+    return {glfStakedAmount, glfRewards}
+}
+
+
 
 

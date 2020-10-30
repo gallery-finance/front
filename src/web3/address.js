@@ -177,6 +177,17 @@ export function getStakingScoreAddress(chainId) {
     }
 }
 
+export function getFigureSwapAddress(chainId) {
+    switch (chainId) {
+        case 1:
+            return  '0xd6f321773dC09E3b7850Fe73a356Fb8591d2B7e3'
+        case 4:
+            return  '0xd6f321773dC09E3b7850Fe73a356Fb8591d2B7e3'
+        default:
+            return '0xd6f321773dC09E3b7850Fe73a356Fb8591d2B7e3'
+    }
+}
+
 
 
 export function getUSDTTokenAddress() {

@@ -7,8 +7,6 @@ export const useGLFBalance = () =>{
     const {account, active, library, chainId} = useActiveWeb3React()
     const [ glfBalance, setGLFBalance] = useState()
 
-
-
     useEffect(()=>{
         if(active){
             try{

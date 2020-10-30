@@ -31,6 +31,7 @@ import {
   ExhibitionHallCardPage,
 } from "./pages/ExhibitionHall";
 import {Footer} from "./components/Footer";
+import {StakingGLF} from "./pages/pools/stakingGLF";
 
 function getLibrary(provider) {
   const library = new Web3Provider(provider);
@@ -51,7 +52,6 @@ function App() {
         <Web3ReactProvider getLibrary={getLibrary}>
 
           <Router>
-            <InitPage/>
             <Header/>
             <Switch>
               <Route exact path="/">
@@ -60,6 +60,10 @@ function App() {
 
               <Route path="/pools">
                 <Pools/>
+              </Route>
+
+              <Route path="/staking-glf">
+                <StakingGLF/>
               </Route>
 
               <Route path="/staking-eth">
@@ -140,6 +144,7 @@ function App() {
                   component={AuctionAccountPage}
               />
             </Switch>
+            <InitPage/>
             <Footer/>
           </Router>
         </Web3ReactProvider>

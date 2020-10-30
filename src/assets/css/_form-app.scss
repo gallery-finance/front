@@ -76,7 +76,7 @@
 			margin-top: 35px;
 
         }
-        
+
         &-row {
             display: flex;
             align-items: center;
@@ -135,7 +135,7 @@
 			align-items: center;
 
 			&-pref {
-
+				cursor: pointer;
 				font-weight: 600;
 				font-size: 12px;
 				line-height: 30px;
@@ -293,7 +293,7 @@
 			height: 60px;
 			padding: 0;
             line-height: 60px;
-            
+
             @media #{$smWidth} {
                 max-width: 100%;
                 margin-top: 12px;
@@ -302,7 +302,7 @@
 		}
 
 	}
-    
+
     &__close-btn {
 
 		position: absolute;
@@ -377,7 +377,7 @@
 		display: flex;
 		justify-content: center;
         margin-bottom: 8px;
-        
+
         svg {
             margin: -10px 2px 26px;
         }

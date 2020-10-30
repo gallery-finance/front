@@ -73,7 +73,7 @@ export const Pools = () => {
                         label="Gallery Rembrandt"
                         cover={cover_7}
                         pair="GLF"
-                        link="staking-eth"
+                        link="/staking-glf"
                         staked={glfStakedAmount && formatAmount(glfStakedAmount)}
                         points={glfRewards && formatAmount(glfRewards)}
                         redeemed={11}
