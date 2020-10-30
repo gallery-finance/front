@@ -1,13 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import { StageCard } from "../components/Workshop";
+import { StageCard } from "../../components/Workshop";
 
-import image1 from "../assets/img/workshop/first-workshop.webp";
-import image2 from "../assets/img/workshop/first-workshop@2x.webp";
-import image3 from "../assets/img/workshop/first-workshop.png";
-import image4 from "../assets/img/workshop/first-workshop@2x.png";
-import image5 from "../assets/img/workshop/first-workshop.png";
+import image1 from "../../assets/img/workshop/first-workshop.webp";
+import image2 from "../../assets/img/workshop/first-workshop@2x.webp";
+import image3 from "../../assets/img/workshop/first-workshop.png";
+import image4 from "../../assets/img/workshop/first-workshop@2x.png";
+import image5 from "../../assets/img/workshop/first-workshop.png";
 
 export const WorkshopPage = () => {
     return (

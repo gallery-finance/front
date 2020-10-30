@@ -16,3 +16,5 @@ export * from "./DonutLightIcon";
 export * from "./DonutRedIcon";
 export * from "./SearchIcon";
 export * from "./CrossModalIcon";
+export * from "./PrevArrowIcon";
+export * from "./NextArrowIcon";

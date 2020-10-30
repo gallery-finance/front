@@ -16,16 +16,20 @@ import {StakingMEME} from "./pages/pools/StakingMEME";
 import {StakingDEGO} from "./pages/pools/StakingDEGO";
 import {StakingDONUT} from "./pages/pools/StakingDONUT";
 import {AboutPage} from "./pages/AboutPage";
-import {WorkshopPage} from "./pages/WorkshopPage";
-import {ExhibitionHallPage} from "./pages/ExhibitionHallPage";
 
 import {AuctionPage, AuctionAccountPage} from "./pages/Auction";
 import {
+  WorkshopPage,
   WorkshopVoterPage,
   WorkshopArtworkPage,
   WorkshopSubmitPage,
   WorkshopAccountPage
 } from "./pages/Workshop";
+import {
+  ExhibitionHallPage,
+  ExhibitionHallPublishPage,
+  ExhibitionHallCardPage,
+} from "./pages/ExhibitionHall";
 import {Footer} from "./components/Footer";
 
 function getLibrary(provider) {
@@ -92,6 +96,18 @@ function App() {
                   exact
                   path="/exhibition-hall"
                   component={ExhibitionHallPage}
+              />
+
+            <Route
+                  exact
+                  path="/exhibition-hall/publish"
+                  component={ExhibitionHallPublishPage}
+              />
+
+              <Route
+                  exact
+                  path="/exhibition-hall/:id"
+                  component={ExhibitionHallCardPage}
               />
 
               <Route

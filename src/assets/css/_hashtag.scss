@@ -27,7 +27,20 @@
 		color: #fff;
 		padding: 0 24px;
 		cursor: pointer;
-		text-decoration: underline;
+        text-decoration: underline;
+        
+        &--more {
+            color: var(--yellow);
+            background: transparent;
+            text-decoration: none;
+
+            svg {
+                display: inline-block;
+                margin-left: 6px;
+                margin-bottom: 1px;
+                fill: none;
+            }
+        }
 
 	}
 
