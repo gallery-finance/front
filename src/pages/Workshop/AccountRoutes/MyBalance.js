@@ -181,9 +181,7 @@ export const MyBalance = () => {
                                     className="btn btn--border btn--small"
                                     type="button"
                                     onClick={() => {
-                                        if (rewardsTime && rewardsTime < 0) {
                                             onWithdraw()
-                                        }
                                     }}
                                 >
                                     Unlock tokens (stage1)
