@@ -15,6 +15,7 @@ import {StakingUSDT} from "./pages/pools/StakingUSDT";
 import {StakingMEME} from "./pages/pools/StakingMEME";
 import {StakingDEGO} from "./pages/pools/StakingDEGO";
 import {StakingDONUT} from "./pages/pools/StakingDONUT";
+import {AvailabelArtworks} from "./pages/pools/AvailabelArtworks";
 import {AboutPage} from "./pages/AboutPage";
 
 import {AuctionPage, AuctionAccountPage} from "./pages/Auction";
@@ -58,7 +59,7 @@ function App() {
                 <HomePage/>
               </Route>
 
-              <Route path="/pools">
+              <Route exact path="/pools">
                 <Pools/>
               </Route>
 
@@ -142,6 +143,12 @@ function App() {
                   exact
                   path="/auction/account"
                   component={AuctionAccountPage}
+              />
+
+              <Route
+                  exact
+                  path="/pools/available-artworks"
+                  component={AvailabelArtworks}
               />
             </Switch>
             <InitPage/>
