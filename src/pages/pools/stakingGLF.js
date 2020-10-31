@@ -5,7 +5,7 @@ import {useMyGLFStaking} from "./Hooks";
 import {formatAmount} from "../../utils/format";
 import {
   HANDLE_SHOW_CONNECT_MODAL,
-  HANDLE_SHOW_FAILED_TRANSACTION_MODAL,
+  HANDLE_SHOW_FAILED_TRANSACTION_MODAL, HANDLE_SHOW_TRANSACTION_MODAL,
   HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
   REQUESTING_DATA, waitingForApprove,
   waitingForConfirm, waitingForInit,
@@ -33,6 +33,7 @@ import ERC20 from "../../web3/abi/ERC20.json";
 import {useGLFBalance} from "../Hooks";
 import {GLFRedIcon} from "../../icons/GLFRedIcon";
 import {GLFLightIcon} from "../../icons/GLFLightIcon";
+import StakingRewardsV2 from "../../web3/abi/StakingRewardsV2.json";
 
 const {toWei, fromWei} = Web3.utils
 
@@ -206,6 +207,60 @@ export const StakingGLF = () => {
     }
   };
 
+  const onClaim = async () => {
+    setClaiming(false)
+    const contract = getContract(library, StakingScore.abi, getStakingScoreAddress(chainId))
+    console.log('starting StakingBOT BOT')
+    dispatch({
+      type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
+      showWaitingWalletConfirmModal: waitingForConfirm
+    });
+    try {
+      await contract.methods.claimScore()
+          .send({from: account})
+          .on('transactionHash', hash => {
+            setTxHash(hash)
+            dispatch({
+              type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
+              showWaitingWalletConfirmModal: {...waitingPending, hash}
+            });
+          })
+          .on('receipt', (_, receipt) => {
+            console.log('glf claim rewards success')
+            dispatch({
+              type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
+              showWaitingWalletConfirmModal: waitingForInit
+            });
+            dispatch({
+              type: HANDLE_SHOW_TRANSACTION_MODAL,
+              showTransactionModal: true
+            });
+          })
+          .on('error', (err, receipt) => {
+            console.log('BOT staking error', err)
+            dispatch({
+              type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
+              showWaitingWalletConfirmModal: waitingForInit
+            });
+          })
+
+    } catch (err) {
+      if (err.code === 4001) {
+        dispatch({
+          type: HANDLE_SHOW_FAILED_TRANSACTION_MODAL,
+          showFailedTransactionModal: true
+        });
+      } else {
+        dispatch({
+          type: HANDLE_SHOW_FAILED_TRANSACTION_MODAL,
+          showFailedTransactionModal: true
+        });
+      }
+      console.log('err', err);
+    }
+  };
+
+
 
   return (
       <article className="center">
@@ -252,14 +307,14 @@ export const StakingGLF = () => {
               </dl>
 
               <a className="statistics__btn btn" onClick={() => {
-                // if (!active) {
-                //   dispatch({
-                //     type: HANDLE_SHOW_CONNECT_MODAL,
-                //     showConnectModal: true
-                //   });
-                //   return
-                // }
-                // setClaiming(true)
+                if (!active) {
+                  dispatch({
+                    type: HANDLE_SHOW_CONNECT_MODAL,
+                    showConnectModal: true
+                  });
+                  return
+                }
+                onClaim()
               }}>
                 Claim Points
               </a>

@@ -47,7 +47,6 @@ export const StakingBOT = () => {
 
     const {account, active, library, chainId} = useActiveWeb3React()
 
-
     const onLaunch = async () => {
         console.log('on stake launch')
         if (!amount) {
@@ -248,7 +247,6 @@ export const StakingBOT = () => {
             console.log('err', err);
         }
     };
-
 
     return (
         <article className="center">
