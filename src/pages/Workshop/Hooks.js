@@ -4,6 +4,47 @@ import {getContract, useActiveWeb3React} from "../../web3";
 import {getGalleryAddress} from "../../web3/address";
 import BigNumber from "bignumber.js";
 
+export const useWorkshopLeftTime = () =>{
+    const {active, library, chainId} = useActiveWeb3React()
+    const [ leftTime, setLeftTime] = useState()
+
+    function queryLeftTime(){
+        try{
+            const contract = getContract(library, Gallery.abi, getGalleryAddress(chainId))
+            contract.methods.startAt().call().then(res =>{
+                console.log('proposal day at:',res)
+                const date = new Date(res * 1000 + 9*24*60*60*1000);
+                const now = new Date();
+                const leftTime = date  - now
+                console.log('proposal left time:',res)
+                setLeftTime(leftTime)
+            })
+        }catch (e) {
+            console.log('load totalSupply error:',e)
+
+        }
+    }
+
+    let timer;
+    useEffect(()=>{
+
+        if (active) {
+            timer = setInterval(() => {
+                queryLeftTime();
+            }, (1000));
+        } else {
+            clearInterval(timer)
+        }
+
+        return () => {
+            clearInterval(timer)
+        }
+
+    },[active])
+
+    return {leftTime}
+}
+
 export const useMyVote = () =>{
     const {account, active, library, chainId} = useActiveWeb3React()
     const [ figureRewards, setFigureRewards] = useState()
@@ -16,11 +57,7 @@ export const useMyVote = () =>{
     const [ figureClaimed, setFigureClaimed] = useState(true)
     const [ myFigureVotes, setMyFigureVotes] = useState()
 
-
-
     const [ proposalLeftTime, setProposalLeftTime] = useState()
-
-
 
 
     useEffect(()=>{
@@ -107,21 +144,6 @@ export const useMyVote = () =>{
                 contract.methods.myFigureRewards(account).call().then(res =>{
                     console.log('myFigureRewards:',res)
                     setFigureRewards(res)
-                })
-            }catch (e) {
-                console.log('load totalSupply error:',e)
-
-            }
-
-            try{
-                const contract = getContract(library, Gallery.abi, getGalleryAddress(chainId))
-                contract.methods.startAt().call().then(res =>{
-                    console.log('proposal day at:',res)
-                    const date = new Date(res * 1000 + 4*24*60*60*1000);
-                    const now = new Date();
-                    const leftTime = date  - now
-                    console.log('proposal left time:',res)
-                    setProposalLeftTime(leftTime)
                 })
             }catch (e) {
                 console.log('load totalSupply error:',e)

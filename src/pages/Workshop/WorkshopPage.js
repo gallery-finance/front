@@ -9,7 +9,9 @@ import image3 from "../../assets/img/workshop/first-workshop.png";
 import image4 from "../../assets/img/workshop/first-workshop@2x.png";
 import image5 from "../../assets/img/workshop/first-workshop.png";
 
+
 export const WorkshopPage = () => {
+
     return (
         <article className="center">
             <header className="workshop-head">
