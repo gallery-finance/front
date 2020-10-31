@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import {useState, useEffect} from 'react';
 import StakingRewardsV2 from '../web3/abi/StakingRewardsV2.json'
 import {getContract, useActiveWeb3React} from "../web3";
 import {getGLFStakingAddress} from "../web3/address";

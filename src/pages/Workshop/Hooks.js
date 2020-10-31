@@ -153,7 +153,6 @@ export const useProposals = () =>{
         const contract = getContract(library, Gallery.abi, getGalleryAddress(chainId))
        const list = await contract.getPastEvents('ProposalCreated',{ fromBlock: 0, toBlock: "latest" })
        const proposalList = await Promise.all(list.map(async item => {
-
            const proposal = await contract.methods.proposals(item.returnValues.proposalId).call()
            proposal.votes = await contract.methods.proposalVotes(item.returnValues.proposalId).call()
            proposal.id = item.returnValues.proposalId

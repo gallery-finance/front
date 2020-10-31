@@ -61,7 +61,6 @@ export const StakingGLF = () => {
     if (!amount) {
       return
     }
-
     const tokenContract = getContract(library, ERC20.abi, getGLFStakingAddress(chainId))
     const contract = getContract(library, StakingScore.abi, getStakingScoreAddress(chainId))
     const weiAmount = toWei(amount, 'ether');

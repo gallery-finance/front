@@ -169,11 +169,11 @@ export function getDONUTAddress(chainId) {
 export function getStakingScoreAddress(chainId) {
     switch (chainId) {
         case 1:
-            return  '0x10cF378933Afd4a4D02217e692bA4CaD0b32a9a9'
+            return  '0x623c421B3af650BBa09E585a1Edb0617D9972a28'
         case 4:
-            return  '0x10cF378933Afd4a4D02217e692bA4CaD0b32a9a9'
+            return  '0x623c421B3af650BBa09E585a1Edb0617D9972a28'
         default:
-            return '0x10cF378933Afd4a4D02217e692bA4CaD0b32a9a9'
+            return '0x623c421B3af650BBa09E585a1Edb0617D9972a28'
     }
 }
 

@@ -11,6 +11,7 @@ import cover_3 from "../../assets/img/card-pool/3.png";
 import cover_4 from "../../assets/img/card-pool/4.png";
 import cover_5 from "../../assets/img/card-pool/5.png";
 import cover_6 from "../../assets/img/card-pool/6.png";
+import {useNFTList} from "./Hooks";
 
 const poolList = [
   {
@@ -58,6 +59,9 @@ const poolList = [
 ];
 
 export const AuctionPage = () => {
+
+  const {nftList} = useNFTList()
+
   return (
       <article className="center auction">
         <BackButton toHome />
