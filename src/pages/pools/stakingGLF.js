@@ -382,6 +382,7 @@ export const StakingGLF = () => {
                     amount={amount}
                     symbol={'GLF'}
                     onOk={() => {
+                      window.location.reload()
                       setStaked(false)
                     }}/>
               </div>

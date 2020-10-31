@@ -9,8 +9,8 @@ import {
 import { BackButton } from "../../components/BackButton";
 
 export const AuctionAccountPage = () => {
-    const userCreatedPool = true;
-    
+    const userCreatedPool = false;
+
     const [tab, setTab] = useState(userCreatedPool ? 2 : 1);
 
     return (
