@@ -20,13 +20,13 @@ export const MyBalance = () => {
     const {dispatch} = useContext(mainContext);
     const {account, library, chainId} = useActiveWeb3React()
     const {glfBalance} = useGLFBalance()
-    const {proposalRewards, figureRewards, myProposalVotes, myFigureVotes} = useMyVote()
+    const {proposalRewards, figureRewards, myProposalVotes, myFigureVotes, proposalWithdrawn, figureWithdrawn, proposalClaimed, figureClaimed} = useMyVote()
 
     const {rewardsTime} = useAccount()
 
 
-    const onClaim = async () => {
-        console.log('on submit')
+    const onClaim = async (func) => {
+        console.log('on submit', func)
         const contract = getContract(library, Gallery.abi, getGalleryAddress(chainId))
         try {
             dispatch({
@@ -34,7 +34,7 @@ export const MyBalance = () => {
                 showWaitingWalletConfirmModal: waitingForConfirm
             });
 
-            await contract.methods.claimFromProposal()
+            await contract.methods[func]()
                 .send({from: account})
                 .on('transactionHash', hash => {
                     dispatch({
@@ -85,7 +85,7 @@ export const MyBalance = () => {
         }
     };
 
-    const onWithdraw = async () => {
+    const onWithdraw = async (func) => {
         console.log('on submit')
         const contract = getContract(library, Gallery.abi, getGalleryAddress(chainId))
         try {
@@ -94,7 +94,7 @@ export const MyBalance = () => {
                 showWaitingWalletConfirmModal: waitingForConfirm
             });
 
-            await contract.methods.withdrawFromProposal()
+            await contract.methods[func]()
                 .send({from: account})
                 .on('transactionHash', hash => {
                     dispatch({
@@ -169,19 +169,19 @@ export const MyBalance = () => {
                     </tr>
                     <tr>
                         <th className="account-balance__title">
-                            <div className="account-balance__unlock">
+                            <div className={proposalWithdrawn? "account-balance__unlock": "account-balance__lock"}>
                                 Tokens ready to unlock stage1:
                             </div>
                         </th>
                         <td className="account-balance__value">{myProposalVotes && formatAmount(myProposalVotes)} GLF</td>
 
                         <td className="account-balance__btn">
-                            {myProposalVotes && myProposalVotes!== '0' ? (
+                            {(!proposalWithdrawn) && myProposalVotes && myProposalVotes!== '0' ? (
                                 <button
                                     className="btn btn--border btn--small"
                                     type="button"
                                     onClick={() => {
-                                            onWithdraw()
+                                            onWithdraw('withdrawFromProposal')
                                     }}
                                 >
                                     Unlock tokens (stage1)
@@ -193,19 +193,21 @@ export const MyBalance = () => {
 
                     <tr>
                         <th className="account-balance__title">
-                            <div className="account-balance__unlock">
+                            <div className={figureWithdrawn? "account-balance__unlock": "account-balance__lock"}>
                                 Tokens ready to unlock stage2:
                             </div>
                         </th>
-                        <td className="account-balance__value">0 GLF</td>
+                        <td className="account-balance__value">{myFigureVotes && formatAmount(myFigureVotes)} GLF</td>
                         <td className="account-balance__btn">
-                            {/*<button*/}
-                            {/*    className="btn btn--border btn--small"*/}
-                            {/*    type="button"*/}
-                            {/*    onClick={() => onWithdraw()}*/}
-                            {/*>*/}
-                            {/*    Unlock tokens (stage2)*/}
-                            {/*</button>*/}
+                            {(!figureWithdrawn && myFigureVotes && myFigureVotes!=0) && (
+                                <button
+                                    className="btn btn--border btn--small"
+                                    type="button"
+                                    onClick={() => onWithdraw('withdrawFromFigure')}
+                                >
+                                    Unlock tokens (stage2)
+                                </button>
+                            )}
                         </td>
                     </tr>
                     <tr>
@@ -242,12 +244,25 @@ export const MyBalance = () => {
                     </tbody>
                 </table>
 
-                <button
-                    className="btn account-balance__submit"
-                    onClick={onClaim}
-                >
-                    Claim reward
-                </button>
+                {!proposalClaimed && (
+                    <button
+                        className="btn account-balance__submit"
+                        onClick={()=>{onClaim('claimFromProposal')}}
+                    >
+                        Claim reward stage1
+                    </button>
+                )}
+
+                {!figureClaimed && (
+                    <button
+                        className="btn account-balance__submit"
+                        onClick={()=>{onClaim('claimFromFigure')}}
+                    >
+                        Claim reward stage2
+                    </button>
+                )}
+
+
             </div>
 
         </div>

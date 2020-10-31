@@ -10,7 +10,13 @@ export const useMyVote = () =>{
     const [ proposalRewards, setProposalRewards] = useState()
 
     const [ myProposalVotes, setMyProposalVotes] = useState()
+    const [ proposalWithdrawn, setProposalWithdrawn] = useState(true)
+    const [ proposalClaimed, setProposalClaimed] = useState(true)
+    const [ figureWithdrawn, setFigureWithdrawn] = useState(true)
+    const [ figureClaimed, setFigureClaimed] = useState(true)
     const [ myFigureVotes, setMyFigureVotes] = useState()
+
+
 
     const [ proposalLeftTime, setProposalLeftTime] = useState()
 
@@ -32,8 +38,52 @@ export const useMyVote = () =>{
 
             try{
                 const contract = getContract(library, Gallery.abi, getGalleryAddress(chainId))
+                contract.methods.myProposalWithdrawn(account).call().then(res =>{
+                    console.log('myProposalWithdrawn:',res)
+                    setProposalWithdrawn(res)
+                })
+            }catch (e) {
+                console.log('myProposalWithdrawn error:',e)
+
+            }
+
+            try{
+                const contract = getContract(library, Gallery.abi, getGalleryAddress(chainId))
+                contract.methods.myProposalClaimed(account).call().then(res =>{
+                    console.log('myProposalClaimed:',res)
+                    setProposalClaimed(res)
+                })
+            }catch (e) {
+                console.log('myProposalClaimed error:',e)
+
+            }
+
+            try{
+                const contract = getContract(library, Gallery.abi, getGalleryAddress(chainId))
+                contract.methods.myFigureClaimed(account).call().then(res =>{
+                    console.log('myFigureClaimed:',res)
+                    setFigureClaimed(res)
+                })
+            }catch (e) {
+                console.log('myFigureClaimed error:',e)
+
+            }
+
+            try{
+                const contract = getContract(library, Gallery.abi, getGalleryAddress(chainId))
+                contract.methods.myFigureWithdrawn(account).call().then(res =>{
+                    console.log('myFigureWithdrawn:',res)
+                    setFigureWithdrawn(res)
+                })
+            }catch (e) {
+                console.log('myFigureWithdrawn error:',e)
+
+            }
+
+            try{
+                const contract = getContract(library, Gallery.abi, getGalleryAddress(chainId))
                 contract.methods.myFigureVotes(account).call().then(res =>{
-                    console.log('myProposalVotes:',res)
+                    console.log('myFigureVotes:',res)
                     setMyFigureVotes(res)
                 })
             }catch (e) {
@@ -81,7 +131,7 @@ export const useMyVote = () =>{
         }
     },[active])
 
-    return {proposalRewards, figureRewards, myProposalVotes, myFigureVotes}
+    return {proposalRewards, figureRewards, myProposalVotes, myFigureVotes, proposalWithdrawn, figureWithdrawn, proposalClaimed, figureClaimed}
 }
 
 
