@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import { GalleryModal, RedeemArtworkModal } from "../Modals";
+import {formatAmount} from "../../utils/format";
 
 export const AvailabelArtworksCard = ({ item }) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -15,6 +16,7 @@ export const AvailabelArtworksCard = ({ item }) => {
                 >
                     <picture>
                         <img
+                            style={{objectFit: 'cover'}}
                             src={item.image}
                             alt="Starry Night"
                             loading="lazy"
@@ -24,7 +26,7 @@ export const AvailabelArtworksCard = ({ item }) => {
                     </picture>
                 </a>
                 <h2 className="item__title h3">{item.title}</h2>
-                <p className="item__author">by {item.author}</p>
+                <p className="item__author">by {item.name}</p>
                 <div className="item__hashtag">
                     <p>#{item.hashtag}</p>
                 </div>
@@ -49,7 +51,7 @@ export const AvailabelArtworksCard = ({ item }) => {
                     / <span class="item__redeemed-yellow">{item.left} left</span>
                 </p>
                 <hr />
-                <div className="item__votes">{item.points} Reward points</div>
+                <div className="item__votes">{formatAmount(item.points)} Reward points</div>
             </div>
 
             {galleryOpen && (

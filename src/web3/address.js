@@ -10,6 +10,30 @@ export function getGalleryAddress(chainId) {
     }
 }
 
+// point token
+export function getPointAddress(chainId) {
+    switch (chainId) {
+        case 1:
+            return  '0x9bB8eFe6fa366f74679839287e0b03821c3105b1'
+        case 4:
+            return  '0xcFB82b27820d092137c985c476813553e7CC6132'
+        default:
+            return '0x9bB8eFe6fa366f74679839287e0b03821c3105b1'
+    }
+}
+
+// GLF NFT
+export function getGalleryNFTAddress(chainId) {
+    switch (chainId) {
+        case 1:
+            return  '0x95926757179d00f8154B0f7F2db0b7E8b0e7cef0'
+        case 4:
+            return  '0xB85AE791393B89510Ab3405448Caf432B288c638'
+        default:
+            return '0x95926757179d00f8154B0f7F2db0b7E8b0e7cef0'
+    }
+}
+
 // GLF staking
 export function getGLFStakingAddress(chainId) {
     switch (chainId) {
@@ -180,11 +204,11 @@ export function getStakingScoreAddress(chainId) {
 export function getFigureSwapAddress(chainId) {
     switch (chainId) {
         case 1:
-            return  '0xd6f321773dC09E3b7850Fe73a356Fb8591d2B7e3'
+            return  '0x92b1Bb455cdD4a339cfC55CDF3F99A807F3daE4F'
         case 4:
-            return  '0xd6f321773dC09E3b7850Fe73a356Fb8591d2B7e3'
+            return  '0x3d0cd0BfB1476d6d32D71F662f89f9FB2C2674B8'
         default:
-            return '0xd6f321773dC09E3b7850Fe73a356Fb8591d2B7e3'
+            return '0x92b1Bb455cdD4a339cfC55CDF3F99A807F3daE4F'
     }
 }
 

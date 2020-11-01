@@ -1,6 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
-
 import { StageCard } from "../../components/Workshop";
 
 import image1 from "../../assets/img/workshop/first-workshop.webp";
@@ -97,7 +95,7 @@ export const WorkshopPage = () => {
                         stageText="Stage Two"
                         title="Vote for the best artwork"
                         timeIn="10/26/2020-10/30/2020"
-                        status="live"
+                        status="finished"
                         description={
                             <>
                                 Once the top-10 figures are selected, artists get to
@@ -111,11 +109,13 @@ export const WorkshopPage = () => {
                         }
                     />
                     <StageCard
+                        active
                         number={3}
+                        link={"/pools/available-artworks"}
                         stageText="Stage Three"
                         title="Mine the resulting NFTs"
                         timeIn="10/31/2020-11/20/2020"
-                        status="preparation"
+                        status="live"
                         description="The top-3 artworks are turned into NFTs, and GLF holders proceed to mine them. The holders can use their reward points (obtained through staking) to redeem the NFT artworks and get them transferred to their wallets. The obtained NFTs can be held for collection purposes or sold via the auction."
                     />
                 </div>

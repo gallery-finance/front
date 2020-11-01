@@ -1,18 +1,65 @@
 import React, { useState } from "react";
 
 import cover from "../../../assets/img/card-pool/6.png";
+import {validateForm} from "../../../utils/form";
+import {getContract, useActiveWeb3React} from "../../../web3";
+import ERC721 from '../../../web3/abi/ERC721.json'
 
 export const CreatePool = () => {
+    const {account, library, chainId} = useActiveWeb3React()
     const [checked, setChecked] = useState(false);
+    const [tokenId, setTokenId] = useState()
+    const [errors, setErrors] = useState({tokenId: "", name: "", startPrice: "", artist: ""})
+
+    const handleChange = async event => {
+        event.preventDefault();
+        const {name, value} = event.target;
+        console.log('handleChange')
+        switch (name) {
+            case "tokenId":
+                console.log('tokenId value', value)
+                const contract = getContract(library, ERC721.abi, '')
+                try {
+                    const ownerAddress = await contract.methods.ownerOf(value).call()
+                    if (ownerAddress.toLowerCase() !== account.toLowerCase()) {
+                        errors.tokenId =  "Token ID is invalid";
+                    } else {
+                        errors.tokenId = ""
+                    }
+                }catch (e){
+                    console.log('confirm token',e)
+                    errors.tokenId = "Token ID is invalid"
+                }
+
+                break;
+            default:
+        }
+
+        setErrors(errors)
+
+    };
+
+
+    const  handleSubmit = (event) =>{
+        event.preventDefault();
+        console.log('handleSubmit', event)
+        if (validateForm(errors)) {
+            console.info("Valid Form");
+            //onSubmit()
+        } else {
+            console.error("Invalid Form");
+
+        }
+    }
 
     return (
         <div className="auction-my-pool">
             <div className="modal__box">
                 <div className="modal__item">
                     <form
+                        id="auction-submit"
+                        onSubmit={handleSubmit}
                         className="form-vote-new form-app"
-                        action="/"
-                        noValidate="novalidate"
                     >
                         <h3 className="modal__title h3">Create a new NFT auction</h3>
                         <div className="auction-details__image-wrapper">
@@ -32,18 +79,17 @@ export const CreatePool = () => {
                                     <p>Token ID:</p>
                                     <div className="form-app__inputbox-input">
                                         <input
+                                            onChange={handleChange}
+                                            required
                                             className="input input--sm"
                                             type="text"
+                                            name="tokenId"
                                         />
-                                    </div>
-                                </div>
-                                <div>
-                                    <p>Contract address:</p>
-                                    <div className="form-app__inputbox-input">
-                                        <input
-                                            className="input input--sm"
-                                            type="text"
-                                        />
+                                        {errors.tokenId.length > 0 && (
+                                            <div className="form-app__inputbox-input__text-error">
+                                                {errors.tokenId}
+                                            </div>
+                                        )}
                                     </div>
                                 </div>
                             </div>
@@ -52,7 +98,10 @@ export const CreatePool = () => {
                             <div>
                                 <p>Name of Auction:</p>
                                 <div className="form-app__inputbox-input">
-                                    <input className="input input--sm" type="text" />
+                                    <input
+                                        onChange={handleChange}
+                                        className="input input--sm"
+                                        type="text" />
                                 </div>
                             </div>
                             <div>
@@ -155,7 +204,7 @@ export const CreatePool = () => {
                             >
                                 Cancel
                             </button>
-                            <button type="button" className="btn btn--medium">
+                            <button type="submit" form="auction-submit"  className="btn btn--medium">
                                 Launch
                             </button>
                         </div>
