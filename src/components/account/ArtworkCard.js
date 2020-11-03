@@ -21,8 +21,8 @@ export const ArtworkCard = ({ isNFT, figure }) => {
                         >
                             <picture>
                                 <img
-                                    src={figure}
-                                    alt={figure}
+                                    src={figure.image}
+                                    alt={figure.image}
                                     loading="lazy"
                                     width="264"
                                     height="170"
@@ -42,11 +42,11 @@ export const ArtworkCard = ({ isNFT, figure }) => {
                                 </b>
                             </span>
                         </a>
-                        <h2 className="artwork-list__title h3">{figure}</h2>
-                        <p className="artwork-list__author">by {figure}</p>
-                        <div className="artwork-list__hashtag">
-                            <p>#vangogh</p>
-                        </div>
+                        <h2 className="artwork-list__title h3">{figure.title}</h2>
+                        <p className="artwork-list__author">by {figure.name}</p>
+                        {/*<div className="artwork-list__hashtag">*/}
+                        {/*    <p>#vangogh</p>*/}
+                        {/*</div>*/}
                         <button
                             type="button"
                             className="artwork-list__btn btn btn--gray"
@@ -55,19 +55,19 @@ export const ArtworkCard = ({ isNFT, figure }) => {
                             Redeemed Jan 15, 2020
                         </button>
                         <p className="artwork-list__token-id">
-                            Token ID {0} of Workshop #1
+                            Token ID: {figure.tokenId}
                         </p>
-                        <p className="artwork-list__token-address">
-                            Token contract address
-                        </p>
-                        <p className="artwork-list__token-hash">
-                            <a href="/">
-                                0x84e517408ba6b891b9ac74b2f90013fcbc516d9d
-                            </a>
-                        </p>
+                        {/*<p className="artwork-list__token-address">*/}
+                        {/*    Token contract address*/}
+                        {/*</p>*/}
+                        {/*<p className="artwork-list__token-hash">*/}
+                        {/*    <a href="/">*/}
+                        {/*        0x84e517408ba6b891b9ac74b2f90013fcbc516d9d*/}
+                        {/*    </a>*/}
+                        {/*</p>*/}
                         <hr />
                         <div className="artwork-list__votes">
-                            200.10 Reward points
+                          {formatAmount(figure.points)} Reward points
                         </div>
                     </div>
                 ) : (

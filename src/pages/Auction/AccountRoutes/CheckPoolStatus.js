@@ -1,8 +1,9 @@
 import React from "react";
 
 import cover from "../../../assets/img/card-pool/6.png";
+import {formatAmount} from "../../../utils/format";
 
-export const CheckPoolStatus = () => {
+export const CheckPoolStatus = ({pool}) => {
     const statusExists = true;
     const statusIsOk = true;
 
@@ -86,11 +87,11 @@ export const CheckPoolStatus = () => {
                             <div className="auction-details__price">
                                 <div>
                                     <p>Starting price:</p>
-                                    <h4>1 GLF = 0.001 ETH</h4>
+                                    <h4>1 GLF = {formatAmount(pool && pool.amountMin1)} ETH</h4>
                                 </div>
                                 <div>
                                     <p>Minimal bid price increment:</p>
-                                    <h4>1 GLF = 0.0356 ETH</h4>
+                                    <h4>1 GLF = {formatAmount(pool && pool.amountMinIncr1)} ETH</h4>
                                 </div>
                             </div>
                         </div>
@@ -99,7 +100,7 @@ export const CheckPoolStatus = () => {
                                 <tr>
                                     <th>Name:</th>
                                     <td>
-                                        Starry Night{" "}
+                                        {pool && pool.name}
                                         <span className="opacity-60">
                                             by Van Gogh
                                         </span>
@@ -117,7 +118,7 @@ export const CheckPoolStatus = () => {
                                 </tr>
                                 <tr>
                                     <th>Token ID:</th>
-                                    <td>13 of Workshop #1</td>
+                                    <td>{pool && pool.tokenId}</td>
                                 </tr>
                                 <tr>
                                     <th>Contract address:</th>

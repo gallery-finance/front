@@ -65,7 +65,7 @@ import cover_3 from "../../assets/img/card-pool/3.png";
 import cover_4 from "../../assets/img/card-pool/4.png";
 import cover_5 from "../../assets/img/card-pool/5.png";
 import cover_6 from "../../assets/img/card-pool/6.png";
-import {useNFTList} from "./Hooks";
+import {usePolls} from "./Hooks";
 
 const poolList = [
   {
@@ -113,6 +113,8 @@ const poolList = [
 ];
 
 export const AuctionPage = () => {
+
+  const {pools} = usePolls()
 
   return (
       <article className="center auction">
@@ -178,7 +180,7 @@ export const AuctionPage = () => {
 
         <div className="auction-list">
           <div className="auction-list__list">
-            {poolList.map(item => (
+            {pools.map(item => (
                 <AuctionCard key={item.id} item={item} />
             ))}
           </div>

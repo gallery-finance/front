@@ -6,7 +6,6 @@ import {formatAmount} from "../../utils/format";
 export const AvailabelArtworksCard = ({ item }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [galleryOpen, setGalleryOpen] = useState(false);
-
     return (
         <>
             <div className="available-artworks-list__item item">
@@ -27,9 +26,9 @@ export const AvailabelArtworksCard = ({ item }) => {
                 </a>
                 <h2 className="item__title h3">{item.title}</h2>
                 <p className="item__author">by {item.name}</p>
-                <div className="item__hashtag">
-                    <p>#{item.hashtag}</p>
-                </div>
+                {/*<div className="item__hashtag">*/}
+                {/*    <p>#{item.hashtag}</p>*/}
+                {/*</div>*/}
                 <button
                     type="button"
                     className="item__btn btn"
@@ -37,19 +36,19 @@ export const AvailabelArtworksCard = ({ item }) => {
                 >
                     Redeem
                 </button>
-                <p class="item__token">Token ID {item.tokenID} of Workshop #1</p>
-                <div class="item__address">
-                    <p class="item__address-title">Token contract address</p>
-                    <a href="/" class="item__address-link">
-                        {item.address}
-                    </a>
-                </div>
-                <p class="item__redeemed">
-                    <span class="item__redeemed-green">
-                        {item.redeemed} redeemed
-                    </span>{" "}
-                    / <span class="item__redeemed-yellow">{item.left} left</span>
-                </p>
+                <p class="item__token">Token ID: {item.tokenId}</p>
+                {/*<div class="item__address">*/}
+                {/*    <p class="item__address-title">Token contract address</p>*/}
+                {/*    <a href="/" class="item__address-link">*/}
+                {/*        {item.address}*/}
+                {/*    </a>*/}
+                {/*</div>*/}
+                {/*<p class="item__redeemed">*/}
+                {/*    <span class="item__redeemed-green">*/}
+                {/*        {item.redeemed} redeemed*/}
+                {/*    </span>{" "}*/}
+                {/*    / <span class="item__redeemed-yellow">{item.left} left</span>*/}
+                {/*</p>*/}
                 <hr />
                 <div className="item__votes">{formatAmount(item.points)} Reward points</div>
             </div>

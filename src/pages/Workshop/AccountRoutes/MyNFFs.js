@@ -17,6 +17,8 @@ import wheatfieldJPG1x from "../../../assets/img/artwork-list/wheatfield.jpg";
 import wheatfieldJPG2x from "../../../assets/img/artwork-list/wheatfield@2x.jpg";
 
 import { ArtworkCard } from "../../../components/account";
+import {useNFTList} from "../../Auction/Hooks";
+import {useActiveWeb3React} from "../../../web3";
 
 const artworks = [
     {
@@ -52,12 +54,15 @@ const artworks = [
 ];
 
 export const MyNFTs = () => {
+    const {account} = useActiveWeb3React()
+    const {nftList} = useNFTList()
+    console.log('my nft',nftList)
     return (
         <div className="tabs__item">
             <div className="artwork-list">
                 <div className="artwork-list__list">
-                    {artworks.map(item => (
-                        <ArtworkCard key={item.title} item={item} isNFT />
+                    {nftList.filter(item => {return item.owner.toLowerCase() === account.toLowerCase()}).map(item => (
+                        <ArtworkCard key={item.title} figure={item} isNFT />
                     ))}
                 </div>
             </div>

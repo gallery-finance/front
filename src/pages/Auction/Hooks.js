@@ -1,13 +1,19 @@
 import {useState, useEffect} from 'react';
-import ERC721 from '../../web3/abi/ERC721.json'
 import Gallery from '../../web3/abi/Gallery.json'
 import FigureSwap from '../../web3/abi/FigureSwap.json'
 import {getContract, useActiveWeb3React} from "../../web3";
-import {getFigureSwapAddress, getGalleryAddress, getGalleryNFTAddress} from "../../web3/address";
+import {
+  getEnglishAuctionNFTAddress,
+  getFigureSwapAddress,
+  getGalleryAddress,
+  getGalleryNFTAddress
+} from "../../web3/address";
 import BigNumber from "bignumber.js";
+import ERC721 from "../../web3/abi/ERC721.json";
+import EnglishAuctionNFT from "../../web3/abi/EnglishAuctionNFT.json";
 
 export const useNFTList = () => {
-  const {account, active, library, chainId} = useActiveWeb3React()
+  const {active, library, chainId} = useActiveWeb3React()
   const [nftList, seNFTList] = useState([])
 
   function queryNFTList() {
@@ -15,6 +21,8 @@ export const useNFTList = () => {
     try {
       const contract = getContract(library, Gallery.abi, getGalleryAddress(chainId))
       const fixContract = getContract(library, FigureSwap.abi, getFigureSwapAddress(chainId))
+      const NFTContract = getContract(library, ERC721.abi, getGalleryNFTAddress(chainId))
+
       let list = [];
       for (let i = 0; i < 10; i++) {
         contract.methods.topProposals(i).call().then(proposalId =>{
@@ -31,17 +39,21 @@ export const useNFTList = () => {
                     if(!(new BigNumber(cardId).isEqualTo('0'))){
                       console.log('query cardIds', cardId)
                       const card = {}
+                      card.owner = await NFTContract.methods.ownerOf(cardId).call()
                       card.points = await fixContract.methods.cardPoints(proposalId, figureId).call()
                       const figure = await contract.methods.figures(figureId).call()
                       console.log('figure', figure)
                       const info = JSON.parse(figure.info)
+                      card.tokenId = cardId
                       card.name = info.name
                       card.title = info.title
                       card.image = info.image
+                      card.description = info.description
                       card.proposalId = proposalId
                       card.figureId = figureId
                       list = list.concat(card)
                       seNFTList(nftList.concat(list))
+
                       // const erc721Contract = getContract(library, ERC721.abi, getGalleryNFTAddress(chainId))
                       // const uri = await erc721Contract.methods.baseURI().call()
                       // console.log('uri--->',uri)
@@ -71,4 +83,58 @@ export const useNFTList = () => {
   }, [active])
 
   return {nftList}
+}
+
+export const useMyPoll = () =>{
+  const {active, account, library, chainId} = useActiveWeb3React()
+  const [myPool, setMyPool] = useState()
+
+  async function queryMyPool (){
+    const contract = getContract(library, EnglishAuctionNFT.abi, getEnglishAuctionNFTAddress(chainId))
+    const index = await contract.methods.myCreatedP(account).call()
+    console.log('my pool',index)
+    if(index > 0){
+      const pool = await contract.methods.pools(index-1).call()
+      pool.claimed = await contract.methods.creatorClaimedP(index-1).call()
+      pool.claimed = await contract.methods.creatorClaimedP(index-1).call()
+      pool.currentBiddenAmount = await contract.methods.currentBidderAmount1P(index-1).call()
+      setMyPool(pool)
+      console.log('pool:',pool)
+    }
+  }
+
+  useEffect(()=>{
+    if(active){
+      queryMyPool()
+    }
+  },[active])
+
+  return {myPool}
+
+}
+
+export const usePolls = ()=> {
+  const {active, library, chainId} = useActiveWeb3React()
+  const [pools, setPools] = useState([])
+
+  async function queryPools() {
+    const contract = getContract(library, EnglishAuctionNFT.abi, getEnglishAuctionNFTAddress(chainId))
+    let poolList = []
+    contract.methods.getPoolCount().call().then( async count =>{
+      console.log('pool count:',count)
+      for (let i = 0; i < count; i++) {
+        const id = count - i - 1;
+        const pool = await contract.methods.pools(id).call()
+        setPools(poolList.concat(pool))
+      }
+    })
+  }
+
+  useEffect(()=>{
+    if(active){
+      queryPools()
+    }
+  },[active])
+
+  return {pools}
 }

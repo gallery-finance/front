@@ -15,7 +15,6 @@ import {
 import {mainContext} from "../../reducer";
 import Web3 from "web3";
 import {useProposals} from "./Hooks";
-import {useHistory} from 'react-router-dom'
 
 const {toWei} = Web3.utils
 

@@ -411,7 +411,7 @@ export const StakingGLF = () => {
               <div className="wrapper">
                 <UnstakeModal
                     amount={amount}
-                    tokenName={'Bounce Token'}
+                    tokenName={'Gallery Token'}
                     icon={<GLFRedIcon width={43} height={43}/>}
                     symbol={'GLF'}
                     balance={glfStakedAmount}

@@ -6,8 +6,6 @@ import { MyBalance, MyFigures, MyArtwork, MyNFTs } from "./AccountRoutes";
 export const WorkshopAccountPage = () => {
     const [tab, setTab] = useState(1);
 
-
-
     return (
         <>
             <div className="center">
@@ -85,14 +83,14 @@ export const WorkshopAccountPage = () => {
                             My Artwork
                         </button>
 
-                        {/*<button*/}
-                            {/*className={`tabs__btn button ${*/}
-                                {/*tab === 4 && "is-active"*/}
-                            {/*}`}*/}
-                            {/*onClick={() => setTab(4)}*/}
-                        {/*>*/}
-                            {/*My NFTs*/}
-                        {/*</button>*/}
+                        <button
+                            className={`tabs__btn button ${
+                                tab === 4 && "is-active"
+                            }`}
+                            onClick={() => setTab(4)}
+                        >
+                            My NFTs
+                        </button>
                     </div>
                 </div>
 

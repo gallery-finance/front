@@ -1,30 +1,69 @@
-import React, { useState } from "react";
+import React, {useContext, useEffect, useState} from "react";
 
 import cover from "../../../assets/img/card-pool/6.png";
 import {validateForm} from "../../../utils/form";
 import {getContract, useActiveWeb3React} from "../../../web3";
 import ERC721 from '../../../web3/abi/ERC721.json'
+import {
+    getEnglishAuctionNFTAddress,
+    getGalleryNFTAddress
+} from "../../../web3/address";
+import EnglishAuctionNFT from "../../../web3/abi/EnglishAuctionNFT.json";
+
+import {
+    HANDLE_SHOW_FAILED_TRANSACTION_MODAL,
+    HANDLE_SHOW_TRANSACTION_MODAL,
+    HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
+    waitingForConfirm,
+    waitingForInit,
+    waitingPending
+} from "../../../const";
+import {mainContext} from "../../../reducer";
+import Web3 from "web3";
+import {getTime} from "../../../utils/time";
+
+const {toWei} = Web3.utils
+
 
 export const CreatePool = () => {
     const {account, library, chainId} = useActiveWeb3React()
+    const {dispatch} = useContext(mainContext);
     const [checked, setChecked] = useState(false);
     const [tokenId, setTokenId] = useState()
+    const [name, setName] = useState()
+    const [details, setDetails] = useState()
+    const [price, setPrice] = useState()
+    const [incr, setIncr] = useState()
+    const [days, setDays] = useState()
+    const [hours, setHours] = useState()
+    const [minutes, setMinutes] = useState()
+
     const [errors, setErrors] = useState({tokenId: "", name: "", startPrice: "", artist: ""})
+
+    useEffect(()=>{
+        //errors.tokenId = "Token ID is invalid"
+        //setErrors(errors)
+    },[])
 
     const handleChange = async event => {
         event.preventDefault();
         const {name, value} = event.target;
-        console.log('handleChange')
+
         switch (name) {
             case "tokenId":
-                console.log('tokenId value', value)
-                const contract = getContract(library, ERC721.abi, '')
+                setTokenId(value)
+                setErrors({tokenId: ''})
                 try {
+                    const contract = getContract(library, ERC721.abi, getGalleryNFTAddress(chainId))
                     const ownerAddress = await contract.methods.ownerOf(value).call()
+                    console.log('start query 1',ownerAddress.toLowerCase(),account.toLowerCase())
+
                     if (ownerAddress.toLowerCase() !== account.toLowerCase()) {
+                        console.log('start query 2')
                         errors.tokenId =  "Token ID is invalid";
                     } else {
-                        errors.tokenId = ""
+                        errors.tokenId =  "";
+                        console.log('start query 3')
                     }
                 }catch (e){
                     console.log('confirm token',e)
@@ -32,6 +71,24 @@ export const CreatePool = () => {
                 }
 
                 break;
+            case "name":
+                setName(value)
+            break
+            case "details":
+                setDetails(value)
+            break
+            case "price":
+                setPrice(value)
+            break
+            case "days":
+                setDays(value)
+            break
+            case "hours":
+                setDays(value)
+                break
+            case "minutes":
+                setDays(value)
+                break
             default:
         }
 
@@ -40,12 +97,91 @@ export const CreatePool = () => {
     };
 
 
-    const  handleSubmit = (event) =>{
+    const  handleSubmit = async (event) =>{
         event.preventDefault();
         console.log('handleSubmit', event)
         if (validateForm(errors)) {
-            console.info("Valid Form");
-            //onSubmit()
+            const tokenContract = getContract(library, ERC721.abi, getGalleryNFTAddress(chainId))
+            const contract = getContract(library, EnglishAuctionNFT.abi, getEnglishAuctionNFTAddress(chainId))
+            const weiPrice = toWei(price, 'ether');
+            //const weiIncr = toWei(incr, 'ether');
+
+            console.log('starting create pool', contract)
+            //setIsOpen(false)
+            dispatch({
+                type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
+                showWaitingWalletConfirmModal: waitingForConfirm
+            });
+            try {
+                await tokenContract.methods.approve(
+                    getEnglishAuctionNFTAddress(chainId),
+                    tokenId,
+                )
+                    .send({from: account});
+                console.log('approve  success')
+
+                dispatch({
+                    type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
+                    showWaitingWalletConfirmModal: waitingForConfirm
+                });
+
+                const time = getTime(days, hours, minutes);
+                console.log('data:',name, getGalleryNFTAddress(chainId),tokenId,weiPrice, 0.1,time)
+                await contract.methods.create(
+                    name,
+                    getGalleryNFTAddress(chainId),
+                    tokenId,
+                    weiPrice,
+                    1,
+                    time)
+                    .send({from: account})
+                    .on('transactionHash', hash => {
+                        dispatch({
+                            type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
+                            showWaitingWalletConfirmModal: {...waitingPending, hash}
+                        });
+                    })
+                    .on('receipt', (_, receipt) => {
+                        console.log('BOT staking success')
+                        dispatch({
+                            type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
+                            showWaitingWalletConfirmModal: {...waitingForInit, link: '/workshop/artwork'}
+                        });
+                        dispatch({
+                            type: HANDLE_SHOW_TRANSACTION_MODAL,
+                            showTransactionModal: true
+                        });
+                    })
+                    .on('error', (err, receipt) => {
+                        console.log('BOT staking error', err)
+                        dispatch({
+                            type: HANDLE_SHOW_FAILED_TRANSACTION_MODAL,
+                            showFailedTransactionModal: true
+                        });
+                        dispatch({
+                            type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
+                            showWaitingWalletConfirmModal: waitingForInit
+                        });
+                    })
+
+            } catch (err) {
+                dispatch({
+                    type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
+                    showWaitingWalletConfirmModal: waitingForInit
+                });
+                if (err.code === 4001) {
+                    dispatch({
+                        type: HANDLE_SHOW_FAILED_TRANSACTION_MODAL,
+                        showFailedTransactionModal: true
+                    });
+                } else {
+                    dispatch({
+                        type: HANDLE_SHOW_FAILED_TRANSACTION_MODAL,
+                        showFailedTransactionModal: true
+                    });
+                }
+                console.log('err', err);
+            }
         } else {
             console.error("Invalid Form");
 
@@ -99,6 +235,7 @@ export const CreatePool = () => {
                                 <p>Name of Auction:</p>
                                 <div className="form-app__inputbox-input">
                                     <input
+                                        name="name"
                                         onChange={handleChange}
                                         className="input input--sm"
                                         type="text" />
@@ -119,9 +256,12 @@ export const CreatePool = () => {
                                 <div className="auction-my-pool__price-input">
                                     <div className="form-app__inputbox-input">
                                         <input
+                                            name={"price"}
+                                            onChange={handleChange}
                                             className="input input--sm"
                                             placeholder="0,00"
-                                            type="text"
+                                            type="number"
+                                            required
                                         />
                                     </div>
                                     GLF
@@ -136,7 +276,6 @@ export const CreatePool = () => {
                                         }}
                                         type="checkbox"
                                         className="checkbox__input visuallyhidden"
-                                        required="required"
                                     />
                                     <span className="checkbox__label">
                                         Min bid price increment:
@@ -146,8 +285,10 @@ export const CreatePool = () => {
                                     <div className="form-app__inputbox-input">
                                         <input
                                             className="input input--sm"
+                                            name="incr"
+                                            onChange={handleChange}
                                             placeholder="0,00"
-                                            type="text"
+                                            type="number"
                                             disabled={!checked}
                                         />
                                     </div>
@@ -166,6 +307,8 @@ export const CreatePool = () => {
                                     <p>Days</p>
                                     <div className="form-app__inputbox-input">
                                         <input
+                                            name={"days"}
+                                            onChange={handleChange}
                                             className="input input--sm"
                                             type="number"
                                             min={0}
@@ -176,6 +319,8 @@ export const CreatePool = () => {
                                     <p>Hours</p>
                                     <div className="form-app__inputbox-input">
                                         <input
+                                            name="hours"
+                                            onChange={handleChange}
                                             className="input input--sm"
                                             type="number"
                                             min={0}
@@ -188,6 +333,8 @@ export const CreatePool = () => {
                                     <div className="form-app__inputbox-input">
                                         <input
                                             className="input input--sm"
+                                            name="minutes"
+                                            onChange={handleChange}
                                             type="number"
                                             min={0}
                                             max={59}

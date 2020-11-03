@@ -34,6 +34,18 @@ export function getGalleryNFTAddress(chainId) {
     }
 }
 
+// GLF NFT
+export function getEnglishAuctionNFTAddress(chainId) {
+    switch (chainId) {
+        case 1:
+            return  '0xfb0630AB838aB538b2C3C257DCD38E5d0C611b58'
+        case 4:
+            return  '0xfb0630AB838aB538b2C3C257DCD38E5d0C611b58'
+        default:
+            return '0xfb0630AB838aB538b2C3C257DCD38E5d0C611b58'
+    }
+}
+
 // GLF staking
 export function getGLFStakingAddress(chainId) {
     switch (chainId) {

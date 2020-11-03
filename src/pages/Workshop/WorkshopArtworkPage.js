@@ -54,7 +54,7 @@ export const WorkshopArtworkPage = () => {
                         </p>
                     </div>
                     <div className="voter-head__dashboard-btn">
-                        <Link to="/workshop/submit" className="btn">
+                        <Link className="btn">
                             Propose an artwork
                         </Link>
                     </div>

@@ -48,3 +48,18 @@ export const getPercent = (time) =>{
         return 0
     }
 }
+
+
+export const getTime = (day, hour, min) => {
+    let time = 0;
+    if ( day ) {
+        time += 24 * 60 * 60 * day;
+    }
+    if ( hour ) {
+        time += 60* 60 * hour;
+    }
+    if ( min ) {
+        time += 60 * min;
+    }
+    return time;
+}

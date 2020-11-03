@@ -22,7 +22,7 @@ export const AuctionCard = ({ item }) => {
                             />
                         </picture>
                     </a>
-                    <h2 className="item__title h3">{item.label}</h2>
+                    <h2 className="item__title h3">{item.name}</h2>
                     <button
                         className={`item__type item__type--${item.type}`}
                         onClick={() => setIsOpen(true)}
@@ -30,7 +30,7 @@ export const AuctionCard = ({ item }) => {
                         {item.type}
                     </button>
                     <h5 className="item__workshop">
-                        Token ID {item.id}
+                        Token ID {item.tokenId}
                     </h5>
                     <div className="item__token">
                         <p className="item__token-title">Token contract address</p>

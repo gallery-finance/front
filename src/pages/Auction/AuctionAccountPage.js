@@ -7,11 +7,12 @@ import {
     PurchasedNFTs
 } from "./AccountRoutes";
 import { BackButton } from "../../components/BackButton";
+import {useMyPoll} from "./Hooks";
 
 export const AuctionAccountPage = () => {
     const userCreatedPool = false;
-
-    const [tab, setTab] = useState(userCreatedPool ? 2 : 1);
+    const {myPool} = useMyPoll()
+    const [tab, setTab] = useState(1);
 
     return (
         <article className="center account">
@@ -34,7 +35,7 @@ export const AuctionAccountPage = () => {
                             className={`tabs__btn button ${
                                 tab === 2 && "is-active"
                             }`}
-                            onClick={() => setTab(2)}
+                            onClick={() => setTab(1)}
                         >
                             Check my pool status
                         </button>
@@ -56,8 +57,8 @@ export const AuctionAccountPage = () => {
                 </div>
             </div>
 
-            {tab === 1 && <CreatePool />}
-            {tab === 2 && <CheckPoolStatus />}
+            {tab === 1 && !myPool && <CreatePool />}
+            {tab === 1 && myPool && <CheckPoolStatus pool={myPool}/>}
             {tab === 3 && <PoolsParticipated />}
             {tab === 4 && <PurchasedNFTs />}
         </article>

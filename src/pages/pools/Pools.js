@@ -70,7 +70,7 @@ export const Pools = () => {
 
                 <div className="card-pool">
                     <PoolBigCard
-                        label="Gallery Rembrandt"
+                        label="Workshop #1 Pool"
                         cover={cover_7}
                         pair="GLF"
                         link="/staking-glf"
