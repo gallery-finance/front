@@ -22,6 +22,30 @@ export const getLeftTime = (time)=>{
     }
 }
 
+export const getPoolLeftTime = (time)=>{
+    if (time) {
+
+        const time1 = time * 1000;
+        const date = new Date(time1);
+        const now = new Date();
+        const lefttime = (date - now);
+        let leftd = Math.floor(lefttime / (1000 * 60 * 60 * 24));
+        let lefth = Math.floor(lefttime / (1000 * 60 * 60) % 24);
+        let leftm = Math.floor(lefttime / (1000 * 60) % 60);
+        let lefts = Math.floor(lefttime / 1000 % 60);
+        const left = {
+            days: leftd < 0 ? 0 : leftd,
+            hours: lefth < 0 ? 0 : lefth,
+            minutes: leftm < 0 ? 0 : leftm,
+            seconds: lefts < 0 ? 0 : lefts,
+        };
+        return left
+    } else {
+        return null
+    }
+}
+
+
 export const getPercent = (time) =>{
 
     if(0 <= time && time <= 24){

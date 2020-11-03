@@ -1,11 +1,99 @@
-import React from "react";
-
+import React, {useContext, useEffect, useState} from "react";
+import {mainContext} from "../../../reducer";
 import cover from "../../../assets/img/card-pool/6.png";
 import {formatAmount} from "../../../utils/format";
+import {getPoolLeftTime} from "../../../utils/time";
+import {getContract, useActiveWeb3React} from "../../../web3";
+import EnglishAuctionNFT from "../../../web3/abi/EnglishAuctionNFT.json";
+import {getEnglishAuctionNFTAddress} from "../../../web3/address";
+import {
+    HANDLE_SHOW_FAILED_TRANSACTION_MODAL,
+    HANDLE_SHOW_TRANSACTION_MODAL,
+    HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
+    waitingForConfirm,
+    waitingForInit,
+    waitingPending
+} from "../../../const";
 
 export const CheckPoolStatus = ({pool}) => {
-    const statusExists = true;
-    const statusIsOk = true;
+
+    const {dispatch} = useContext(mainContext);
+    const {active, account, library, chainId} = useActiveWeb3React()
+
+    console.log('pool status',pool)
+
+    const [left, setLeft] = useState()
+
+    let timer
+    useEffect(() => {
+        timer = setInterval(() => {
+            const left = getPoolLeftTime(pool.closeAt)
+            setLeft(left)
+        }, 1000)
+        return () => {
+            clearInterval(timer)
+        }
+    }, [getPoolLeftTime])
+
+    const onClaim = () => {
+        const contract = getContract(library, EnglishAuctionNFT.abi, getEnglishAuctionNFTAddress(chainId))
+        try {
+            dispatch({
+                type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
+                showWaitingWalletConfirmModal: waitingForConfirm
+            });
+
+             contract.methods.creatorClaim(pool.index)
+                .send({from: account})
+                .on('transactionHash', hash => {
+                    dispatch({
+                        type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
+                        showWaitingWalletConfirmModal: {...waitingPending, hash}
+                    });
+                })
+                .on('receipt', (_, receipt) => {
+                    console.log('BOT staking success')
+                    dispatch({
+                        type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
+                        showWaitingWalletConfirmModal: waitingForInit
+                    });
+                    dispatch({
+                        type: HANDLE_SHOW_TRANSACTION_MODAL,
+                        showTransactionModal: true
+                    });
+                })
+                .on('error', (err, receipt) => {
+                    console.log('BOT staking error', err)
+                    dispatch({
+                        type: HANDLE_SHOW_FAILED_TRANSACTION_MODAL,
+                        showFailedTransactionModal: true
+                    });
+                    dispatch({
+                        type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
+                        showWaitingWalletConfirmModal: waitingForInit
+                    });
+                })
+
+        } catch (err) {
+            dispatch({
+                type: HANDLE_SHOW_WAITING_WALLET_CONFIRM_MODAL,
+                showWaitingWalletConfirmModal: waitingForInit
+            });
+            if (err.code === 4001) {
+                dispatch({
+                    type: HANDLE_SHOW_FAILED_TRANSACTION_MODAL,
+                    showFailedTransactionModal: true
+                });
+            } else {
+                dispatch({
+                    type: HANDLE_SHOW_FAILED_TRANSACTION_MODAL,
+                    showFailedTransactionModal: true
+                });
+            }
+            console.log('err', err);
+        }
+    };
+
 
     const getPoolStatus = () => {
         return (
@@ -15,13 +103,13 @@ export const CheckPoolStatus = ({pool}) => {
                     <tbody>
                         <tr>
                             <th>The auction is closed:</th>
-                            <td>0d : 0h : 0m </td>
+                            <td>{left && `${left.days}d : ${left.hours}h : ${left.minutes}m ${left.seconds}s`} </td>
                         </tr>
                     </tbody>
                 </table>
                 <hr />
 
-                {statusIsOk ? (
+                {pool.currentBiddenAmount !== "0" ? (
                     <p className="auction-details__result result--green">
                         Your item was successfully sold at the auction
                     </p>
@@ -31,11 +119,14 @@ export const CheckPoolStatus = ({pool}) => {
                     </p>
                 )}
 
-                <div className="form-app__submit">
-                    <button className="btn btn--medium check-pool-btn" type="button">
-                        {statusIsOk ? "Claim my GLFs" : "Claim my NFT"}
-                    </button>
-                </div>
+                {!pool.claimed && (
+                    <div className="form-app__submit">
+                        <button className="btn btn--medium check-pool-btn" type="button" onClick={onClaim}>
+                            {pool.currentBiddenAmount !== "0" ? "Claim my GLFs" : "Claim my NFT"}
+                        </button>
+                    </div>
+                )}
+
             </>
         );
     };
@@ -48,7 +139,7 @@ export const CheckPoolStatus = ({pool}) => {
                     <tbody>
                         <tr>
                             <th>Time left:</th>
-                            <td>2d : 15h : 45m</td>
+                            <td>{left && `${left.days}d : ${left.hours}h : ${left.minutes}m : ${left.seconds}s`}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -76,7 +167,7 @@ export const CheckPoolStatus = ({pool}) => {
                             <div className="form-vote-new__img auction-details__image">
                                 <picture>
                                     <img
-                                        src={cover}
+                                        src={pool.image}
                                         alt=""
                                         loading="lazy"
                                         width="180"
@@ -101,19 +192,12 @@ export const CheckPoolStatus = ({pool}) => {
                                     <th>Name:</th>
                                     <td>
                                         {pool && pool.name}
-                                        <span className="opacity-60">
-                                            by Van Gogh
-                                        </span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <th>Details:</th>
                                     <td>
-                                        Amet minim mollit non deserunt ullamco est
-                                        sit aliqua dolor do amet sint. Velit officia
-                                        consequat duis enim velit mollit.
-                                        Exercitation veniam consequat sunt nostrud
-                                        amet.
+                                        {pool.description}
                                     </td>
                                 </tr>
                                 <tr>
@@ -124,14 +208,14 @@ export const CheckPoolStatus = ({pool}) => {
                                     <th>Contract address:</th>
                                     <td className="table__token">
                                         <a href="/">
-                                            0x84e517408ba6b891b9ac74b2f90013fcbc516d9d
+                                            0x84e517408ba6b891b9ac74b2f90013fcbc516d9d{pool.status}
                                         </a>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
 
-                        {statusExists ? getPoolStatus() : getTimeInfo()}
+                        {pool.status !== 'closed' ? getPoolStatus() : getTimeInfo()}
                     </form>
                 </div>
             </div>

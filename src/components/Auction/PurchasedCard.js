@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Grow } from "@material-ui/core";
 
 import { GalleryModal, PurchasedDetailsModal } from "../Modals";
+import {formatAmount} from "../../utils/format";
 
 export const PurchasedCard = ({ item }) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -14,31 +15,25 @@ export const PurchasedCard = ({ item }) => {
                     <a onClick={() => setGalleryOpen(true)} className="item__img">
                         <picture>
                             <img
-                                src={item.cover}
-                                alt={item.label}
+                                src={item.image}
+                                alt={item.image}
                                 loading="lazy"
                                 width="264"
                                 height="170"
                             />
                         </picture>
                     </a>
-                    <h2 className="item__title h3">{item.label}</h2>
+                    <h2 className="item__title h3">{item.title}</h2>
                     <button
                         type="button"
                         className="artwork-list__btn btn btn--gray"
                         onClick={() => setIsOpen(true)}
                     >
-                        Purchased Jan 15, 2020
+                        Purchased {new Date(item.closeAt*1000).toLocaleDateString()}
                     </button>
-                    <p className="artwork-list__token-id">Token ID {item.tokenID}</p>
-                    <p className="artwork-list__token-address">
-                        Token contract address
-                    </p>
-                    <p className="artwork-list__token-hash">
-                        <a href="/">{item.token}</a>
-                    </p>
+                    <p className="artwork-list__token-id">Token ID: {item.tokenId}</p>
                     <hr className="item__line" />
-                    <div className="item-purchased__price">220.30 GLF</div>
+                    <div className="item-purchased__price">{formatAmount(item.currentPrice)} GLF</div>
                 </div>
             </Grow>
 
@@ -46,7 +41,7 @@ export const PurchasedCard = ({ item }) => {
                 <div className="modal-show">
                     <div className="wrapper">
                         <GalleryModal
-                            imgBig={item.cover}
+                            imgBig={item.image}
                             setIsOpen={setGalleryOpen}
                         />
                     </div>

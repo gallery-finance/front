@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import { Grow } from "@material-ui/core";
 
 import { GalleryModal, AuctionDetailsModal } from "../Modals";
@@ -14,7 +14,7 @@ export const AuctionCard = ({ item }) => {
                     <a onClick={() => setGalleryOpen(true)} className="item__img">
                         <picture>
                             <img
-                                src={item.cover}
+                                src={item.image}
                                 alt="`$`"
                                 loading="lazy"
                                 width="264"
@@ -24,20 +24,20 @@ export const AuctionCard = ({ item }) => {
                     </a>
                     <h2 className="item__title h3">{item.name}</h2>
                     <button
-                        className={`item__type item__type--${item.type}`}
+                        className={`item__type item__type--${item.status}`}
                         onClick={() => setIsOpen(true)}
                     >
-                        {item.type}
+                        {item.status}
                     </button>
                     <h5 className="item__workshop">
                         Token ID {item.tokenId}
                     </h5>
-                    <div className="item__token">
-                        <p className="item__token-title">Token contract address</p>
-                        <a href="/" className="item__token-address">
-                            {item.token}
-                        </a>
-                    </div>
+                    {/*<div className="item__token">*/}
+                    {/*    <p className="item__token-title">Token contract address</p>*/}
+                    {/*    <a href="/" className="item__token-address">*/}
+                    {/*        {item.token}*/}
+                    {/*    </a>*/}
+                    {/*</div>*/}
                 </div>
             </Grow>
 
@@ -45,7 +45,7 @@ export const AuctionCard = ({ item }) => {
                 <div className="modal-show">
                     <div className="wrapper">
                         <GalleryModal
-                            imgBig={item.cover}
+                            imgBig={item.image}
                             setIsOpen={setGalleryOpen}
                         />
                     </div>

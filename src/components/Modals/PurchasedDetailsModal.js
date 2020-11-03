@@ -17,7 +17,7 @@ export const PurchasedDetailsModal = ({ item, setIsOpen }) => {
                             <div className="form-vote-new__img auction-details__image">
                                 <picture>
                                     <img
-                                        src={item.cover}
+                                        src={item.image}
                                         alt=""
                                         loading="lazy"
                                         width="180"
@@ -28,30 +28,26 @@ export const PurchasedDetailsModal = ({ item, setIsOpen }) => {
                             <div className="auction-details__price">
                                 <div style={{ display: "flex" }}>
                                     <p>Token ID:</p>
-                                    <h4> {item.tokenID}</h4>
+                                    <h4> {item.tokenId}</h4>
                                 </div>
-                                <div>
-                                    <p>Contract address:</p>
-                                    <div className="auction-purchased__token">
-                                        <a href="/">0x84e517408b....516d9d</a>
-                                    </div>
-                                </div>
+                                {/*<div>*/}
+                                {/*    <p>Contract address:</p>*/}
+                                {/*    <div className="auction-purchased__token">*/}
+                                {/*        <a href="/">0x84e517408b....516d9d</a>*/}
+                                {/*    </div>*/}
+                                {/*</div>*/}
                             </div>
                         </div>
                         <table className="form-vote__table auction-details__table">
                             <tbody>
                                 <tr>
                                     <th>Name:</th>
-                                    <td>{item.label}</td>
+                                    <td>{item.title}</td>
                                 </tr>
                                 <tr>
                                     <th>Details:</th>
                                     <td>
-                                        Amet minim mollit non deserunt ullamco est
-                                        sit aliqua dolor do amet sint. Velit officia
-                                        consequat duis enim velit mollit.
-                                        Exercitation veniam consequat sunt nostrud
-                                        amet.
+                                        {item.description}
                                     </td>
                                 </tr>
                             </tbody>

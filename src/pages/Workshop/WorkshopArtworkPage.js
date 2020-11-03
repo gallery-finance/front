@@ -54,9 +54,9 @@ export const WorkshopArtworkPage = () => {
                         </p>
                     </div>
                     <div className="voter-head__dashboard-btn">
-                        <Link className="btn">
+                        <button className="btn" disabled>
                             Propose an artwork
-                        </Link>
+                        </button>
                     </div>
                 </div>
             </header>

@@ -1,15 +1,10 @@
 import React, {useContext, useEffect, useState} from "react";
-
-import cover from "../../../assets/img/card-pool/6.png";
+import Web3 from "web3";
 import {validateForm} from "../../../utils/form";
 import {getContract, useActiveWeb3React} from "../../../web3";
 import ERC721 from '../../../web3/abi/ERC721.json'
-import {
-    getEnglishAuctionNFTAddress,
-    getGalleryNFTAddress
-} from "../../../web3/address";
+import {getEnglishAuctionNFTAddress, getGalleryNFTAddress} from "../../../web3/address";
 import EnglishAuctionNFT from "../../../web3/abi/EnglishAuctionNFT.json";
-
 import {
     HANDLE_SHOW_FAILED_TRANSACTION_MODAL,
     HANDLE_SHOW_TRANSACTION_MODAL,
@@ -19,8 +14,8 @@ import {
     waitingPending
 } from "../../../const";
 import {mainContext} from "../../../reducer";
-import Web3 from "web3";
 import {getTime} from "../../../utils/time";
+import {queryNFTInfo} from "../Hooks";
 
 const {toWei} = Web3.utils
 
@@ -37,6 +32,8 @@ export const CreatePool = () => {
     const [days, setDays] = useState()
     const [hours, setHours] = useState()
     const [minutes, setMinutes] = useState()
+    const [cover, setCover] = useState('')
+
 
     const [errors, setErrors] = useState({tokenId: "", name: "", startPrice: "", artist: ""})
 
@@ -56,7 +53,7 @@ export const CreatePool = () => {
                 try {
                     const contract = getContract(library, ERC721.abi, getGalleryNFTAddress(chainId))
                     const ownerAddress = await contract.methods.ownerOf(value).call()
-                    console.log('start query 1',ownerAddress.toLowerCase(),account.toLowerCase())
+                    console.log('start query ',value,ownerAddress.toLowerCase(),account.toLowerCase())
 
                     if (ownerAddress.toLowerCase() !== account.toLowerCase()) {
                         console.log('start query 2')
@@ -64,6 +61,11 @@ export const CreatePool = () => {
                     } else {
                         errors.tokenId =  "";
                         console.log('start query 3')
+                        queryNFTInfo(value).then(res=>{
+                            const cover = res && res.properties && res.properties.image && res.properties.image.description? res.properties.image.description: ''
+                            setCover(cover)
+                        })
+
                     }
                 }catch (e){
                     console.log('confirm token',e)
@@ -80,14 +82,17 @@ export const CreatePool = () => {
             case "price":
                 setPrice(value)
             break
+            case "incr":
+                setIncr(value)
+                break
             case "days":
                 setDays(value)
             break
             case "hours":
-                setDays(value)
+                setHours(value)
                 break
             case "minutes":
-                setDays(value)
+                setMinutes(value)
                 break
             default:
         }
@@ -132,7 +137,7 @@ export const CreatePool = () => {
                     getGalleryNFTAddress(chainId),
                     tokenId,
                     weiPrice,
-                    1,
+                    checked? toWei(incr) : 1,
                     time)
                     .send({from: account})
                     .on('transactionHash', hash => {
@@ -260,7 +265,6 @@ export const CreatePool = () => {
                                             onChange={handleChange}
                                             className="input input--sm"
                                             placeholder="0,00"
-                                            type="number"
                                             required
                                         />
                                     </div>
@@ -272,6 +276,7 @@ export const CreatePool = () => {
                                     <input
                                         checked={checked}
                                         onChange={() => {
+                                            setIncr(null)
                                             setChecked(prev => !prev);
                                         }}
                                         type="checkbox"
@@ -288,7 +293,6 @@ export const CreatePool = () => {
                                             name="incr"
                                             onChange={handleChange}
                                             placeholder="0,00"
-                                            type="number"
                                             disabled={!checked}
                                         />
                                     </div>

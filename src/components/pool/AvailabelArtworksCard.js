@@ -32,9 +32,10 @@ export const AvailabelArtworksCard = ({ item }) => {
                 <button
                     type="button"
                     className="item__btn btn"
+                    disabled={item.redeemed}
                     onClick={() => setIsOpen(true)}
                 >
-                    Redeem
+                    {item.redeemed? 'Redeemed': 'Redeem'}
                 </button>
                 <p class="item__token">Token ID: {item.tokenId}</p>
                 {/*<div class="item__address">*/}

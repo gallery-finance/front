@@ -139,13 +139,13 @@ export const InitPage = () => {
                     </div>
                 </div>
             )}
-            {showWaitingWalletConfirmModal.show && (
-                <div className="modal-show" style={{zIndex: 11}}>
-                    <div className="wrapper" >
-                        <WaitingWalletConfirmModal />
-                    </div>
-                </div>
-            )}
+            {/*{showWaitingWalletConfirmModal.show && (*/}
+            {/*    <div className="modal-show" style={{zIndex: 11}}>*/}
+            {/*        <div className="wrapper" >*/}
+            {/*            <WaitingWalletConfirmModal />*/}
+            {/*        </div>*/}
+            {/*    </div>*/}
+            {/*)}*/}
 
             {showTransactionModal && (
                 <div className="modal-show" style={{zIndex: 11}}>
