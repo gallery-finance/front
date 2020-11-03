@@ -1,11 +1,24 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import { Grow } from "@material-ui/core";
 
 import { GalleryModal, AuctionDetailsModal } from "../Modals";
+import {getPoolLeftTime} from "../../utils/time";
 
 export const AuctionCard = ({ item }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [galleryOpen, setGalleryOpen] = useState(false);
+    const [left, setLeft] = useState()
+
+    let timer
+    useEffect(() => {
+        timer = setInterval(() => {
+            const left = getPoolLeftTime(item.closeAt)
+            setLeft(left)
+        }, 1000)
+        return () => {
+            clearInterval(timer)
+        }
+    }, [getPoolLeftTime()])
 
     return (
         <>
@@ -32,12 +45,12 @@ export const AuctionCard = ({ item }) => {
                     <h5 className="item__workshop">
                         Token ID {item.tokenId}
                     </h5>
-                    {/*<div className="item__token">*/}
-                    {/*    <p className="item__token-title">Token contract address</p>*/}
-                    {/*    <a href="/" className="item__token-address">*/}
-                    {/*        {item.token}*/}
-                    {/*    </a>*/}
-                    {/*</div>*/}
+                    <div className="item__token">
+                        <p className="item__token-title">{left && `${left.days}d : ${left.hours}h : ${left.minutes}m`}</p>
+                        {/*<a href="/" className="item__token-address">*/}
+                        {/*    {item.token}*/}
+                        {/*</a>*/}
+                    </div>
                 </div>
             </Grow>
 

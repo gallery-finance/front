@@ -38,11 +38,11 @@ export function getGalleryNFTAddress(chainId) {
 export function getEnglishAuctionNFTAddress(chainId) {
     switch (chainId) {
         case 1:
-            return  '0xfb0630AB838aB538b2C3C257DCD38E5d0C611b58'
+            return  '0xA6D353fda6960cF774DbEc2F7BbD650d7098DEcD'
         case 4:
             return  '0xfb0630AB838aB538b2C3C257DCD38E5d0C611b58'
         default:
-            return '0xfb0630AB838aB538b2C3C257DCD38E5d0C611b58'
+            return '0xA6D353fda6960cF774DbEc2F7BbD650d7098DEcD'
     }
 }
 
