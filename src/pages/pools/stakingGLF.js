@@ -300,7 +300,7 @@ export const StakingGLF = () => {
                     {glfRewards ? formatAmount(glfRewards) : REQUESTING_DATA}
                   </dt>
                   <dd className="statistics__dl-dd">
-                    GLF Earned
+                    Reward Point Earned
                   </dd>
                 </div>
 
