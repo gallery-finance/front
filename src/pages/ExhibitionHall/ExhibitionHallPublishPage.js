@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import { BackButton } from "../../components/BackButton";
+import { CropImageModal } from "../../components/Modals";
 
 const validateForm = errors => {
     let valid = true;
@@ -9,28 +10,25 @@ const validateForm = errors => {
 };
 
 export const ExhibitionHallPublishPage = () => {
-    const [image, setImage] = useState();
     const [artwork, setArtwork] = useState();
     const [artist, setArtist] = useState();
     const [hashtags, setHashtags] = useState();
     const [details, setDetails] = useState();
     const [errors, setErrors] = useState({
-        image: "",
         artwork: "",
         artist: "",
         hashtags: ""
     });
+
+    const [tempImage, setTempImage] = useState();
+    const [cropModalOpen, setCropModalOpen] = useState(false);
+    const [croppedImage, setCroppedImage] = useState();
 
     const handleChange = event => {
         event.preventDefault();
         const { name, value } = event.target;
 
         switch (name) {
-            case "image":
-                console.log("image value", value);
-                errors.image = value === "" ? "Artwork url cannot be empty" : "";
-                setImage(value);
-                break;
             case "artwork":
                 setArtwork(value);
                 errors.artwork =
@@ -54,7 +52,7 @@ export const ExhibitionHallPublishPage = () => {
     };
 
     const handleSubmit = event => {
-        console.log("info", image, artwork, artist, hashtags, details);
+        console.log("info", croppedImage, artwork, artist, hashtags, details);
         event.preventDefault();
 
         if (validateForm(errors)) {
@@ -67,6 +65,13 @@ export const ExhibitionHallPublishPage = () => {
 
     const onSubmit = () => {
         console.log("submit");
+    };
+
+    const handleFileAttachment = files => {
+        if (files && files.length !== 0) {
+            setTempImage(files[0]);
+            setCropModalOpen(true);
+        }
     };
 
     return (
@@ -106,30 +111,33 @@ export const ExhibitionHallPublishPage = () => {
                 </div>
 
                 <div className="publish-artwork__drop publish-artwork__inputbox">
-                    <input className="publish-artwork__drop-input" type="file" />
+                    <input
+                        className="publish-artwork__drop-input"
+                        type="file"
+                        accept="image/png, image/jpg, image/jpeg"
+                        onChange={event => handleFileAttachment(event.target.files)}
+                    />
                     <div className="publish-artwork__drop-content">
-                        {image ? (
-                            <img
-                                className="cover"
-                                content="no-referrer"
-                                src={image}
-                            />
+                        {croppedImage ? (
+                            <img className="cover" src={croppedImage} />
                         ) : (
-                            <svg
-                                className="publish-artwork__drop-logo"
-                                width="48"
-                                height="48"
-                                viewBox="0 0 48 48"
-                            >
-                                <path d="M9.5 22.2v1.2l.85-.85L14 18.91l10.65 10.64.35.36.35-.36L32 22.91l5.65 5.64.85.86V9.5h-29v12.7zm.15 5.3l-.15.15V38.5h6.9l.15-.15 5.98-5.97.35-.35-.35-.35-8.18-8.18-.35-.35-.35.35-4 4zM21.5 37.65l-.85.85H38.5v-4.84l-.15-.16-6-6-.35-.35-.35.35L21.5 37.65zM8 6.5h32A1.5 1.5 0 0141.5 8v32a1.5 1.5 0 01-1.5 1.5H8A1.5 1.5 0 016.5 40V8A1.5 1.5 0 018 6.5zm23 13a2.5 2.5 0 110-5 2.5 2.5 0 010 5z" />
-                            </svg>
+                            <>
+                                <svg
+                                    className="publish-artwork__drop-logo"
+                                    width="48"
+                                    height="48"
+                                    viewBox="0 0 48 48"
+                                >
+                                    <path d="M9.5 22.2v1.2l.85-.85L14 18.91l10.65 10.64.35.36.35-.36L32 22.91l5.65 5.64.85.86V9.5h-29v12.7zm.15 5.3l-.15.15V38.5h6.9l.15-.15 5.98-5.97.35-.35-.35-.35-8.18-8.18-.35-.35-.35.35-4 4zM21.5 37.65l-.85.85H38.5v-4.84l-.15-.16-6-6-.35-.35-.35.35L21.5 37.65zM8 6.5h32A1.5 1.5 0 0141.5 8v32a1.5 1.5 0 01-1.5 1.5H8A1.5 1.5 0 016.5 40V8A1.5 1.5 0 018 6.5zm23 13a2.5 2.5 0 110-5 2.5 2.5 0 010 5z" />
+                                </svg>
+                                <p className="publish-artwork__drop-text">
+                                    Drop your image here, or <b>browse</b>
+                                </p>
+                                <small className="publish-artwork__drop-format">
+                                    Supports: JPG, JPEG2000, PNG
+                                </small>
+                            </>
                         )}
-                        <p className="publish-artwork__drop-text">
-                            Drop your image here, or <b>browse</b>
-                        </p>
-                        <small className="publish-artwork__drop-format">
-                            Supports: JPG, JPEG2000, PNG
-                        </small>
                     </div>
                 </div>
 
@@ -220,6 +228,18 @@ export const ExhibitionHallPublishPage = () => {
                     Publish
                 </button>
             </form>
+
+            {cropModalOpen && (
+                <div className="modal-show">
+                    <div className="wrapper">
+                        <CropImageModal
+                            setCropModalOpen={setCropModalOpen}
+                            tempImage={URL.createObjectURL(tempImage)}
+                            setCroppedImage={setCroppedImage}
+                        />
+                    </div>
+                </div>
+            )}
         </article>
     );
 };
