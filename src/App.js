@@ -30,6 +30,7 @@ import {
   ExhibitionHallPage,
   ExhibitionHallPublishPage,
   ExhibitionHallCardPage,
+  ExhibitionHallJoinPage
 } from "./pages/ExhibitionHall";
 import {Footer} from "./components/Footer";
 
@@ -99,10 +100,16 @@ function App() {
                   component={ExhibitionHallPage}
               />
 
-            <Route
+              <Route
                   exact
                   path="/exhibition-hall/publish"
                   component={ExhibitionHallPublishPage}
+              />
+
+              <Route
+                 exact
+                 path="/exhibition-hall/join"
+                 component={ExhibitionHallJoinPage}
               />
 
               <Route
