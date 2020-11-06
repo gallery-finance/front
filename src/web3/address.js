@@ -53,6 +53,8 @@ export function getGLFStakingAddress(chainId) {
             return  '0x47fd85128312ee72aa0e0382a531a8f848b8b2cb'
         case 4:
             return  '0xD7AD78B0B839cBE9B0f9bE0b10250779553a4411'
+        case 31337:
+            return  '0xa4bcDF64Cdd5451b6ac3743B414124A6299B65FF'
         default:
             return '0x47fd85128312ee72aa0e0382a531a8f848b8b2cb'
     }
@@ -228,4 +230,26 @@ export function getFigureSwapAddress(chainId) {
 
 export function getUSDTTokenAddress() {
     return '0xdac17f958d2ee523a2206206994597c13d831ec7'
+}
+
+export function getNFTTokenAddress(chainId) {
+    switch (chainId) {
+        case 4: 
+            return '0x499d0187BFe75aA7282aB7145Fc70B27C76E538a'
+        case 31337:
+            return  '0xb682dEEf4f8e298d86bFc3e21f50c675151FB974'
+        default:
+            throw new Error('not implemented yet')
+    }
+}
+
+export function getOpenseaURL(chainId) {
+    switch (chainId) {
+        case 1:
+            return  'https://opensea.io/assets/'
+        case 4:
+            return  'https://rinkeby.opensea.io/assets/'
+        default:
+            return ''
+    }
 }

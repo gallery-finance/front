@@ -19,7 +19,7 @@ import {WalletConnectConnector} from "@web3-react/walletconnect-connector";
 import {LedgerConnector} from "@web3-react/ledger-connector";
 
 const injected = new InjectedConnector({
-    supportedChainIds: [1, 3, 4, 5, 42]
+    supportedChainIds: [1, 3, 4, 5, 42, 31337]
 });
 
 const POLLING_INTERVAL = 12000;
@@ -75,6 +75,7 @@ export const InitPage = () => {
         const localContent = window && window.localStorage.getItem(GALLERY_SELECT_WEB3_CONTEXT)
         console.log('wallet content', localContent)
         if (localContent) {
+            console.log('activate', wallets[localContent])
             activate(wallets[localContent]);
         }
     }, [])

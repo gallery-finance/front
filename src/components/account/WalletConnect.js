@@ -13,7 +13,7 @@ import {LedgerConnector} from "@web3-react/ledger-connector";
 import { CrossModalIcon } from "../../icons";
 
 const injected = new InjectedConnector({
-    supportedChainIds: [1, 3, 4, 5, 42]
+    supportedChainIds: [1, 3, 4, 5, 42, 31337]
 });
 
 const POLLING_INTERVAL = 12000;
@@ -51,6 +51,8 @@ export const WalletConnect = () => {
     const [connectedName, setConnectedName] = useState()
 
     const context = useWeb3React();
+
+    console.log('context', context)
 
     const [activatingConnector, setActivatingConnector] = useState();
     const [currentConnector, setCurrentConnector] = useState();
@@ -93,6 +95,7 @@ export const WalletConnect = () => {
         setActivatingConnector(currentConnector);
         setConnectedName(name)
         window && window.localStorage.setItem(GALLERY_SELECT_WEB3_CONTEXT, name)
+        console.log('activate')
         activate(wallets[name]);
     }
 
