@@ -2,16 +2,17 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 export const ExhibitionHallCard = ({ item, handleHashtagClick }) => {
+  const href = `/exhibition-hall/${item.tokenId}`
     return (
         <div className="exhibition-hall-list__item item">
-            <Link to={`/exhibition-hall/${item.id}`} className="item__image">
+            <Link to={href} className="item__image">
                 <img src={item.image} alt="`$`" width="348" height="348" />
             </Link>
             <div className="item__content">
-                <Link to={`/exhibition-hall/${item.id}`} className="item__title h4">
-                    {item.title}
+                <Link to={href} className="item__title h4">
+                    {item.name}
                 </Link>
-                <p className="item__author">{item.author}</p>
+                <p className="item__author">{item.artist}</p>
                 <p className="item__hashtags">
                     {item.hashtags &&
                         item.hashtags.map(hashtag => (
@@ -22,7 +23,7 @@ export const ExhibitionHallCard = ({ item, handleHashtagClick }) => {
                             </React.Fragment>
                         ))}
                 </p>
-                <p className="item__date">{item.date}</p>
+                <p className="item__date">{new Date(item.dateCreated).toLocaleString()}</p>
             </div>
         </div>
     );

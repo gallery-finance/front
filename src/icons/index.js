@@ -18,3 +18,5 @@ export * from "./SearchIcon";
 export * from "./CrossModalIcon";
 export * from "./PrevArrowIcon";
 export * from "./NextArrowIcon";
+export * from "./ZoomInIcon";
+export * from "./ZoomOutIcon";

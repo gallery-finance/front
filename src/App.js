@@ -27,7 +27,7 @@ import {
   WorkshopAccountPage
 } from "./pages/Workshop";
 import {
-  ExhibitionHallPage,
+  ExhibitionHallListPage,
   ExhibitionHallPublishPage,
   ExhibitionHallCardPage,
 } from "./pages/ExhibitionHall";
@@ -99,8 +99,8 @@ function App() {
 
               <Route
                   exact
-                  path="/exhibition-hall"
-                  component={ExhibitionHallPage}
+                  path={["/exhibition-hall","/exhibition-hall/tags/:tag"]}
+                  component={ExhibitionHallListPage}
               />
 
             <Route
