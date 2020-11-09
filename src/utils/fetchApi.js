@@ -1,5 +1,4 @@
-//var API_BASE = 'http://localhost:3000/'
-var API_BASE = 'http://ec2-18-156-198-242.eu-central-1.compute.amazonaws.com/api/'
+var API_BASE = 'https://apiv1.gallery.finance/api/'
 
 export async function fetchApi(url, params){
     var resp = await fetch(API_BASE + url, params)
