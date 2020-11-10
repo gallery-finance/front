@@ -14,6 +14,7 @@ import {mainContext} from "../../reducer";
 import { BackButton } from "../../components/BackButton";
 import { CropImageModal } from "../../components/Modals";
 import {getNFTTokenAddress, getGLFStakingAddress} from "../../web3/address";
+import {ConnectWalletModal} from '../../components/Modals/ConnectWalletModal';
 
 import {
     HANDLE_SHOW_FAILED_TRANSACTION_MODAL,
@@ -50,6 +51,10 @@ class TokenPublisher {
     this.openImage = this.openImage.bind(this)
     this.setCropModalOpen = this.setCropModalOpen.bind(this)
     this.setCroppedImage = this.setCroppedImage.bind(this)
+  }
+
+  isMainnet(){
+    return this.chainId == 1
   }
 
   showWalletConfirmModal(options){
@@ -326,6 +331,16 @@ const ExhibitionHallPublishPageView = ({publisher}) => {
         <article className="center">
             <BackButton toExhibitionHall />
 
+            {!publisher.isMainnet() &&
+              <div class='modal-show'>
+                <div class='wrapper'>
+                  <ConnectWalletModal />  
+                </div>
+              </div>
+            }
+
+            {(publisher.isMainnet()) &&
+
             <form action="/" className="publish-artwork" onSubmit={publisher.onSubmit}>
                 <h1 className="publish-artwork__title h3">Publish an Artwork</h1>
 
@@ -480,7 +495,9 @@ const ExhibitionHallPublishPageView = ({publisher}) => {
                 </button>
             </form>
 
-            {publisher.cropModalOpen && (
+            }
+
+            {publisher.isMainnet() && publisher.cropModalOpen && (
                 <div className="modal-show">
                     <div className="wrapper">
                         <CropImageModal

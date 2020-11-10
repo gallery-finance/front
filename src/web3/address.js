@@ -234,12 +234,14 @@ export function getUSDTTokenAddress() {
 
 export function getNFTTokenAddress(chainId) {
     switch (chainId) {
+        case 1:
+            return '0x025A8842c57d3dA43F7698922a5BA4cEbE3B8767'
         case 4: 
             return '0x499d0187BFe75aA7282aB7145Fc70B27C76E538a'
         case 31337:
             return  '0xb682dEEf4f8e298d86bFc3e21f50c675151FB974'
         default:
-            throw new Error('not implemented yet')
+            throw new Error('unknown chain')
     }
 }
 
