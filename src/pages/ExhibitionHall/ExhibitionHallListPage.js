@@ -222,7 +222,9 @@ export const ExhibitionHallListPage = () => {
                 </div>
             </header>
 
+            {/*
             <ExhibitionHallSlider />
+            */}
 
             <div className="hashtag">
                 <div
