@@ -25,9 +25,6 @@ import {
     waitingPending
 } from "../../const";
 
-// TODO remove hardcode
-var PRICE_TOKEN = '0.01';
-
 function dataURLtoBlob(dataurl) {
     var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
         bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
@@ -103,7 +100,7 @@ class TokenPublisher {
 
   }
 
-  async getBalance(){
+  async getBalanceAndPrice(){
 
       console.log('account', this.account)
 
@@ -115,12 +112,15 @@ class TokenPublisher {
       console.log('get balance')
       this.balance = new BigNumber(await this.tokenContract.methods.balanceOf(this.account).call())
       console.log('get decimals')
+      this.price = new BigNumber(await this.minterContract.methods.price().call())
+      console.log('price', this.price.toString())
       this.decimals = await this.tokenContract.methods.decimals().call()
       if(typeof(this.decimals) == 'string'){
         this.decimals = parseInt(this.decimals)
       }
       console.log('this.decimals', this.decimals, typeof(this.decimals))
       this.balanceInToken = this.balance.shiftedBy(-this.decimals)
+      this.priceInToken = this.price.shiftedBy(-this.decimals)
       this.onChange()
   }
 
@@ -136,7 +136,7 @@ class TokenPublisher {
       this.tokenContract = getContract(this.library, ERC20.abi, tokenAddress)
       this.minterContract = getContract(this.library, Minter.abi, this.nftAddress)
       if(this.balance == null){
-        this.getBalance()
+        this.getBalanceAndPrice()
       }
     }
   }
@@ -202,13 +202,11 @@ class TokenPublisher {
       //var allowance = await tokenContract.methods.allowance(this.account, nftAddress).call()
 
       console.log('publish this.decimals', this.decimals, typeof(this.decimals))
-      console.log('publish PRICE TOKEN', typeof(PRICE_TOKEN), PRICE_TOKEN)
-      var price = new BigNumber(PRICE_TOKEN).shiftedBy(this.decimals)
 
 
 
       console.log('checking balance...')
-      if(this.balance.lt(price)){
+      if(this.balance.lt(this.price)){
         console.log('balance lt price')
         // TODO show error
         //this.setPublishMessage('Insufficient token balance: required ' + PRICE_TOKEN + 
@@ -221,7 +219,7 @@ class TokenPublisher {
 
       var txApprove = this.tokenContract.methods.approve(
         this.nftAddress,
-        price.toString()
+        this.price.toString()
       ).send({from: this.account})
         .on('transactionHash', (hash) => {
           this.showTxConfirmModal(hash)
@@ -479,10 +477,14 @@ const ExhibitionHallPublishPageView = ({publisher}) => {
                 </div>
 
                 <p className="publish-artwork__note">
-                    Cost of publication is <b> {PRICE_TOKEN} in GLF</b> tokens. We will create
-                    an NFT token and send it to your wallet. Published artwork will
-                    be stored in the decentralized storage forever, with no
-                    additional cost.
+                    Cost of publication is 
+                    <b> {
+                        publisher.priceInToken &&
+                        publisher.priceInToken.toString()
+                    } in GLF</b> tokens. We
+                    will create an NFT token and send it to your wallet.
+                    Published artwork will be stored in the decentralized
+                    storage forever, with no additional cost.
                 </p>
 
                 <button

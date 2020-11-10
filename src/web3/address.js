@@ -235,9 +235,9 @@ export function getUSDTTokenAddress() {
 export function getNFTTokenAddress(chainId) {
     switch (chainId) {
         case 1:
-            return '0x025A8842c57d3dA43F7698922a5BA4cEbE3B8767'
+            return '0x27862ac434f06998a3dd40cb64a8400a39148750'
         case 4: 
-            return '0x499d0187BFe75aA7282aB7145Fc70B27C76E538a'
+            return '0xD99E5262090274468D6A9d91a290d35BC07aA4fD'
         case 31337:
             return  '0xb682dEEf4f8e298d86bFc3e21f50c675151FB974'
         default:
