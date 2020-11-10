@@ -244,14 +244,3 @@ export function getNFTTokenAddress(chainId) {
             throw new Error('unknown chain')
     }
 }
-
-export function getOpenseaURL(chainId) {
-    switch (chainId) {
-        case 1:
-            return  'https://opensea.io/assets/'
-        case 4:
-            return  'https://rinkeby.opensea.io/assets/'
-        default:
-            return ''
-    }
-}

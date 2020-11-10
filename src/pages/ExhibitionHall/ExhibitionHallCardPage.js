@@ -4,8 +4,6 @@ import {fetchApi} from '../../utils/fetchApi'
 import { BackButton } from "../../components/BackButton";
 import cardImage from "../../assets/img/exhibition-hall/card.jpg";
 import {getNFTTokenAddress} from "../../web3/address";
-import {getOpenseaURL} from "../../web3/address";
-import {useActiveWeb3React} from "../../web3";
 
 export class ExhibitionHallCardPage extends React.Component {
 
@@ -26,12 +24,8 @@ export class ExhibitionHallCardPage extends React.Component {
 
 const ExhibitionHallCardPageView = ({card}) => {
     const { id } = useParams();
-    const {chainId} = useActiveWeb3React()
-    if(chainId != null){
-      var contractAddress = getNFTTokenAddress(chainId)
-      var openseaHref = getOpenseaURL(chainId) + contractAddress + '/' + card.tokenId
-
-    }
+    var contractAddress = getNFTTokenAddress(1)
+    var openseaHref = 'https://opensea.io/assets/' + contractAddress + '/' + card.tokenId
 
     /*
     useEffect(() => {
