@@ -404,7 +404,7 @@ export const AuctionDetailsModal = ({item, setIsOpen}) => {
                   </div>
                   <div>
                     <p>Minimal bid price increment:</p>
-                    <h4>{formatAmount(item.amountMin1)} ETH</h4>
+                    <h4>{formatAmount(item.amountMin1)} GLF</h4>
                   </div>
                 </div>
               </div>
