@@ -53,6 +53,8 @@ export function getGLFStakingAddress(chainId) {
             return  '0x47fd85128312ee72aa0e0382a531a8f848b8b2cb'
         case 4:
             return  '0xD7AD78B0B839cBE9B0f9bE0b10250779553a4411'
+        case 31337:
+            return  '0xa4bcDF64Cdd5451b6ac3743B414124A6299B65FF'
         default:
             return '0x47fd85128312ee72aa0e0382a531a8f848b8b2cb'
     }
@@ -239,4 +241,17 @@ export function getNFTAddress(chainId) {
 
 export function getUSDTTokenAddress() {
     return '0xdac17f958d2ee523a2206206994597c13d831ec7'
+}
+
+export function getNFTTokenAddress(chainId) {
+    switch (chainId) {
+        case 1:
+            return '0x27862ac434f06998a3dd40cb64a8400a39148750'
+        case 4: 
+            return '0xD99E5262090274468D6A9d91a290d35BC07aA4fD'
+        case 31337:
+            return  '0xb682dEEf4f8e298d86bFc3e21f50c675151FB974'
+        default:
+            throw new Error('unknown chain')
+    }
 }

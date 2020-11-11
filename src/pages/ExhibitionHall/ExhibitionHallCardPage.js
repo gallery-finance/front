@@ -1,13 +1,33 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-
+import {fetchApi} from '../../utils/fetchApi'
 import { BackButton } from "../../components/BackButton";
 import cardImage from "../../assets/img/exhibition-hall/card.jpg";
+import {getNFTTokenAddress} from "../../web3/address";
 
-export const ExhibitionHallCardPage = () => {
+export class ExhibitionHallCardPage extends React.Component {
+
+  async componentWillMount(){
+    var id = this.props.match.params.id
+    this.setState({isLoading: true})
+    var token = await fetchApi('tokens/'+id, {
+      method: 'GET'
+    })
+    this.setState({card: token, isLoading: false})
+  }
+
+  render(){
+    return this.state.isLoading ? null : 
+      <ExhibitionHallCardPageView  card={this.state.card} />
+  }
+}
+
+const ExhibitionHallCardPageView = ({card}) => {
     const { id } = useParams();
-    const [testCard, setTestCard] = useState({});
+    var contractAddress = getNFTTokenAddress(1)
+    var openseaHref = 'https://opensea.io/assets/' + contractAddress + '/' + card.tokenId
 
+    /*
     useEffect(() => {
         // fetch by id ...
         setTestCard({
@@ -27,27 +47,28 @@ export const ExhibitionHallCardPage = () => {
             `
         });
     }, []);
+    */
 
     return (
         <article className="center">
             <BackButton toExhibitionHall />
 
             <div className="exhibition-hall-card__header">
-                <h1 className="h1">{testCard.title}</h1>
+                <h1 className="h1">{card.name}</h1>
                 <h3 className="exhibition-hall-card__header__author color-gray">
-                    {testCard.author}
+                    {card.artist}
                 </h3>
             </div>
 
             <div className="exhibition-hall-card">
                 <div className="exhibition-hall-card__image">
-                    <img src={testCard.image} alt="`$`" width="704" height="510" />
+                    <img src={card.fullimage} />
                 </div>
                 <div className="exhibition-hall-card__content">
                     <p className="exhibition-hall-card__hashtags">
-                        {testCard.hashtags &&
-                            testCard.hashtags.map(hashtag => (
-                                <Link to="/exhibition-hall" key={hashtag}>
+                        {card.hashtags &&
+                            card.hashtags.map(hashtag => (
+                                <Link to={`/exhibition-hall/tags/${hashtag}`} key={hashtag}>
                                     #{hashtag}
                                 </Link>
                             ))}
@@ -56,35 +77,47 @@ export const ExhibitionHallCardPage = () => {
                         <tbody>
                             <tr>
                                 <th>Date of Creation:</th>
-                                <td>{testCard.date}</td>
+                                <td>{new Date(card.dateCreated).toLocaleString()}</td>
                             </tr>
+                            {/*
                             <tr>
                                 <th>Arweave hash:</th>
-                                <td className="break-all">{testCard.hash}</td>
+                                <td className="break-all">{card.hash}</td>
                             </tr>
+                            */}
                             <tr>
                                 <th>Token ID:</th>
-                                <td>{testCard.tokenID}</td>
+                                <td>{card.tokenId}</td>
                             </tr>
+                            {/*
                             <tr>
                                 <th>Contract address:</th>
                                 <td  className="break-all">
-                                    <a href="/">{testCard.address}</a>
+                                    <a href="/">{contractAddress}</a>
                                 </td>
                             </tr>
+                            */}
                             <tr>
                                 <th>Details:</th>
-                                <td>{testCard.details}</td>
+                                <td>{card.description}</td>
                             </tr>
                         </tbody>
+                            <tr>
+                                <th>Opensea</th>
+                                <td>
+                                  <a target="__blank" href={openseaHref}>
+                                      View on Opensea
+                                  </a>
+                                </td>
+                            </tr>
                     </table>
                     <div className="form-app__submit">
-                        <button
+                        <Link to={`/exhibition-hall/`} 
                             className="btn btn--outline btn--medium modal__close"
                             type="button"
                         >
                             OK
-                        </button>
+                        </Link>
                     </div>
                 </div>
             </div>
