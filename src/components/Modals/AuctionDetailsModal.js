@@ -1,11 +1,16 @@
 import React, {useContext, useEffect, useState} from "react";
 import Web3 from 'web3'
-import {formatAmount} from "../../utils/format";
+import {formatAddress, formatAmount} from "../../utils/format";
 import {useGLFBalance} from "../../pages/Hooks";
 import { getPoolLeftTime} from "../../utils/time";
 import {getContract, useActiveWeb3React} from "../../web3";
 import ERC20 from "../../web3/abi/ERC20.json";
-import {getEnglishAuctionNFTAddress, getGLFStakingAddress} from "../../web3/address";
+import {
+  getEnglishAuctionNFTAddress,
+  getGalleryNFTAddress,
+  getGLFStakingAddress,
+  getNFTAddress
+} from "../../web3/address";
 import {
   HANDLE_SHOW_FAILED_TRANSACTION_MODAL,
   HANDLE_SHOW_TRANSACTION_MODAL,
@@ -424,12 +429,12 @@ export const AuctionDetailsModal = ({item, setIsOpen}) => {
                   <th>Token ID:</th>
                   <td>{item.tokenId}</td>
                 </tr>
-                {/*<tr>*/}
-                {/*    <th>Contract address:</th>*/}
-                {/*    <td className="table__token">*/}
-                {/*        <a href="/">{item.token}</a>*/}
-                {/*    </td>*/}
-                {/*</tr>*/}
+                <tr>
+                    <th>Contract address:</th>
+                    <td className="table__token">
+                        <a href={getNFTAddress(chainId)} target="_blank">{formatAddress(getGalleryNFTAddress(chainId))}</a>
+                    </td>
+                </tr>
                 </tbody>
               </table>
               {item.isMine && getMyPoolInfo()}

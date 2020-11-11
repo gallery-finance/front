@@ -224,6 +224,17 @@ export function getFigureSwapAddress(chainId) {
     }
 }
 
+export function getNFTAddress(chainId) {
+    switch (chainId) {
+        case 1:
+            return  'https://etherscan.io/address/0x95926757179d00f8154B0f7F2db0b7E8b0e7cef0'
+        case 4:
+            return  'https://rinkeby.etherscan.io/address/0xB85AE791393B89510Ab3405448Caf432B288c638'
+        default:
+            return 'https://etherscan.io/address/0x95926757179d00f8154B0f7F2db0b7E8b0e7cef0'
+    }
+}
+
 
 
 export function getUSDTTokenAddress() {

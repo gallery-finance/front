@@ -3,3 +3,4 @@ export const validateForm = errors => {
   Object.values(errors).forEach(val => val.length > 0 && (valid = false));
   return valid;
 };
+
