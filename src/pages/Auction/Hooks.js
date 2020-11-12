@@ -14,7 +14,7 @@ import EnglishAuctionNFT from "../../web3/abi/EnglishAuctionNFT.json";
 
 export async function queryNFTInfo (id){
   try {
-    const res = await fetch(`https://raw.github/usercontent.com/gallery-finance/gallery-card/master/${id+1}.json`)
+    const res = await fetch(`https://raw.githubusercontent.com/gallery-finance/gallery-card/master/${id+1}.json`)
     return await res.json()
   }catch (e){
     return null
