@@ -82,16 +82,16 @@ export const Header = () => {
                                             Exhibition hall
                                         </NavLink>
                                     </li>
-                                    <li className="menu__item">
-                                        <NavLink
-                                            to="/pools"
-                                            className="menu__link"
-                                            activeClassName="is-current"
-                                            onClick={handleMenuItemClick}
-                                        >
-                                            Pools
-                                        </NavLink>
-                                    </li>
+                                    {/*<li className="menu__item">*/}
+                                    {/*    <NavLink*/}
+                                    {/*        to="/pools"*/}
+                                    {/*        className="menu__link"*/}
+                                    {/*        activeClassName="is-current"*/}
+                                    {/*        onClick={handleMenuItemClick}*/}
+                                    {/*    >*/}
+                                    {/*        Pools*/}
+                                    {/*    </NavLink>*/}
+                                    {/*</li>*/}
                                 </ul>
                             </nav>
                         </div>
